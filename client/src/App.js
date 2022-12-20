@@ -1,26 +1,22 @@
-import styled from 'styled-components';
-import Header from './Components/Header';
-import SideNav from './Components/SideNav';
-import Main from './Components/Main';
-import Footer from './Components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Logout from './Pages/Logout';
+import Signup from './Pages/Signup';
 import './App.css';
 
 function App() {
-	const Body = styled.div`
-		display: flex;
-		justify-content: center;
-		width: 1264px;
-		margin: 0 auto;
-	`;
-
 	return (
 		<div className='App'>
-			<Header />
-			<Body>
-				<SideNav />
-				<Main />
-			</Body>
-			<Footer />
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Home />}></Route>
+					<Route path='/login' element={<Login />}></Route>
+					<Route path='/logout' element={<Logout />}></Route>
+					<Route path='/signup' element={<Signup />}></Route>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }
