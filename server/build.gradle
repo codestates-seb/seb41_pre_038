@@ -19,17 +19,33 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web',	// jwt
+			'io.jsonwebtoken:jjwt-api:0.11.2'	// jwt
+	implementation 'junit:junit:4.13.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config' //AWS 클라우드 관련
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2',		//jsonwebtoken
+			'io.jsonwebtoken:jjwt-jackson:0.11.2'		//jsonwebtoken
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
+	compileOnly "com.fasterxml.jackson.core:jackson-databind:2.9.4"
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'						// h2
+	runtimeOnly 'mysql:mysql-connector-java'			// mysql
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'org.springframework.boot:spring-boot-starter-security'  // 추가
+	//implementation 'org.springframework.boot:spring-boot-starter-security'  // security
+	//compileOnly "org.springframework.boot:spring-boot-starter-security" 	// security
 
-
+	implementation 'org.mapstruct:mapstruct:1.5.1.Final' // mapper
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final' // mapper
+}
+dependencyManagement { //AWS 클라우드 관련
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"
+	}
 }
 
 tasks.named('test') {
