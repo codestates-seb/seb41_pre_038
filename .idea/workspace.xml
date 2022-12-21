@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/buildspec.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/buildspec.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/scripts/server_start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/scripts/server_start.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
