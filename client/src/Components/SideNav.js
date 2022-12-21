@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
+const Container = styled.nav`
+	background-color: lightgray;
+	width: 164px;
+`;
+
 const SideNav = () => {
-	const Container = styled.nav`
-		background-color: lightgray;
-		width: 164px;
-	`;
 	return <Container>side nav</Container>;
 };
 
