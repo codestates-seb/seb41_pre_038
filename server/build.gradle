@@ -26,18 +26,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'	// MYSQL 추가
 	runtimeOnly 'com.h2database:h2'				// h2 추가
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 	implementation 'org.springframework.boot:spring-boot-starter-security'  //AWS 추가
-
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final' // mapper 추가
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final' //mapper 추가
-
 }
 
 dependencyManagement { // AWS 블록 추가
