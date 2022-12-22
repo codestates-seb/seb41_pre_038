@@ -4,35 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d90b8915-99ba-430d-a357-cf882544ea9a" name="Changes" comment="first push">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pre-project/src/setupTests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pre_project/pre_project/PreProjectApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pre_project/pre_project/PreProjectApplicationTests.java" beforeDir="false" />
+    <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +37,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2J7TKGr1RAQxHtKRB2gzkDX350k" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,7 +46,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/DH/project/pre-project/seb41_pre_038"
+    "last_opened_file_path": "C:/DH/project/pre-project/server"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -82,7 +57,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d90b8915-99ba-430d-a357-cf882544ea9a" name="Changes" comment="" />
+      <changelist id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="" />
       <created>1671428055810</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -95,7 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671428257990</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="push">
+      <created>1671623514001</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671623514001</updated>
+    </task>
+    <task id="LOCAL-00003" summary="push">
+      <created>1671626409839</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671626409839</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,6 +100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first push" />
-    <option name="LAST_COMMIT_MESSAGE" value="first push" />
+    <MESSAGE value="push" />
+    <option name="LAST_COMMIT_MESSAGE" value="push" />
   </component>
 </project>
