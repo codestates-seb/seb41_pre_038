@@ -31,12 +31,11 @@ public class MemberController
 
     private final MemberMapper mapper;
 
-
-
     @PostMapping("/sign-up") //회원 등록
     public ResponseEntity registerMember(@Valid @RequestBody MemberPostDto memberPost)
     {
-        Member member = memberService.saveMember(memberPost);
+
+        Member member = memberService.saveMember(mapper.memberPostToMember(memberPost));
         MemberResponseDto response = mapper.memberToMemberResponse(member);
 
         log.info("member registered");
@@ -48,7 +47,8 @@ public class MemberController
     public ResponseEntity updateMember(@PathVariable("member-id") long memberId,
                                        @Valid @RequestBody MemberPatchDto memberPatchDto)
     {
-        Member member = memberService.update(memberId, memberPatchDto);
+        memberPatchDto.addMemberId(memberId);
+        Member member = memberService.update(mapper.memberPatchToMember(memberPatchDto));
         MemberResponseDto response = mapper.memberToMemberResponse(member);
 
         log.info("member updated");
