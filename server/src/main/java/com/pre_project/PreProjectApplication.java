@@ -11,5 +11,4 @@ public class PreProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PreProjectApplication.class, args);
 	}
-
 }
