@@ -9,7 +9,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
 @Getter
-@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member //엔티티 클래스
@@ -33,8 +32,9 @@ public class Member //엔티티 클래스
     private String country;
 
     @Builder
-    public Member(String loginId, String password, String email, String nickname, String country)
+    public Member(Long memberId, String loginId, String password, String email, String nickname, String country)
     {
+        this.memberId = memberId;
         this.loginId = loginId;
         this.password = password;
         this.email = email;
@@ -48,7 +48,6 @@ public class Member //엔티티 클래스
         this.password = password;
     }
 
-
     //닉네임 변경
     public void updateNickname(String nickname)
     {
@@ -60,10 +59,4 @@ public class Member //엔티티 클래스
         this.country = country;
     }
 
-    public void updateMember(String password, String nickname, String country)
-    {
-        this.password = password;
-        this.nickname = nickname;
-        this.country = country;
-    }
 }

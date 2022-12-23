@@ -21,27 +21,20 @@ public class MemberService
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Member saveMember(MemberPostDto request) // 회원 가입
+    public Member saveMember(Member request) // 회원 가입
     {
-        verifyMemberByEmail(request.getEmail());
-        verifyMemberByNickname(request.getNickname());
+        verifyMemberByLoginId(request.getLoginId()); //로그인 아이디 중복검사
+        verifyMemberByEmail(request.getEmail()); //이메일 중복 검사
+        verifyMemberByNickname(request.getNickname()); //닉네임 중복 검사
 
-        Member member = Member.builder()
-                .loginId(request.getLoginId())
-                .password(request.getPassword())
-                .email(request.getEmail())
-                .nickname(request.getNickname())
-                .country(request.getCountry())
-                .build();
-
-        return memberRepository.save(member);
+        return memberRepository.save(request);
     }
 
-    @Transactional
-    public Member update(long memberId, MemberPatchDto request) //회원 정보 수정
-    {
-        Member findMember = findMemberById(memberId);
 
+    @Transactional
+    public Member update(Member request) //회원 정보 수정
+    {
+        Member findMember = findMemberById(request.getMemberId());
 
         Optional.ofNullable(request.getPassword())
                 .ifPresent(findMember::updatePassword);
@@ -52,9 +45,8 @@ public class MemberService
         Optional.ofNullable(request.getCountry())
                 .ifPresent(findMember::updateCountry);
 
-        return (findMember);
+        return findMember;
     }
-
 
     public Member findMemberById(long id) //회원 한명 조회
     {
@@ -75,10 +67,9 @@ public class MemberService
         memberRepository.delete(member);
     }
 
-
     private void verifyMemberByEmail(String email) //이메일로 회원 조회
     {
-        Optional<Member> member = memberRepository.findByNickname(email);
+        Optional<Member> member = memberRepository.findByEmail(email);
 
         if(member.isPresent())
         {
@@ -94,5 +85,13 @@ public class MemberService
         {
             throw new IllegalArgumentException("This nickname is already in use");
         }
+    }
+
+    private void verifyMemberByLoginId(String loginId) //로그인 아이디로 회원 조회
+    {
+        Optional<Member> member = memberRepository.findByLoginId(loginId);
+
+        if(member.isPresent())
+            throw new IllegalStateException("This ID is already in use");
     }
 }
