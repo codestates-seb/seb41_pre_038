@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.6'
+	id "org.asciidoctor.jvm.convert" version "3.3.2"    // API문서화 추가
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 group = 'com.pre_project'
@@ -10,11 +11,25 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	asciidoctorExtensions	// API문서화 추가
 }
 repositories {
 	mavenCentral()
 }
+
+// API문서화 추가
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
+
+
+
 dependencies {
+
+
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'	//API문서화 추가
+	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'	//API문서화 추가
 	implementation 'org.springframework.boot:spring-boot-starter-web',		//jwt 추가
 			'io.jsonwebtoken:jjwt-api:0.11.2'
 	//implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config' //AWS 추가
@@ -33,6 +48,8 @@ dependencies {
 	//implementation 'org.springframework.boot:spring-boot-starter-security'  //Security 추가
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final' // mapper 추가
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final' //mapper 추가
+
+	implementation 'com.google.code.gson:gson'
 }
 
 /*dependencyManagement { // AWS 블록 추가
@@ -42,5 +59,34 @@ dependencies {
 }*/
 
 tasks.named('test') {
+	outputs.dir snippetsDir	//API문서화 추가
 	useJUnitPlatform()
+}
+
+
+//API문서화 추가
+tasks.named('asciidoctor') {
+	configurations "asciidoctorExtensions"
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+//API문서화 추가
+task copyDocument(type: Copy) {
+	dependsOn asciidoctor
+	from file("${asciidoctor.outputDir}")
+	into file("src/main/resources/static/docs")
+}
+
+//API문서화 추가
+build {
+	dependsOn copyDocument
+}
+
+//API문서화 추가
+bootJar {
+	dependsOn copyDocument
+	from ("${asciidoctor.outputDir}") {
+		into 'static/docs'
+	}
 }
