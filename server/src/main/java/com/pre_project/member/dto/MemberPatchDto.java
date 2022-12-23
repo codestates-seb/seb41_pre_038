@@ -11,6 +11,8 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class MemberPatchDto
 {
+    private Long memberId;
+
     @NotSpace(message = "Password must be 8-20 characters without space")
     @Length(min = 8, max = 20)
     private String password;
@@ -27,5 +29,10 @@ public class MemberPatchDto
         this.password = password;
         this.nickname = nickname;
         this.country = country;
+    }
+
+    public void addMemberId(Long memberId)
+    {
+        this.memberId = memberId;
     }
 }
