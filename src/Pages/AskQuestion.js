@@ -11,7 +11,7 @@ const backgroundImg = 'https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205
 
 const Container = styled.div`
 	width: 100%;
-	height: 190vh;
+	height: 1700px;
 	background-color: #f8faf9;
 	display: flex;
 	flex-direction: column;
@@ -236,6 +236,10 @@ const AskQuestion = () => {
     setWriting('');
   }
 
+  const handleClick = (event) => {
+    console.log(event.target.closest('div').querySelector(`[role='textbox']`).innerHTML);
+  };
+  
 
 	return (
     <>
@@ -280,7 +284,7 @@ const AskQuestion = () => {
             <p>Describe what you tried, what you expected to happen, and what actually resulted. Minimum 20 characters.</p>
             <Editor ref={answerRef2} onChange={(e)=>{console.log(e.target.value)}} ></Editor>
           </QuestionBox>
-          <BlueButton>Review your question</BlueButton>
+          <BlueButton onClick={handleClick}>Review your question</BlueButton>
           <Link to='/'><DiscardButton >Discard draft</DiscardButton></Link>
         </Box>
 		  </Container>

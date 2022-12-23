@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Header from '../Components/Header';
+import React, { forwardRef, useRef } from "react";
 
 const iconBar= 'https://cdn.sstatic.net/Img/favicons-sprite16.png?v=1cfab30b280e';
 const Container = styled.div`
@@ -18,7 +18,7 @@ const LogoutWindow = styled.div`
                 0 16px 32px rgba(0,0,0,0.07), 
                 0 32px 64px rgba(0,0,0,0.07);
 	position: absolute;
-	left: 63%;
+	left: 65%;
 	z-index: 100000;
 `
 const MenuHeader = styled.div` 
@@ -125,7 +125,7 @@ const Menu = styled.div`
 	border-bottom: 1px solid rgb(241, 242, 242);
 	background-color: white;
 
-// 로고
+
 .logo{ 
 	width: 10px;
 	height: 15px;
@@ -135,7 +135,6 @@ const Menu = styled.div`
 	margin-top: 3px;
 	margin-right: 10px;
 
-	// 로고 크롭
 	.icon-3d{ 
 		top : 0;
 		left: 0px;
@@ -147,18 +146,18 @@ const Menu = styled.div`
 
 .logo2{ 
 	width: 10px;
-	height: 15px; // 이만큼 잘라냈어 
+	height: 15px; 
 	position: relative;
 	overflow: hidden;
 	padding: 2px 8px;
 	margin-top:10px;
 	margin-right: 10px;
 
-	// 로고 크롭
+
 	.icon-books{ 
-		top : 0px; //실제 위치를 명서
+		top : 0px; 
 		left:0px;
-		position: absolute; // 오리지널 사이즈
+		position: absolute; 
 		width: 18px;
 		margin-top: -165%;
 		margin-left: 5px;
@@ -167,18 +166,18 @@ const Menu = styled.div`
 
 .logo3{ 
 	width: 10px;
-	height: 15px; // 이만큼 잘라냈어 
+	height: 15px; 
 	position: relative;
 	overflow: hidden;
 	padding: 2px 8px;
 	margin-top:10px;
 	margin-right: 10px;
 
-	// 로고 크롭
+
 	.icon-ar{ 
-		top : 0px; //실제 위치를 명서
+		top : 0px; 
 		left:0px;
-		position: absolute; // 오리지널 사이즈
+		position: absolute; 
 		width: 18px;
 		margin-top: -1095%;
 		margin-left: 5px;
