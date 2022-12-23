@@ -1,5 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Logout from '../Pages/Logout';
+
 const iconImg ="https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27"
 
 const GlobalStyle = createGlobalStyle`
@@ -54,6 +57,7 @@ const Container = styled.header`
 	line-height: 25px;
 	color: #525960;
 	font-size: 13px;
+	cursor : pointer;
 }
 
 .products:hover{ 
@@ -103,6 +107,7 @@ const Container = styled.header`
 	width: 50px;
 	height: 47px;
 	padding-right: 10px;
+	cursor : pointer;
 
 	& div{
 		width:20px;
@@ -144,6 +149,7 @@ const Container = styled.header`
 .icons{
 	padding:0px 10px;
 	padding-top:14px;
+	cursor : pointer;
 }
 
 .icons:hover{
@@ -156,14 +162,21 @@ const Container = styled.header`
 
 const Header = () => {
 
+	const [logout,setLogout] = useState(false);
+
+
 	return (
+		<>
+		
 		<Container>
 			<GlobalStyle />
 			<div>
 			{/* 로고 */}
+			<Link to='/'>
 				<div className='logo'>
 					<img className="logoCrop" src={iconImg} alt='로고이미지'></img>
 				</div> 
+			</Link>
 
 			{/* Products 버튼 */}
 				<div className='products'>Products</div>
@@ -227,7 +240,7 @@ const Header = () => {
 					</div>
 					
 					{/* 커뮤니티 */}
-					<div className='icons'>
+					<div className='icons' onClick={()=>setLogout(!logout)} style={{position:'relative'}}>
 						<svg 
 							viewBox="0 0 20 18"
 							fill="rgb(82, 90, 95)"
@@ -238,7 +251,8 @@ const Header = () => {
 				</div>
 			</div>
 		</Container>
-
+		{logout === true ? <Logout></Logout> : null}
+		</>
 	)
 };
 

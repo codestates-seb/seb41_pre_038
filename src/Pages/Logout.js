@@ -1,15 +1,25 @@
 import styled from 'styled-components';
 import Header from '../Components/Header';
 
+const iconBar= 'https://cdn.sstatic.net/Img/favicons-sprite16.png?v=1cfab30b280e';
 const Container = styled.div`
 `;
 
 const LogoutWindow = styled.div`
 	width: 363px;
 	height: 379px;
-	background-color: red;
 	display: flex;
 	flex-direction: column;
+	box-sizing: content-box;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
+                0 2px 4px rgba(0,0,0,0.07), 
+                0 4px 8px rgba(0,0,0,0.07), 
+                0 8px 16px rgba(0,0,0,0.07),
+                0 16px 32px rgba(0,0,0,0.07), 
+                0 32px 64px rgba(0,0,0,0.07);
+	position: absolute;
+	left: 63%;
+	z-index: 100000;
 `
 const MenuHeader = styled.div` 
 	width: 343px;
@@ -74,21 +84,116 @@ const MenuMain = styled.div`
 
 	> div > .info:hover, div > .main:hover , a:hover{
 		color:hsl(206deg 100% 57%);
-
-		// 수정대상
-		.searchIcon{
+		background-color: hsl(205deg 46% 92%);
+		> div>.searchIcon{
 			background-color: hsl(205deg 46% 92%);
 		}
 	}
 
 `
 
+const SearchBar = styled.div`
+	position: relative;
+	background-color: white;
+
+	>.searchIcon{
+	position: absolute;
+	top:18px;
+	left:18px;
+	width: 25px; 
+	}
+
+> .searchInput{
+	padding: 7.8px 9.1px 7.8px 36px;
+	width: 304px;
+	height: 14px;
+	margin: 10px 6px;
+	border: 1px solid rgb(188, 191, 193);
+	border-radius: 3px;
+}
+> .searchInput:focus{
+	outline-color: hsl(206deg 90% 70%);
+  box-shadow: 0px 0px 6px skyblue;
+  border-radius: 5px;
+}
+`
+
+const Menu = styled.div`
+	width: 347px;
+	height: 31px;
+	padding: 8px;
+	border-bottom: 1px solid rgb(241, 242, 242);
+	background-color: white;
+
+// 로고
+.logo{ 
+	width: 10px;
+	height: 15px;
+	position: relative;
+	overflow: hidden;
+	padding: 2px 8px;
+	margin-top: 3px;
+	margin-right: 10px;
+
+	// 로고 크롭
+	.icon-3d{ 
+		top : 0;
+		left: 0px;
+		position: absolute;
+		width: 18px;
+		margin-left: 5px;
+	}
+}
+
+.logo2{ 
+	width: 10px;
+	height: 15px; // 이만큼 잘라냈어 
+	position: relative;
+	overflow: hidden;
+	padding: 2px 8px;
+	margin-top:10px;
+	margin-right: 10px;
+
+	// 로고 크롭
+	.icon-books{ 
+		top : 0px; //실제 위치를 명서
+		left:0px;
+		position: absolute; // 오리지널 사이즈
+		width: 18px;
+		margin-top: -165%;
+		margin-left: 5px;
+	}
+}
+
+.logo3{ 
+	width: 10px;
+	height: 15px; // 이만큼 잘라냈어 
+	position: relative;
+	overflow: hidden;
+	padding: 2px 8px;
+	margin-top:10px;
+	margin-right: 10px;
+
+	// 로고 크롭
+	.icon-ar{ 
+		top : 0px; //실제 위치를 명서
+		left:0px;
+		position: absolute; // 오리지널 사이즈
+		width: 18px;
+		margin-top: -1095%;
+		margin-left: 5px;
+	}
+}
+
+`
+
+
+
 
 const Logout = () => {
 
 	return (
 		<Container>
-			<Header />
 				<LogoutWindow>
 					<MenuHeader>
 						<a className='head' href='/'>CURRENT COMMUNITY</a>
@@ -110,7 +215,16 @@ const Logout = () => {
 								<a className='info' href='/'>logout</a>
 							</div>
 						</MenuMain>
-						<MenuMain>
+						<MenuMain> ㄴ 
+							<div style={{width:'25px',height:'13px',backgroundColor: 'rgb(244, 249, 250)'}}>
+								<svg className='searchIcon'
+									fill="rgb(81, 88, 90)"
+									viewBox='10 3 10 50'
+									width="23px" height="23px">
+									<path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="rgb(81, 88, 90)"></path>
+									<path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5 0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14 10.79.68-2.95-16.1-3.35L7 23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="rgb(81, 88, 90)"></path>
+								</svg>
+							</div>
 							<a className='main' href='/'>Meta Stack Overflow</a>
 						</MenuMain>
 					<MenuHeader>
@@ -129,8 +243,54 @@ const Logout = () => {
 						<a className='main' href='/'>Stack Overflow</a>
 						</MenuMain>
 					<MenuHeader>
-					<a className='head' href='/'>MORE STACK EXCHANGE COMMUNITIES</a>
+						<a className='head' href='/'>MORE STACK EXCHANGE COMMUNITIES</a>
 					</MenuHeader>
+
+				{/* 검색창 */}
+				<SearchBar>
+					<svg className='searchIcon'
+						fill="hsl(210deg 8% 55%)"
+						width="27px" height="27px">
+							<path d="M0 0h24v24H0z" fill="none"/>
+							<path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"/>
+					</svg>
+					<input className="searchInput" placeholder="Find a Stack Exchange community"></input>
+				</SearchBar>
+
+				<Menu>
+					<div style={{display:'flex'}}>
+						<div className='logo'>
+							<img  className='icon-3d' src={iconBar} alt='3D아이콘'></img>
+						</div>
+						<div style={{display:'flex',flexDirection:'column'}}>
+							<p>3D Printing</p>
+							<span style={{fontSize:'12px'}}>For 3D printing enthusiasts</span>
+						</div>
+					</div>
+				</Menu>
+				<Menu>
+				<div style={{display:'flex'}}>
+					<div className='logo2'>
+						<img className ='icon-books' src={iconBar} alt='3D아이콘'></img>
+					</div>
+					<div style={{display:'flex',flexDirection:'column'}}>
+							<p>Academia</p>
+							<span style={{fontSize:'12px'}}>For academics and those enrolled in higher education</span>
+						</div>
+					</div>
+				</Menu>
+				<Menu>
+				<div style={{display:'flex'}}>
+					<div className='logo3'>
+						<img className ='icon-ar' src={iconBar} alt='3D아이콘'></img>
+					</div>
+					<div style={{display:'flex',flexDirection:'column'}}>
+							<p>Amateur Radio</p>
+							<span style={{fontSize:'12px'}}>For amateur radio enthusiasts</span>
+						</div>
+				</div>
+				</Menu>
+
 				</LogoutWindow>
 		</Container>
 	);

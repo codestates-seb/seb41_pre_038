@@ -1,23 +1,17 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import Header from '../Components/Header';
 import { useEffect, useState,useRef } from 'react';
 import { StacksEditor } from "@stackoverflow/stacks-editor";
+import { Link } from 'react-router-dom';
 import '@stackoverflow/stacks-editor/dist/styles.css';
 import '@stackoverflow/stacks';
 import '@stackoverflow/stacks/dist/css/stacks.css';
 import Footer from '../Components/Footer';
-
-// const GlobalStyle = createGlobalStyle`
-// 	* {
-// 		box-sizing: content-box;
-// 	}
-// `;
-
 const backgroundImg = 'https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368';
 
 const Container = styled.div`
 	width: 100%;
-	height: 180vh;
+	height: 190vh;
 	background-color: #f8faf9;
 	display: flex;
 	flex-direction: column;
@@ -116,17 +110,7 @@ const TitleBox = styled.div`
     color: #3e3f42;
     padding: 6px 0px;
   }
-
-  // next 버튼 없는 버전 
-  /* >input{
-    width: 780px;
-    height: 15px;
-    padding: 7px 9px;
-    border: 1px solid rgb(189, 190, 193) ;
-    border-radius: 4px; 
-  } */
-
-  //next버튼 있는 버전 
+ 
   > input{
     width: 780px;
     height: 18px;
@@ -227,11 +211,15 @@ const AskQuestion = () => {
   useEffect(()=>{
     new StacksEditor(answerRef1.current, '', {});
     new StacksEditor(answerRef2.current, '', {});
-  },[])
+  },[answerRef1,answerRef2])
   
 
   let [title,setTitle] = useState('');
   let [writing,setWriting] = useState('');
+
+  let [content,setContent] = useState('');
+  let [expecting,setExpecting] = useState('');
+  
 
   const typing = (e) => {
     setWriting(e.target.value);
@@ -253,57 +241,50 @@ const AskQuestion = () => {
     <>
 		<Container>
 			<Header />
-      <Box>
-        <Main>
-          <h1>Ask a public question</h1>
-        </Main>
+        <Box>
+          <Main>
+            <h1>Ask a public question</h1>
+          </Main>
+          <BlueBox>
+            <h2>Writing a good question</h2>
+            <p>You’re ready to <span className='font-blue'>ask</span> a <span className='font-blue'>programming-related question</span> and this form will help guide you through the process.</p>
+            <p>Looking to ask a non-programming question? See <span className='font-blue'>the topics here</span> to find a relevant site.</p>          
+            <p>steps</p>
+            <ul>
+              <li>Summarize your problem in a one-line title.</li>
+              <li>Describe your problem in more detail.</li>
+              <li>Describe what you tried and what you expected to happen.</li>
+              <li>Add “tags” which help surface your question to members of the community.</li>
+              <li>Review your question and post it to the site.</li>
+            </ul>
+          </BlueBox>
+          <TitleBox>
 
-        <BlueBox>
-          <h2>Writing a good question</h2>
-          <p>You’re ready to <span className='font-blue'>ask</span> a <span className='font-blue'>programming-related question</span> and this form will help guide you through the process.</p>
-          <p>Looking to ask a non-programming question? See <span className='font-blue'>the topics here</span> to find a relevant site.</p>
-        
-          <p>steps</p>
-          <ul>
-            <li>Summarize your problem in a one-line title.</li>
-            <li>Describe your problem in more detail.</li>
-            <li>Describe what you tried and what you expected to happen.</li>
-            <li>Add “tags” which help surface your question to members of the community.</li>
-            <li>Review your question and post it to the site.</li>
-          </ul>
-        </BlueBox>
-
-        <TitleBox>
-          <h5>Title</h5>
-          <p>Be specific and imagine you’re asking a question to another person.</p>
-          <input 
-            type='text' 
-            value={writing}
-            onChange={typing}
-            onKeyUp={addTodoEnter}
-            placeholder='e.g. Is there an R function for finding the index of an element in a vector?'></input>
-          <button onClick={addTitle}>Next</button>
-        </TitleBox>
-        
-        <QuestionBox>
-          <h5>What are the details of your problem?</h5>
-          <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-          <Editor ref={answerRef1} ></Editor>
-        </QuestionBox>
-
-        <QuestionBox>
-          <h5>What did you try and what were you expecting?</h5>
-          <p>Describe what you tried, what you expected to happen, and what actually resulted. Minimum 20 characters.</p>
-          <Editor ref={answerRef2} ></Editor>
-        </QuestionBox>
-
-        <BlueButton>Review your question</BlueButton>
-        <DiscardButton>Discard draft</DiscardButton>
-
+            <h5>Title</h5>
+            <p>Be specific and imagine you’re asking a question to another person.</p>
+            <input 
+              type='text' 
+              value={writing}
+              onChange={typing}
+              onKeyUp={addTodoEnter}
+              placeholder='e.g. Is there an R function for finding the index of an element in a vector?'></input>
+            <button onClick={addTitle}>Next</button>
+          </TitleBox>        
+          <QuestionBox>
+            <h5>What are the details of your problem?</h5>
+            <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
+            <Editor value ={content} onChange ={typing} ref={answerRef1} ></Editor>
+          </QuestionBox>
+          <QuestionBox>
+            <h5>What did you try and what were you expecting?</h5>
+            <p>Describe what you tried, what you expected to happen, and what actually resulted. Minimum 20 characters.</p>
+            <Editor ref={answerRef2} onChange={(e)=>{console.log(e.target.value)}} ></Editor>
+          </QuestionBox>
+          <BlueButton>Review your question</BlueButton>
+          <Link to='/'><DiscardButton >Discard draft</DiscardButton></Link>
         </Box>
-        
-		</Container>
-    <Footer></Footer>
+		  </Container>
+      <Footer></Footer>
     </>
     
 	);

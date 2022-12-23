@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Container = styled.main`
 	background-color: lightgreen;
 	width: 1100px;
+	position: relative;
 `;
 
 const Main = () => {
