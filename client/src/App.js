@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import Logout from './Pages/Logout';
 import Signup from './Pages/Signup';
 import ForgotPassword from './Pages/ForgotPassword';
+import Question from './Pages/Question';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 					<Route path='/logout' element={<Logout />}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
 					<Route path='/forgotpassword' element={<ForgotPassword />}></Route>
+					<Route path='/question' element={<Question />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>

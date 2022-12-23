@@ -1,0 +1,15 @@
+{
+  "editor.tokenColorCustomizations": {
+    "comments": "#88d3ff"
+  },
+  "explorer.confirmDelete": false,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "json.schemas": [],
+  "editor.minimap.enabled": false,
+  "prettier.printWidth": 150,
+  "window.zoomLevel": 1,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true
+}
