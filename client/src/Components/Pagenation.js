@@ -24,6 +24,10 @@ const Container = styled.div`
 			color: #3b4045;
 		}
 
+		.invisible {
+			display: none;
+		}
+
 		.active {
 			color: white;
 			border-color: #f48225;
@@ -57,6 +61,7 @@ const PerPage = styled.div`
 const Pagenation = ({ data, setCurrentData }) => {
 	const [pageNum, setPageNum] = useState(0); // 현재 페이지 번호
 	const [pageCount, setPageCount] = useState(15); // 한 페이지당 몇 개씩 보여줄 건지
+	const totalPages = Math.ceil(data.length / pageCount); // 총 페이지 수
 
 	// data, pageNum, pageCount가 변경되면 현재 보여주는 데이터를 업데이트하는 함수
 	useEffect(() => {
@@ -80,12 +85,12 @@ const Pagenation = ({ data, setCurrentData }) => {
 				onPageChange={handlePageClick} // 페이지가 바뀔 때 호출되는 함수
 				marginPagesDisplayed={1} // __...__ 가장자리에 보이는 페이지 수
 				pageRangeDisplayed={5} // ...___... 중간에 보이는 페이지 수
-				pageCount={Math.ceil(data.length / pageCount)} // 총 페이지 수
+				pageCount={totalPages} // 총 페이지 수
 				renderOnZeroPageCount={undefined} // pageCount가 0일 때 호출되는 함수로, 값이 undefined면 Previous/Next 버튼이 표시되고, null이면 표시되지 않음
 				containerClassName='pagenation'
 				pageLinkClassName='page-num'
-				previousLinkClassName='page-num'
-				nextLinkClassName='page-num'
+				previousLinkClassName={pageNum === 0 ? 'page-num invisible' : 'page-num'}
+				nextLinkClassName={pageNum === totalPages - 1 ? 'page-num invisible' : 'page-num'}
 				activeLinkClassName='active'
 			/>
 			<PerPage>
