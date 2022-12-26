@@ -7,6 +7,9 @@ import '@stackoverflow/stacks-editor/dist/styles.css';
 import '@stackoverflow/stacks';
 import '@stackoverflow/stacks/dist/css/stacks.css';
 import Footer from '../Components/Footer';
+import axios from 'axios';
+import { addQuestions, editQuestions, deleteQuestions } from '../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 const backgroundImg = 'https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368';
 
 const Container = styled.div`
@@ -226,9 +229,10 @@ const AskQuestion = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [expecting, setExpecting] = useState('');
-  const [isClicked, setIsClicked] = useState([false, false]);
+  const [isClicked, setIsClicked] = useState([false, false]); // redux 상태관리 필요 x
   const scrollRefContent = useRef();
   const scrollRefExpecting = useRef();
+  let dispatch = useDispatch();
 
   useEffect(() => {
     new StacksEditor(answerRef1.current, '', {});
@@ -258,8 +262,15 @@ const AskQuestion = () => {
   // expecting값 저장 및 제출 이벤트를 구동하는 함수입니다.
   const onSubmit = (event) => {
     setExpecting(event.target.closest('div').querySelector(`[role='textbox']`).innerHTML);
+    const write = { title, content, expecting };
 
-    // 제출시 이벤트 작성
+    return axios
+      .post('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/questions/ask', { write })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(addQuestions(res.data));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

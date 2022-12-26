@@ -107,7 +107,7 @@ const TopQuestions = () => {
     <Container>
       <Header>
         <h1>Top Questions</h1>
-        <Link to='/askQuestion'>
+        <Link to='/questions/ask'>
           <button className='ask-question'>Ask Question</button>
         </Link>
       </Header>
