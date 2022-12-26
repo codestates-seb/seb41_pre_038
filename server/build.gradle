@@ -32,31 +32,30 @@ dependencies {
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'	//API문서화 추가
 	implementation 'org.springframework.boot:spring-boot-starter-web',		//jwt 추가
 			'io.jsonwebtoken:jjwt-api:0.11.2'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config' //AWS 추가
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config' //AWS 추가
 	implementation 'junit:junit:4.13.1' //	junit 추가
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2', //	jwt 추가
 			'io.jsonwebtoken:jjwt-jackson:0.11.2'
 	compileOnly "com.fasterxml.jackson.core:jackson-databind:2.9.4"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'	// MYSQL 추가
-	runtimeOnly 'com.h2database:h2'				// h2 추가
+	implementation 'com.h2database:h2'				// h2 추가
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//implementation 'org.springframework.boot:spring-boot-starter-security'  //Security 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security'  //Security 추가
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final' // mapper 추가
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final' //mapper 추가
 
 	implementation 'com.google.code.gson:gson'
 }
 
-//dependencyManagement { // AWS 블록 추가
-//	imports {
-//		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"
-//	}
-//}
+dependencyManagement { // AWS 블록 추가
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"
+	}
+}
 
 tasks.named('test') {
 	outputs.dir snippetsDir	//API문서화 추가
