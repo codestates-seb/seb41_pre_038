@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
-// import Pagenation from './Pagenation';
+import Pagenation from './Pagenation';
 
 const Container = styled.div`
 	width: 712px;
@@ -46,7 +46,7 @@ const FlexBox = styled.div`
 	justify-content: space-between;
 	align-items: center;
 
-	&.buttons {
+	&.PerPage {
 		margin-bottom: 12px;
 	}
 `;
@@ -57,7 +57,7 @@ const Counter = styled.div`
 	font-size: 17px;
 `;
 
-const SortButtons = styled.div`
+const SortPerPage = styled.div`
 	display: flex;
 	justify-content: flex-end;
 
@@ -116,7 +116,7 @@ const FilterBtn = styled.button`
 `;
 
 const FilterIcon = (
-	<svg aria-hidden='true' class='svg-icon iconFilter' width='18' height='18' viewBox='0 0 18 18'>
+	<svg aria-hidden='true' className='svg-icon iconFilter' width='18' height='18' viewBox='0 0 18 18'>
 		<path d='M2 4h14v2H2V4Zm2 4h10v2H4V8Zm8 4H6v2h6v-2Z'></path>
 	</svg>
 );
@@ -124,12 +124,14 @@ const FilterIcon = (
 const Questions = styled.div``;
 
 const AllQuestions = () => {
+	const [data, setData] = useState([]); // 전체 데이터
+	const [currentData, setCurrentData] = useState(data.slice(0, 15)); // 현재 보여주는 데이터
 	const [selected, setSelected] = useState('Newest');
-	const [data, setData] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => setData(res.data.slice(0, 15)));
+		axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => setData(res.data));
 	}, []);
+
 	const selectSorting = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Newest') {
@@ -149,6 +151,7 @@ const AllQuestions = () => {
 			// sorting logic..
 		}
 	};
+
 	return (
 		<Container>
 			<Header>
@@ -159,8 +162,8 @@ const AllQuestions = () => {
 			</Header>
 			<FlexBox>
 				<Counter>0 questions</Counter>
-				<FlexBox className='buttons'>
-					<SortButtons>
+				<FlexBox className='PerPage'>
+					<SortPerPage>
 						<button onClick={selectSorting} className={selected === 'Newest' ? 'clicked' : ''}>
 							Newest
 						</button>
@@ -176,7 +179,7 @@ const AllQuestions = () => {
 						<button onClick={selectSorting} className={selected === 'More' ? 'clicked' : ''}>
 							More
 						</button>
-					</SortButtons>
+					</SortPerPage>
 					<FilterBtn>
 						<span>{FilterIcon}</span>
 						Filter
@@ -185,12 +188,12 @@ const AllQuestions = () => {
 			</FlexBox>
 
 			<Questions>
-				{data.map((question) => (
+				{currentData.map((question) => (
 					<Question key={question.id} id={question.id} userId={question.userId} title={question.title} body={question.body} tab='all-questions' />
 				))}
 			</Questions>
 
-			{/* <Pagenation data={data} /> */}
+			<Pagenation data={data} setCurrentData={setCurrentData} />
 		</Container>
 	);
 };
