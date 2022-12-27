@@ -26,6 +26,7 @@
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/service/MemberService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/validator/NotSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/validator/NotSpace.java" afterDir="false" />
     </list>
+    <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +71,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/aands/preproject/seb41_pre_038/server"
+    "last_opened_file_path": "C:\DH\project\seb41_pre_038\server"
   }
 }]]></component>
   <component name="RecentsManager">
