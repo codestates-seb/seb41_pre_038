@@ -47,19 +47,26 @@ let members = createSlice({
 	initialState: [],
 });
 
-// SideNav에서 선택한 탭 업데이트
+// SideNav, MyPage에서 선택한 탭 업데이트
 let tab = createSlice({
 	name: 'tab',
-	initialState: 'Home',
+	initialState: {
+		sideNav: 'Home',
+		myPageNav: 'Activity',
+	},
 	reducers: {
-		updateTab(state, action) {
-			state = action.payload;
+		updateSideNavTab(state, action) {
+			state.sideNav = action.payload;
+			return state;
+		},
+		updateMyPageNav(state, action) {
+			state.myPageNav = action.payload;
 			return state;
 		},
 	},
 });
 
-export let { updateTab } = tab.actions;
+export let { updateSideNavTab, updateMyPageNav } = tab.actions;
 
 export default configureStore({
 	reducer: {

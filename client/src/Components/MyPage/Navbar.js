@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateMyPageNav } from '../../store/store';
 
 const Container = styled.div`
 	margin: 4px 0px 20px 0px;
@@ -31,38 +33,44 @@ const NavMenu = styled.div`
 `;
 
 const Navbar = () => {
-	const [selected, setSelected] = useState('Activity');
+	// 맨 처음 렌더링 때는 Activity 탭으로 설정
+	useEffect(() => {
+		dispatch(updateMyPageNav('Activity'));
+	}, []);
+
 	const navigate = useNavigate();
-	console.log(selected);
+	const dispatch = useDispatch();
+	const selectedTab = useSelector((state) => state.tab.myPageNav);
+	console.log('selectedTab in MyPage : ', selectedTab);
 	const selectMenu = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Profile') {
-			setSelected('Profile');
+			dispatch(updateMyPageNav('Profile'));
 			// navigate();
 		} else if (text === 'Activity') {
-			setSelected('Activity');
+			dispatch(updateMyPageNav('Activity'));
 			navigate('/members/1/profiles');
 		} else if (text === 'Saves') {
-			setSelected('Saves');
+			dispatch(updateMyPageNav('Saves'));
 			// navigate();
 		} else if (text === 'Settings') {
-			setSelected('Settings');
+			dispatch(updateMyPageNav('Settings'));
 			navigate('/members/1');
 		}
 	};
 
 	return (
 		<Container>
-			<NavMenu onClick={selectMenu} className={selected === 'Profile' ? 'selected' : ''}>
+			<NavMenu onClick={selectMenu} className={selectedTab === 'Profile' ? 'selected' : ''}>
 				Profile
 			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selected === 'Activity' ? 'selected' : ''}>
+			<NavMenu onClick={selectMenu} className={selectedTab === 'Activity' ? 'selected' : ''}>
 				Activity
 			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selected === 'Saves' ? 'selected' : ''}>
+			<NavMenu onClick={selectMenu} className={selectedTab === 'Saves' ? 'selected' : ''}>
 				Saves
 			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selected === 'Settings' ? 'selected' : ''}>
+			<NavMenu onClick={selectMenu} className={selectedTab === 'Settings' ? 'selected' : ''}>
 				Settings
 			</NavMenu>
 		</Container>

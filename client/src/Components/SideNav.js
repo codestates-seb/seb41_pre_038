@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateTab } from '../store/store';
+import { updateSideNavTab } from '../store/store';
 
 const COLORS = {
 	lightGrey: 'rgb(238, 239, 240)',
@@ -73,22 +72,22 @@ const IconMenu = styled(Menu)`
 const SideNav = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const selectedTab = useSelector((state) => state.tab);
-	console.log(selectedTab);
+	const selectedTab = useSelector((state) => state.tab.sideNav);
+	console.log('selectedTab in SideNav :', selectedTab);
 
 	const selectMenu = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Home') {
-			dispatch(updateTab('Home'));
+			dispatch(updateSideNavTab('Home'));
 			navigate('/');
 		} else if (text === 'Questions') {
-			dispatch(updateTab('Questions'));
+			dispatch(updateSideNavTab('Questions'));
 			navigate('/questions');
 		} else if (text === 'Tags') {
-			dispatch(updateTab('Tags'));
+			dispatch(updateSideNavTab('Tags'));
 			// navigate('/tags');
 		} else if (text === 'Users') {
-			dispatch(updateTab('Users'));
+			dispatch(updateSideNavTab('Users'));
 			navigate('/members');
 		}
 	};
