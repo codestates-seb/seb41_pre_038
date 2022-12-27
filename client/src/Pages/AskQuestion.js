@@ -147,6 +147,22 @@ const TitleBox = styled.div`
     padding: 10.4px;
     text-decoration: none;
   }
+  > button:hover {
+    width: 30px;
+    height: 14px;
+    box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    background-color: hsl(209deg 94% 33% / 89%);
+    border-radius: 3px;
+    border: 1px solid rgb(34, 147, 237);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 10.4px;
+    text-decoration: none;
+  }
 `;
 
 const QuestionBox = styled.div`
@@ -183,6 +199,10 @@ const QuestionBox = styled.div`
     padding: 10.4px;
     text-decoration: none;
     margin-top: 70px;
+    :hover {
+      background-color: hsl(209deg 94% 33% / 89%);
+      border: 1px solid hsl(209deg 94% 33% / 89%);
+    }
   }
 `;
 const Editor = styled.div`
@@ -207,6 +227,10 @@ const BlueButton = styled.button`
   padding: 10.4px;
   text-decoration: none;
   margin-top: 20px;
+  :hover {
+    background-color: hsl(209deg 94% 33% / 89%);
+    border: 1px solid hsl(209deg 94% 33% / 89%);
+  }
 `;
 const DiscardButton = styled.button`
   width: 100px;

@@ -108,7 +108,7 @@ const Container = styled.header`
     padding-right: 10px;
     cursor: pointer;
 
-    & div {
+    & img {
       width: 20px;
       height: 20px;
       background-color: red;
@@ -189,7 +189,7 @@ const Header = () => {
           <div style={{ display: 'flex' }}>
             {/* 프로필 */}
             <div className='profile' style={{ display: 'flex' }}>
-              <div></div>
+              <img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1'></img>
               <p>3</p>
             </div>
 

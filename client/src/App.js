@@ -8,6 +8,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import Question from './Pages/Question';
 import AskQuestion from './Pages/AskQuestion';
 import Mypage from './Pages/Mypage';
+import Users from './Pages/Users';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/questions/{question-id}' element={<Question />}></Route>
           <Route path='/questions/ask' element={<AskQuestion />}></Route>
           <Route path='/members/{member-id}/profiles' element={<Mypage />}></Route>
+          <Route path='/members' element={<Users />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
