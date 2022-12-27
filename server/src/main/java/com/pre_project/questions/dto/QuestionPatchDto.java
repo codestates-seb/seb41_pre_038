@@ -9,7 +9,13 @@ public class QuestionPatchDto {
 
     private String title; // 질문 제목
 
-    private String content; // 질문 내용
+    @Lob
+    @Column(nullable = false)
+    private String problemContent;    //문제 내용
+
+    @Lob
+    @Column(nullable = false)
+    private String expectationContent;  //기대 내용
 
 
 

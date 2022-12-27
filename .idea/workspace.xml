@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/scripts/initialize.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/scripts/initialize.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/scripts/server_clear.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/scripts/server_clear.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/scripts/server_start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/scripts/server_start.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/scripts/server_stop.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/scripts/server_stop.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/pre_project/PreProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/pre_project/PreProjectApplication.java" afterDir="false" />
-    </list>
+    <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +43,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/DH/project/pre_project/server"
+    "last_opened_file_path": "C:/DH/project/seb41_pre_038/server"
   }
 }]]></component>
   <component name="RecentsManager">
