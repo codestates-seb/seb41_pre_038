@@ -73,7 +73,7 @@ const SortPerPage = styled.div`
 			background-color: hsl(210, 8%, 97.5%);
 		}
 
-		&.clicked {
+		&.selected {
 			border-color: rgb(120, 129, 138);
 			color: #3b4045;
 			background-color: hsl(210, 8%, 90%);
@@ -164,19 +164,19 @@ const AllQuestions = () => {
 				<Counter>0 questions</Counter>
 				<FlexBox className='PerPage'>
 					<SortPerPage>
-						<button onClick={selectSorting} className={selected === 'Newest' ? 'clicked' : ''}>
+						<button onClick={selectSorting} className={selected === 'Newest' ? 'selected' : ''}>
 							Newest
 						</button>
-						<button onClick={selectSorting} className={selected === 'Active' ? 'clicked' : ''}>
+						<button onClick={selectSorting} className={selected === 'Active' ? 'selected' : ''}>
 							Active
 						</button>
-						<button onClick={selectSorting} className={selected === 'Bountied' ? 'clicked' : ''}>
+						<button onClick={selectSorting} className={selected === 'Bountied' ? 'selected' : ''}>
 							Bountied
 						</button>
-						<button onClick={selectSorting} className={selected === 'Unanswered' ? 'clicked' : ''}>
+						<button onClick={selectSorting} className={selected === 'Unanswered' ? 'selected' : ''}>
 							Unanswered
 						</button>
-						<button onClick={selectSorting} className={selected === 'More' ? 'clicked' : ''}>
+						<button onClick={selectSorting} className={selected === 'More' ? 'selected' : ''}>
 							More
 						</button>
 					</SortPerPage>

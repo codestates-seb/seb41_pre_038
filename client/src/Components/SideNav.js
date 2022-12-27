@@ -16,12 +16,12 @@ const Container = styled.nav`
 	padding: 24px 0px 12px 0px;
 	border-right: 1px solid rgb(208, 212, 215);
 	width: 164px;
-	min-height: calc(100vh - 53px - 322px);
+	min-height: calc(100vh - 53px - 322px); // 100vh - header - footer 높이
 	color: ${COLORS.grey};
 	font-family: -apple-system, 'system-ui', 'Segoe UI Adjusted', 'Segoe UI', 'Liberation Sans', sans-serif;
 
 	// 버튼이 클릭되었을 때의 스타일
-	.clicked {
+	.selected {
 		font-weight: 700;
 		background-color: ${COLORS.lightGrey};
 		color: ${COLORS.black};
@@ -95,11 +95,11 @@ const SideNav = () => {
 
 	return (
 		<Container>
-			<Home onClick={selectMenu} className={selectedTab === 'Home' ? 'clicked' : ''}>
+			<Home onClick={selectMenu} className={selectedTab === 'Home' ? 'selected' : ''}>
 				Home
 			</Home>
 			<Public>PUBLIC</Public>
-			<IconMenu onClick={selectMenu} className={selectedTab === 'Questions' ? 'clicked' : ''}>
+			<IconMenu onClick={selectMenu} className={selectedTab === 'Questions' ? 'selected' : ''}>
 				<svg
 					aria-hidden='true'
 					className='svg-icon iconGlobe'
@@ -113,10 +113,10 @@ const SideNav = () => {
 
 				<span>Questions</span>
 			</IconMenu>
-			<Menu onClick={selectMenu} className={selectedTab === 'Tags' ? 'clicked' : ''}>
+			<Menu onClick={selectMenu} className={selectedTab === 'Tags' ? 'selected' : ''}>
 				Tags
 			</Menu>
-			<Menu onClick={selectMenu} className={selectedTab === 'Users' ? 'clicked' : ''}>
+			<Menu onClick={selectMenu} className={selectedTab === 'Users' ? 'selected' : ''}>
 				Users
 			</Menu>
 		</Container>
