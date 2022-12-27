@@ -74,7 +74,7 @@ const QuestionAnswer = () => {
             <QnA>
               <Question voteCount={'0'} question={question ? question.body : ''} userName={'username'} userId={'1'} />
               <Answers answers={answers || []} />
-              <Editor />
+              <Editor answers={answers} setAnswers={setAnswers} />
               <BottomNotice />
             </QnA>
             <SideBar />

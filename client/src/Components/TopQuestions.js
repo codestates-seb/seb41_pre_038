@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 712px;
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;

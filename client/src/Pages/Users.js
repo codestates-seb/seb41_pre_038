@@ -201,7 +201,6 @@ const UserProfile = styled.div`
 
 const Users = () => {
   const [filterUser, setFilterUser] = useState('');
-
   const [filterDate, setFilterDate] = useState('');
   const agent = ['Reputation', 'New users', 'Voters', 'Editors', 'Moderators'];
   const date = ['week', 'month', 'quarter', 'year', 'all'];
@@ -221,7 +220,6 @@ const Users = () => {
 
   const buttonActiveAgent = (e) => {
     setFilterUser((prev) => {
-      console.log(e.target.value);
       return e.target.value;
     });
   };
