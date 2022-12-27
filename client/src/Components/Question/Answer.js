@@ -83,7 +83,7 @@ const Answer = (props) => {
             <SocialButton onClick={() => console.log('edit')}>Edit</SocialButton>
             <SocialButton onClick={() => console.log('follow')}>Follow</SocialButton>
           </SocialButtons>
-          <UserInfo onClick={() => navigate(`/users/${props.userId}`)}>
+          <UserInfo onClick={() => navigate(`/members/${props.userId}`)}>
             <UserImage src='https://www.gravatar.com/avatar/a6f7ffb957d52ac7b1b21e24d6078329?s=64&d=identicon&r=PG&f=1' alt='user-profile' />
             <UserName>{props.userName}</UserName>
           </UserInfo>

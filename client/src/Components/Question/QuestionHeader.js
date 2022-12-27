@@ -59,7 +59,7 @@ const QuestionHeader = (props) => {
     <>
       <Header>
         <Title>{props.title}</Title>
-        <Button onClick={() => navigate('/ask')}>Ask Question</Button>
+        <Button onClick={() => navigate('/questions/ask')}>Ask Question</Button>
       </Header>
       <InfoContainer>
         <Info>
