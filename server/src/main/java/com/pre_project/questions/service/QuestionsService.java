@@ -46,22 +46,22 @@ public class QuestionsService {
         return savaQuestion;
     }
 
-    @Transactional
-    public Question updateQuestion(Question question){
-        //memberId가 있는지 체크
-        //수정이 필요함 : Question의 memberId가 현재 로그인한 memberId와 비교하여 맞다면 수정
-        //Question findQuestion = findVerifiedQuestion(question.getMember().getMemberId());
-
-        //questionID가 맞는지 확인
-        findVerifiedQuestion(question.getQuestionId());
-
-        //*테스트* 글작성한사람의 아이디와 question에 저장된 memberId가 같을 때 수정
-        if(question.getMember().getMemberId() == 1L){
-            question.setContent(question.getContent());
-        }
-
-        return questionRepository.save(question);
-    }
+//    @Transactional
+//    public Question updateQuestion(Question question){
+//        //memberId가 있는지 체크
+//        //수정이 필요함 : Question의 memberId가 현재 로그인한 memberId와 비교하여 맞다면 수정
+//        //Question findQuestion = findVerifiedQuestion(question.getMember().getMemberId());
+//
+//        //questionID가 맞는지 확인
+//        findVerifiedQuestion(question.getQuestionId());
+//
+//        //*테스트* 글작성한사람의 아이디와 question에 저장된 memberId가 같을 때 수정
+//        if(question.getMember().getMemberId() == 1L){
+//            question.setContent(question.getContent());
+//        }
+//
+//        return questionRepository.save(question);
+//    }
 
     //내가 한 질문만 출력
     @Transactional

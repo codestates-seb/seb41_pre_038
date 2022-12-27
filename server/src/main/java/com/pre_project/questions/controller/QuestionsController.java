@@ -44,22 +44,22 @@ public class QuestionsController {
 
 
     //질문 수정
-    @PatchMapping("/{member-id}/{question-id}")
-    public ResponseEntity patchQuestion(@PathVariable("member-id") @Positive long memberId,
-                                        @PathVariable("question-id") @Positive long questionId,
-                                        @RequestBody QuestionPatchDto questionPatchDto){
-
-        //현재 로그인한 MemberID값과
-        questionPatchDto.setMemberId(memberId);
-        //현재 선택한 questionID값을 통해서 수정
-        questionPatchDto.setQuestionId(questionId);
-
-        Question question = questionsService.updateQuestion
-                (questionsMapper.questionPatchToQuestion(questionPatchDto));
-
-        QuestionResponseDto response = questionsMapper.questionToQuestionResponse(question);
-        return new ResponseEntity<>(response,HttpStatus.OK);
-    }
+//    @PatchMapping("/{member-id}/{question-id}")
+//    public ResponseEntity patchQuestion(@PathVariable("member-id") @Positive long memberId,
+//                                        @PathVariable("question-id") @Positive long questionId,
+//                                        @RequestBody QuestionPatchDto questionPatchDto){
+//
+//        //현재 로그인한 MemberID값과
+//        questionPatchDto.setMemberId(memberId);
+//        //현재 선택한 questionID값을 통해서 수정
+//        questionPatchDto.setQuestionId(questionId);
+//
+//        Question question = questionsService.updateQuestion
+//                (questionsMapper.questionPatchToQuestion(questionPatchDto));
+//
+//        QuestionResponseDto response = questionsMapper.questionToQuestionResponse(question);
+//        return new ResponseEntity<>(response,HttpStatus.OK);
+//    }
 
 
     //내가 한 질문 전체 검색

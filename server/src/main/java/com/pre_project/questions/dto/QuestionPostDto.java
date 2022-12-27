@@ -16,7 +16,11 @@ public class QuestionPostDto {
 
     @Lob
     @Column(nullable = false)
-    private String content;// 질문 내용
+    private String problemContent;    //문제 내용
+
+    @Lob
+    @Column(nullable = false)
+    private String expectationContent;  //기대 내용
 
 
     private int vote;    // 추천 수
