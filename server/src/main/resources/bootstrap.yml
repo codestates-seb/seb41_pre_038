@@ -2,5 +2,5 @@ aws:
   paramstore:
     enabled: true
     prefix: /spring-boot-aws
-    name: stackoverflow-38
+    name: stackoverflowDB
     profileSeparator: _

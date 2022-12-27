@@ -37,18 +37,15 @@ public class MemberController
     @PostMapping("/sign-up") //회원 등록
     public ResponseEntity registerMember(@Valid @RequestBody MemberPostDto memberPost)
     {
-
         Member member = memberService.saveMember(mapper.memberPostToMember(memberPost));
         MemberResponseDto response = mapper.memberToMemberResponse(member);
 
         log.info("member registered");
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.CREATED);
-
     }
 
     @PatchMapping("/{member-id}") //회원 수정
-    public ResponseEntity updateMember(@PathVariable("member-id") long memberId,
-                                       @Valid @RequestBody MemberPatchDto memberPatchDto)
+    public ResponseEntity updateMember(@PathVariable("member-id") long memberId, @Valid @RequestBody MemberPatchDto memberPatchDto)
     {
         memberPatchDto.addMemberId(memberId);
         Member member = memberService.update(mapper.memberPatchToMember(memberPatchDto));

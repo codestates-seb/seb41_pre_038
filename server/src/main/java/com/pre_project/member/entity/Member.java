@@ -1,5 +1,6 @@
 package com.pre_project.member.entity;
 
+import com.pre_project.audit.Auditable;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Member //엔티티 클래스
+public class Member extends Auditable //엔티티 클래스
 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -36,7 +37,12 @@ public class Member //엔티티 클래스
 
     public Member(String email)
     {
+        this.memberId = memberId;
+        this.loginId = loginId;
+        this.password = password;
         this.email = email;
+        this.nickname = nickname;
+        this.country = country;
     }
 
     //비밀번호 변경
