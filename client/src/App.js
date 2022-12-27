@@ -8,7 +8,8 @@ import Signup from './Pages/Signup';
 import ForgotPassword from './Pages/ForgotPassword';
 import Question from './Pages/Question';
 import AskQuestion from './Pages/AskQuestion';
-import Mypage from './Pages/Mypage';
+import MyPage from './Pages/MyPage';
+import Setting from './Pages/Setting';
 import './App.css';
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
 					<Route path='/members/help/password' element={<ForgotPassword />}></Route>
 					<Route path='/questions/{question-id}' element={<Question />}></Route>
 					<Route path='/questions/ask' element={<AskQuestion />}></Route>
-					<Route path='/members/{member-id}/profiles' element={<Mypage />}></Route>
+					{/* <Route path='/members/{member-id}/profiles' element={<MyPage />}></Route> */}
+					<Route path='/members/1234/profiles' element={<MyPage />}></Route>
+					<Route path='/members/1234' element={<Setting />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
