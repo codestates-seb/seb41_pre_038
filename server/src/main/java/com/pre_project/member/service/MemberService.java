@@ -1,16 +1,22 @@
 package com.pre_project.member.service;
 
-import com.pre_project.member.dto.MemberPatchDto;
-import com.pre_project.member.dto.MemberPostDto;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.pre_project.Security.utils.CustomAuthorityUtils;
+import com.pre_project.Security.jwt.Jwt;
+import com.pre_project.Security.jwt.JwtRepository;
 import com.pre_project.member.entity.Member;
 import com.pre_project.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -19,6 +25,9 @@ import java.util.Optional;
 public class MemberService
 {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
+    private final JwtRepository jwtRepository;
 
     @Transactional
     public Member saveMember(Member request) // 회원 가입
@@ -27,9 +36,15 @@ public class MemberService
         verifyMemberByEmail(request.getEmail()); //이메일 중복 검사
         verifyMemberByNickname(request.getNickname()); //닉네임 중복 검사
 
+        String encryptedPassword = passwordEncoder.encode(request.getPassword());
+
+        List<String> roles = authorityUtils.createRoles(request.getLoginId());
+
+        request.updatePassword(encryptedPassword);
+        request.updateRoles(roles);
+
         return memberRepository.save(request);
     }
-
 
     @Transactional
     public Member update(Member request) //회원 정보 수정
@@ -65,6 +80,38 @@ public class MemberService
     {
         Member member = findMemberById(memberId);
         memberRepository.delete(member);
+    }
+
+    @Transactional
+    public String getAccessToken(String refreshToken)
+    {
+        Jwt token = jwtRepository.findRefreshToken(refreshToken)
+                .orElseThrow(() -> new IllegalArgumentException("Refresh Token Not Found"));
+
+        String accessToken = JWT.create()
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60000))
+                .withClaim("id", token.getMember().getMemberId())
+                .withClaim("username", token.getMember().getLoginId())
+                .sign(Algorithm.HMAC256("zion"));
+
+        token.updateToken(accessToken);
+        return accessToken;
+    }
+
+    @Transactional
+    public void deleteToken(String refreshToken)
+    {
+        jwtRepository.deleteJwtToken(refreshToken);
+    }
+
+    public Member getMemberFromToken(String token)
+    {
+        String pureToken = token.replace("Bearer ", "");
+
+        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
+        Member findMember = findMemberById(jwt.getMember().getMemberId());
+
+        return findMember;
     }
 
     private void verifyMemberByEmail(String email) //이메일로 회원 조회
