@@ -18,7 +18,7 @@ public class Question extends Auditable{//시간 추가
     private Long questionId; // 질문 ID
 
     @ManyToOne
-    @JoinColumn(name = "MEMEBER_ID")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     public void addMember(Member member){
