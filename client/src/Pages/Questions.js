@@ -9,7 +9,7 @@ import AllQuestions from '../Components/AllQuestions';
 const Body = styled.div`
 	display: flex;
 	justify-content: center;
-	width: 1264px;
+	width: 100vw;
 	margin: 0 auto;
 `;
 

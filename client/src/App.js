@@ -16,28 +16,27 @@ import Users from './Pages/Users';
 import './App.css';
 
 function App() {
-  return (
-    <div className='App'>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/questions' element={<Questions />}></Route>
-          <Route path='/members/login' element={<Login />}></Route>
-          <Route path='/members/logout' element={<Logout />}></Route>
-          <Route path='/members/sign-up' element={<Signup />}></Route>
-          <Route path='/members/help/password' element={<ForgotPassword />}></Route>
-          <Route path='/questions/{question-id}' element={<Question />}></Route>
-          <Route path='/questions/ask' element={<AskQuestion />}></Route>
-          <Route path='/members/{member-id}/profiles' element={<MyPage />}></Route>
-          {/* <Route path='/members/1234/profiles' element={<MyPage />}></Route> */}
-          <Route path='/members/1234' element={<Setting />}></Route>
-          <Route path='/edit-answer' element={<EditAnswer />}></Route>
-          <Route path='/edit-question' element={<EditQuestion />}></Route>
-          <Route path='/members' element={<Users />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Home />}></Route>
+					<Route path='/questions' element={<Questions />}></Route>
+					<Route path='/members/login' element={<Login />}></Route>
+					<Route path='/members/logout' element={<Logout />}></Route>
+					<Route path='/members/sign-up' element={<Signup />}></Route>
+					<Route path='/members/help/password' element={<ForgotPassword />}></Route>
+					<Route path='/questions/1' element={<Question />}></Route>
+					<Route path='/questions/ask' element={<AskQuestion />}></Route>
+					<Route path='/members/1/profiles' element={<MyPage />}></Route>
+					<Route path='/members/1' element={<Setting />}></Route>
+					<Route path='/edit-answer' element={<EditAnswer />}></Route>
+					<Route path='/edit-question' element={<EditQuestion />}></Route>
+					<Route path='/members' element={<Users />}></Route>
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;

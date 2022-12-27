@@ -41,13 +41,13 @@ const Navbar = () => {
 			// navigate();
 		} else if (text === 'Activity') {
 			setSelected('Activity');
-			navigate('/members/1234/profiles');
+			navigate('/members/1/profiles');
 		} else if (text === 'Saves') {
 			setSelected('Saves');
 			// navigate();
 		} else if (text === 'Settings') {
 			setSelected('Settings');
-			navigate('/members/1234');
+			navigate('/members/1');
 		}
 	};
 

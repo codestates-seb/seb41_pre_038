@@ -99,7 +99,7 @@ const Profile = () => {
 
 	return (
 		<Container>
-			<Image onClick={() => navigate('/members/1234/profiles')}>
+			<Image onClick={() => navigate('/members/1/profiles')}>
 				<img src='https://www.gravatar.com/avatar/30e5d5f2709879d13de488ab1c6d4441?s=256&d=identicon&r=PG' />
 			</Image>
 			<Info>
@@ -122,7 +122,7 @@ const Profile = () => {
 			<Edit>
 				<a>
 					<span className='icon'>{PencilIcon}</span>
-					<span onClick={() => navigate('/members/1234')}>Edit Profile</span>
+					<span onClick={() => navigate('/members/1')}>Edit Profile</span>
 				</a>
 			</Edit>
 		</Container>
