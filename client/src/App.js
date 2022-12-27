@@ -12,6 +12,7 @@ import MyPage from './Pages/MyPage';
 import Setting from './Pages/Setting';
 import EditAnswer from './Pages/EditAnswer';
 import EditQuestion from './Pages/EditQuestion';
+import Users from './Pages/Users';
 import './App.css';
 
 function App() {
@@ -27,11 +28,12 @@ function App() {
           <Route path='/members/help/password' element={<ForgotPassword />}></Route>
           <Route path='/questions/{question-id}' element={<Question />}></Route>
           <Route path='/questions/ask' element={<AskQuestion />}></Route>
-          {/* <Route path='/members/{member-id}/profiles' element={<MyPage />}></Route> */}
-          <Route path='/members/1234/profiles' element={<MyPage />}></Route>
+          <Route path='/members/{member-id}/profiles' element={<MyPage />}></Route>
+          {/* <Route path='/members/1234/profiles' element={<MyPage />}></Route> */}
           <Route path='/members/1234' element={<Setting />}></Route>
           <Route path='/edit-answer' element={<EditAnswer />}></Route>
           <Route path='/edit-question' element={<EditQuestion />}></Route>
+          <Route path='/members' element={<Users />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
