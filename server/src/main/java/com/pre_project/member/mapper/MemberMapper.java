@@ -21,7 +21,6 @@ public interface MemberMapper
                 .nickname(request.getNickname())
                 .country(request.getCountry())
                 .build();
-
         return member;
     }
 
