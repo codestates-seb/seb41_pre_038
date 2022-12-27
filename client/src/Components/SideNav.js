@@ -16,6 +16,7 @@ const Container = styled.nav`
 	padding: 24px 0px 12px 0px;
 	border-right: 1px solid rgb(208, 212, 215);
 	width: 164px;
+	min-height: calc(100vh - 53px - 322px);
 	color: ${COLORS.grey};
 	font-family: -apple-system, 'system-ui', 'Segoe UI Adjusted', 'Segoe UI', 'Liberation Sans', sans-serif;
 
