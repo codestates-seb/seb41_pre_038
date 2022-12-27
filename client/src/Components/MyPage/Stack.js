@@ -54,7 +54,7 @@ const Stack = ({ votes, title, date }) => {
 	return (
 		<Container>
 			<Votes>{votes}</Votes>
-			<Title>{title}</Title>
+			<Title href='/questions/1'>{title}</Title>
 			<Date>{date}</Date>
 		</Container>
 	);

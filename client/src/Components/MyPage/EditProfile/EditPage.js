@@ -142,7 +142,7 @@ const EditPage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(profileInfo);
-		navigate('/members/1234/profiles');
+		navigate('/members/1/profiles');
 	};
 
 	return (
@@ -170,7 +170,7 @@ const EditPage = () => {
 				</SectionContainer>
 				<Buttons>
 					<button className='save-profile'>Save Profile</button>
-					<button onClick={() => navigate('/members/1234/profiles')} className='cancel'>
+					<button onClick={() => navigate('/members/1/profiles')} className='cancel'>
 						Cancel
 					</button>
 				</Buttons>
