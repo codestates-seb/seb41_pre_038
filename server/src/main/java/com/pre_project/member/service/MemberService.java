@@ -40,11 +40,11 @@ public class MemberService
         verifyMemberByEmail(request.getEmail()); //이메일 중복 검사
         verifyMemberByNickname(request.getNickname()); //닉네임 중복 검사
 
-        //String encryptedPassword = passwordEncoder.encode(request.getPassword());
+        String encryptedPassword = passwordEncoder.encode(request.getPassword());
 
         List<String> roles = authorityUtils.createRoles(request.getLoginId());
 
-        //request.updatePassword(encryptedPassword);
+        request.updatePassword(encryptedPassword);
         request.updateRoles(roles);
 
         return memberRepository.save(request);
@@ -87,50 +87,50 @@ public class MemberService
     }
 
 
-//    //로그인한 회원정보 반환
-//    public Member getLoginMember(){
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        MemberDetails userDetails = (MemberDetails)principal;
-//        Long userId = userDetails.getMember().getMemberId();
-//        String username = userDetails.getUsername();
-//        log.info("로그인한 아이디"+userId);
-//        log.info("로그인한 아이디"+username);
-//
-//        return userDetails.getMember();
-//    }
+    //로그인한 회원정보 반환
+    public Member getLoginMember(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MemberDetails userDetails = (MemberDetails)principal;
+        Long userId = userDetails.getMember().getMemberId();
+        String username = userDetails.getUsername();
+        log.info("로그인한 아이디"+userId);
+        log.info("로그인한 아이디"+username);
+
+        return userDetails.getMember();
+    }
 
     //사용자 토큰 가져오는 메서드
-//    @Transactional
-//    public String getAccessToken(String refreshToken)
-//    {
-//        Jwt token = jwtRepository.findRefreshToken(refreshToken)
-//                .orElseThrow(() -> new IllegalArgumentException("Refresh Token Not Found"));
-//
-//        String accessToken = JWT.create()
-//                .withExpiresAt(new Date(System.currentTimeMillis() + 60000))
-//                .withClaim("id", token.getMember().getMemberId())
-//                .withClaim("username", token.getMember().getLoginId())
-//                .sign(Algorithm.HMAC256("zion"));
-//
-//        token.updateToken(accessToken);
-//        return accessToken;
-//    }
+    @Transactional
+    public String getAccessToken(String refreshToken)
+    {
+        Jwt token = jwtRepository.findRefreshToken(refreshToken)
+                .orElseThrow(() -> new IllegalArgumentException("Refresh Token Not Found"));
 
-//    @Transactional
-//    public void deleteToken(String refreshToken)
-//    {
-//        jwtRepository.deleteJwtToken(refreshToken);
-//    }
-//
-//    public Member getMemberFromToken(String token)
-//    {
-//        String pureToken = token.replace("Bearer ", "");
-//
-//        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
-//        Member findMember = findMemberById(jwt.getMember().getMemberId());
-//
-//        return findMember;
-//    }
+        String accessToken = JWT.create()
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60000))
+                .withClaim("id", token.getMember().getMemberId())
+                .withClaim("username", token.getMember().getLoginId())
+                .sign(Algorithm.HMAC256("zion"));
+
+        token.updateToken(accessToken);
+        return accessToken;
+    }
+
+    @Transactional
+    public void deleteToken(String refreshToken)
+    {
+        jwtRepository.deleteJwtToken(refreshToken);
+    }
+
+    public Member getMemberFromToken(String token)
+    {
+        String pureToken = token.replace("Bearer ", "");
+
+        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
+        Member findMember = findMemberById(jwt.getMember().getMemberId());
+
+        return findMember;
+    }
 
     private void verifyMemberByEmail(String email) //이메일로 회원 조회
     {

@@ -90,22 +90,22 @@ public class MemberController
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @PostMapping("/refresh")
-//    public ResponseEntity refreshToken(@RequestHeader String Refresh)
-//    {
-//        String accessToken = memberService.getAccessToken(Refresh);
-//
-//        response.addHeader("Authorization", accessToken);
-//
-//        return new ResponseEntity(HttpStatus.ACCEPTED);
-//    }
-//
-//    @DeleteMapping("/logout")
-//    public ResponseEntity logout(@RequestHeader String Refresh)
-//    {
-//        memberService.deleteToken(Refresh);
-//
-//        log.info("log out");
-//        return new ResponseEntity(HttpStatus.NO_CONTENT);
-//    }
+    @PostMapping("/refresh")
+    public ResponseEntity refreshToken(@RequestHeader String Refresh)
+    {
+        String accessToken = memberService.getAccessToken(Refresh);
+
+        response.addHeader("Authorization", accessToken);
+
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity logout(@RequestHeader String Refresh)
+    {
+        memberService.deleteToken(Refresh);
+
+        log.info("log out");
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }
