@@ -153,7 +153,7 @@ const EditPage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(profileInfo);
-		// axios
+		// return axios
 		// 	.post(`${process.env.REACT_APP_API_URL}/members/1`, JSON.stringify(profileInfo))
 		// 	.then((res) => {
 		// 		const { data } = res;

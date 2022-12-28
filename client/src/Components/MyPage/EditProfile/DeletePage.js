@@ -97,7 +97,7 @@ const DeletePage = () => {
 	// 탈퇴할 userId를 서버로 전송하고, store에서 해당 유저를 삭제하는 함수
 	const deleteUser = () => {
 		console.log('deleteUser');
-		// axios
+		// return axios
 		// 	.delete(`${process.env.REACT_APP_API_URL}/members/1`, {
 		// 		data: {
 		// 			memberId,
