@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { updateMyPageNav } from '../../../store/store';
+import { useDispatch } from 'react-redux';
 
 const GlobalStyle = createGlobalStyle`
   button,
@@ -128,6 +130,9 @@ const Buttons = styled.div`
 `;
 
 const EditPage = () => {
+	const dispatch = useDispatch();
+	dispatch(updateMyPageNav('Settings'));
+
 	// 이미지 제외
 	const [profileInfo, setProfileInfo] = useState({
 		nickname: 'Nickname',
