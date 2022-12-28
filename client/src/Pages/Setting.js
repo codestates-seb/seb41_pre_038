@@ -4,8 +4,12 @@ import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
 import Profile from '../Components/MyPage/Profile';
 import Navbar from '../Components/MyPage/Navbar';
-import Sidebar from '../Components/MyPage/Sidebar';
-import Section from '../Components/MyPage/Section';
+import Sidebar from '../Components/MyPage/EditProfile/Sidebar';
+import EditPage from '../Components/MyPage/EditProfile/EditPage';
+import DeletePage from '../Components/MyPage/EditProfile/DeletePage';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { editNickname, editCountry, editUserImage } from '../store/store';
 
 const Container = styled.div`
 	width: 100vw;
@@ -15,7 +19,7 @@ const Container = styled.div`
 const Body = styled.div`
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	width: 1264px;
 	margin: 0 auto;
 `;
 
@@ -32,14 +36,14 @@ const Main = styled.div`
 	display: flex;
 `;
 
-const SectionContainer = styled.div`
-	width: 100%;
+const Setting = () => {
+	const [selected, setSelected] = useState('Edit');
 
-	display: flex;
-	justify-content: space-between;
-`;
+	let store = useSelector((state) => {
+		return state;
+	});
+	let dispatch = useDispatch();
 
-const MyPage = () => {
 	return (
 		<Container>
 			<Header />
@@ -49,11 +53,8 @@ const MyPage = () => {
 					<Profile />
 					<Navbar />
 					<Main>
-						<Sidebar />
-						<SectionContainer>
-							<Section text='Questions' emptyMsg='asked' data={null}></Section>
-							<Section text='Answers' emptyMsg='answered' data={null}></Section>
-						</SectionContainer>
+						<Sidebar selected={selected} setSelected={setSelected} />
+						{selected === 'Edit' ? <EditPage /> : <DeletePage />}
 					</Main>
 				</ProfileContainer>
 			</Body>
@@ -62,4 +63,4 @@ const MyPage = () => {
 	);
 };
 
-export default MyPage;
+export default Setting;

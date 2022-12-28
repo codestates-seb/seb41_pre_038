@@ -4,7 +4,7 @@ import Header from '../Components/Header';
 import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
 import SideBar from '../Components/SideBar';
-import TopQuestions from '../Components/TopQuestions';
+import AllQuestions from '../Components/AllQuestions';
 
 const Body = styled.div`
 	display: flex;
@@ -18,18 +18,19 @@ const Container = styled.main`
 	width: 1100px;
 	height: 100%;
 	padding: 24px;
+
 	display: flex;
 	justify-content: space-between;
 `;
 
-const Home = () => {
+const Questions = () => {
 	return (
 		<div>
 			<Header />
 			<Body>
 				<SideNav />
 				<Container>
-					<TopQuestions />
+					<AllQuestions />
 					<SideBar />
 				</Container>
 			</Body>
@@ -38,4 +39,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Questions;

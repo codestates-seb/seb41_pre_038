@@ -33,7 +33,7 @@ const BottomNotice = () => {
   return (
     <Container>
       <Notice>
-        Browse other questions tagged <Tag>javascript</Tag> <Tag>python</Tag> or <Link to='/ask'>ask your own question</Link>.
+        Browse other questions tagged <Tag>javascript</Tag> <Tag>python</Tag> or <Link to='/questions/ask'>ask your own question</Link>.
       </Notice>
     </Container>
   );
