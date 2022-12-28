@@ -38,5 +38,4 @@ public class Question extends Auditable{//시간 추가
     
     @Column(nullable = false)
     private int vote;    // 추천 수
-
 }

@@ -90,6 +90,7 @@ public class MemberService
         return member.get();
     }
 
+    //사용자 토큰 가져오는 메서드
     @Transactional
     public String getAccessToken(String refreshToken)
     {
