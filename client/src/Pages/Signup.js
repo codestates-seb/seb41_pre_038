@@ -240,9 +240,9 @@ const Option = styled(Subscript)`
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('abc123@abc.com');
+  const [id, setId] = useState('abc123');
+  const [password, setPassword] = useState('abc12345');
 
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidId, setIsValidId] = useState(true);
@@ -265,13 +265,14 @@ const Signup = () => {
   };
 
   const requestSignUp = async (userData) => {
-    const response = await fetch('http://localhost:8080/members/sign-up', {
+    const response = await fetch('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/sign-up', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
     });
+    console.log(response);
     return response.json();
   };
 
@@ -306,7 +307,7 @@ const Signup = () => {
       country: 'Korea',
     };
 
-    // const response = requestSignUp(userData);
+    const response = requestSignUp(userData);
     // if (response) {
     //   setEmail('');
     //   setId('');
