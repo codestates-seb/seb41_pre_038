@@ -100,7 +100,7 @@ const Profile = () => {
 	return (
 		<Container>
 			<Image onClick={() => navigate('/members/1/profiles')}>
-				<img src='https://www.gravatar.com/avatar/30e5d5f2709879d13de488ab1c6d4441?s=256&d=identicon&r=PG' />
+				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
 			</Image>
 			<Info>
 				<NickName>Nickname</NickName>

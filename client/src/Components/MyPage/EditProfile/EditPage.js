@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateMyPageNav } from '../../../store/store';
 import { useDispatch } from 'react-redux';
+import { editNickname, editCountry } from '../../../store/store';
+import axios from 'axios';
 
 const GlobalStyle = createGlobalStyle`
   button,
@@ -135,19 +137,31 @@ const EditPage = () => {
 
 	// 이미지 제외
 	const [profileInfo, setProfileInfo] = useState({
+		memberId: 1,
+		password: 'password123',
 		nickname: 'Nickname',
-		country: null,
+		country: 'Korea',
 	});
 	const navigate = useNavigate();
 
+	// 인풋에 입력한 값을 profileInfo 상태에 업데이트하는 함수
 	const handleInputValue = (key) => (e) => {
 		setProfileInfo({ ...profileInfo, [key]: e.target.value });
 	};
 
+	// 변경된 profileInfo를 서버로 전송하고, 받은 응답을 store에 업데이트하는 함수
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(profileInfo);
-		navigate('/members/1/profiles');
+		// axios
+		// 	.post(`${process.env.REACT_APP_API_URL}/members/1`, JSON.stringify(profileInfo))
+		// 	.then((res) => {
+		// 		const { data } = res;
+		// 		dispatch(editNickname(data.nickname));
+		// 		dispatch(editCountry(data.country));
+		// 	})
+		// 	.catch((err) => console.log(err));
+		// navigate('/members/1/profiles');
 	};
 
 	return (
@@ -160,7 +174,7 @@ const EditPage = () => {
 					<Section>
 						<Label>Profile image</Label>
 						<Wrapper>
-							<img src='https://www.gravatar.com/avatar/30e5d5f2709879d13de488ab1c6d4441?s=256&d=identicon&r=PG' />
+							<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
 							<a>Change picture</a>
 						</Wrapper>
 					</Section>
@@ -170,7 +184,7 @@ const EditPage = () => {
 					</Section>
 					<Section>
 						<Label>Location</Label>
-						<Input onChange={handleInputValue('country')} type='text' />
+						<Input onChange={handleInputValue('country')} type='text' value={profileInfo.country} />
 					</Section>
 				</SectionContainer>
 				<Buttons>
