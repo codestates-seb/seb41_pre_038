@@ -74,6 +74,14 @@ public class QuestionsService {
     }
 
 
+    //질문 검색
+    public Question findQuestion(long questionId){
+        Question findQuestion = findVerifiedQuestion(questionId);
+        questionRepository.save(findQuestion);
+        return findQuestion;
+    }
+
+
     //전체 질문 출력
     public Page<Question> findQuestions(int page,int size){
         return questionRepository.findAll(PageRequest.of(page,size,

@@ -2,13 +2,17 @@ package com.pre_project.questions.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Lob;
 
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Setter
 public class QuestionResponseDto {
     private String title; // 질문 제목
 
