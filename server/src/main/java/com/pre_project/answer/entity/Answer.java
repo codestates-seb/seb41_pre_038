@@ -20,7 +20,7 @@ public class Answer extends Auditable
 
     private String answerContent;
 
-    private Integer vote = 0;
+    private int vote;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
