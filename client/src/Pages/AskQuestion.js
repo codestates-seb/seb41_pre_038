@@ -286,13 +286,15 @@ const AskQuestion = () => {
   // expecting값 저장 및 제출 이벤트를 구동하는 함수입니다.
   const onSubmit = (event) => {
     setExpecting(event.target.closest('div').querySelector(`[role='textbox']`).innerHTML);
-    const write = { title, content, expecting };
+    const write = JSON.stringify({ title, content, expecting });
+
+    alert('글쓰기 완료');
 
     return axios
-      .post('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/questions/ask', { write })
+      .post('https://jsonplaceholder.typicode.com/posts', { write })
       .then((res) => {
         console.log(res.data);
-        dispatch(addQuestions(res.data));
+        //dispatch(addQuestions(res.data));
       })
       .catch((err) => console.log(err));
   };
