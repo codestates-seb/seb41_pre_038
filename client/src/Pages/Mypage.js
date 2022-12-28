@@ -6,6 +6,9 @@ import Profile from '../Components/MyPage/Profile';
 import Navbar from '../Components/MyPage/Navbar';
 import Sidebar from '../Components/MyPage/Sidebar';
 import Section from '../Components/MyPage/Section';
+import { useDispatch } from 'react-redux';
+import { updateMyPageNav, updateSideNavTab } from '../store/store';
+import { useEffect } from 'react';
 
 const Container = styled.div`
 	width: 100vw;
@@ -40,6 +43,9 @@ const SectionContainer = styled.div`
 `;
 
 const MyPage = () => {
+	const dispatch = useDispatch();
+	dispatch(updateSideNavTab('Users'));
+
 	return (
 		<Container>
 			<Header />

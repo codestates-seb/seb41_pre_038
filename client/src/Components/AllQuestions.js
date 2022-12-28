@@ -1,9 +1,15 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
 import Pagenation from './Pagenation';
+
+const GlobalStyle = createGlobalStyle`
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+`;
 
 const Container = styled.div`
 	width: 712px;
@@ -65,9 +71,27 @@ const SortPerPage = styled.div`
 		padding: 9.6px;
 		border: 1px solid rgb(150, 156, 163);
 		border-right: none;
+		font-size: 12px;
 		color: #6a737c;
 		background-color: white;
 		cursor: pointer;
+
+		&.more {
+			padding-right: 24px;
+			position: relative;
+
+			&:after {
+				content: '';
+				border: 4px solid transparent;
+				border-bottom-width: 0;
+				border-top-color: #6a737c;
+				width: 0;
+				height: 0;
+				position: absolute;
+				top: 15px;
+				right: 9px;
+			}
+		}
 
 		&:hover {
 			background-color: hsl(210, 8%, 97.5%);
@@ -98,6 +122,7 @@ const FilterBtn = styled.button`
 	border: 1px solid hsl(205, 41%, 63%);
 	border-radius: 4px;
 	height: 36.13px;
+	font-size: 12px;
 	color: #39739d;
 	background-color: #e1ecf4;
 	box-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px 0px inset;
@@ -154,6 +179,7 @@ const AllQuestions = () => {
 
 	return (
 		<Container>
+			<GlobalStyle />
 			<Header>
 				<h1>All Questions</h1>
 				<Link to='/questions/ask'>
@@ -176,7 +202,7 @@ const AllQuestions = () => {
 						<button onClick={selectSorting} className={selected === 'Unanswered' ? 'selected' : ''}>
 							Unanswered
 						</button>
-						<button onClick={selectSorting} className={selected === 'More' ? 'selected' : ''}>
+						<button onClick={selectSorting} className={selected === 'More' ? 'selected more' : 'more'}>
 							More
 						</button>
 					</SortPerPage>
