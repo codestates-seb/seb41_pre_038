@@ -46,7 +46,7 @@ public class SecurityConfig
                 .httpBasic().disable()
                 .apply(new CustomFilterConfigure())
                 .and()
-                .authorizeHttpRequests()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "*/member/refresh").permitAll()
                 .antMatchers(HttpMethod.GET, "/*/members/").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/*members/").hasRole("ADMIN")
