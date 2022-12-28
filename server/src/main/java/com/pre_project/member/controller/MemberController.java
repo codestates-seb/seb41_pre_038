@@ -87,7 +87,7 @@ public class MemberController
         memberService.deleteMember(member.getMemberId());
 
         log.info("delete member = {}", memberId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/refresh")
