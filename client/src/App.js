@@ -13,6 +13,7 @@ import Setting from './Pages/Setting';
 import EditAnswer from './Pages/EditAnswer';
 import EditQuestion from './Pages/EditQuestion';
 import Users from './Pages/Users';
+import DeleteCompleted from './Pages/DeleteCompleted';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
 					<Route path='/questions/ask' element={<AskQuestion />}></Route>
 					<Route path='/members/1/profiles' element={<MyPage />}></Route>
 					<Route path='/members/1' element={<Setting />}></Route>
+					<Route path='/members/delete/completed' element={<DeleteCompleted />}></Route>
 					<Route path='/edit-answer' element={<EditAnswer />}></Route>
 					<Route path='/edit-question' element={<EditQuestion />}></Route>
 					<Route path='/members' element={<Users />}></Route>

@@ -1,8 +1,14 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Header from '../Components/Header';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+
+const GlobalStyle = createGlobalStyle`
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+`;
 
 const Container = styled.div`
 	width: 100%;
@@ -277,6 +283,7 @@ const Login = () => {
 
 	return (
 		<Container>
+			<GlobalStyle />
 			<Header />
 			<Body>
 				<LoginContainer>

@@ -1,4 +1,10 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+`;
 
 const Container = styled.div`
 	margin-bottom: 16px;
@@ -51,6 +57,7 @@ const IgnoredTags = () => {
 	return (
 		<div>
 			<Container>
+				<GlobalStyle />
 				<Title>Ignored Tags</Title>
 				<List>
 					<Button>Add an Ignored tag</Button>
