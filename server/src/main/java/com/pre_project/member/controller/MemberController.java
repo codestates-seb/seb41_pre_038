@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -31,6 +32,7 @@ public class MemberController
 
     private final MemberMapper mapper;
 
+    private final HttpServletResponse response;
 
     @PostMapping("/sign-up") //회원 등록
     public ResponseEntity registerMember(@Valid @RequestBody MemberPostDto memberPost)
@@ -85,6 +87,25 @@ public class MemberController
         memberService.deleteMember(member.getMemberId());
 
         log.info("delete member = {}", memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity refreshToken(@RequestHeader String Refresh)
+    {
+        String accessToken = memberService.getAccessToken(Refresh);
+
+        response.addHeader("Authorization", accessToken);
+
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity logout(@RequestHeader String Refresh)
+    {
+        memberService.deleteToken(Refresh);
+
+        log.info("log out");
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

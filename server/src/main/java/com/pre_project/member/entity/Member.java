@@ -1,16 +1,16 @@
 package com.pre_project.member.entity;
 
 import com.pre_project.audit.Auditable;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Member extends Auditable //엔티티 클래스
 {
@@ -21,7 +21,7 @@ public class Member extends Auditable //엔티티 클래스
     @Column(unique = true, nullable = false)
     private String loginId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(unique = true, nullable = false)
@@ -32,8 +32,10 @@ public class Member extends Auditable //엔티티 클래스
 
     private String country;
 
-    @Builder
-    public Member(Long memberId, String loginId, String password, String email, String nickname, String country)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
+    public Member(String email)
     {
         this.memberId = memberId;
         this.loginId = loginId;
@@ -55,9 +57,16 @@ public class Member extends Auditable //엔티티 클래스
         this.nickname = nickname;
     }
 
+    //국적 변경
     public void updateCountry(String country)
     {
         this.country = country;
+    }
+
+    //유저 권한 변경
+    public void updateRoles(List<String> roles)
+    {
+        this.roles = roles;
     }
 
 }

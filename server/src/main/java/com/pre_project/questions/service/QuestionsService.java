@@ -35,8 +35,8 @@ public class QuestionsService {
     public Question createQuestion(Question question){
         // 회원인지 아닌지 체크
         //Question verifiedQuestion = findVerifiedQuestion(question.getMember().getMemberId());
-        Member member = new Member(1L,"asdf","asdf","asdf@asdf.com","asdf","korea");
-        question.addMember(member);
+//        Member member = new Member(1L,"asdfaas","asdfasda","asdasdff@aasdfsdf.com","asdfasdfassdf","korea");
+//        question.addMember(member);
 
         // 회원이면 addMember메서드를 통해서 member저장
 
@@ -46,31 +46,31 @@ public class QuestionsService {
         return savaQuestion;
     }
 
-//    @Transactional
-//    public Question updateQuestion(Question question){
-//        //memberId가 있는지 체크
-//        //수정이 필요함 : Question의 memberId가 현재 로그인한 memberId와 비교하여 맞다면 수정
-//        //Question findQuestion = findVerifiedQuestion(question.getMember().getMemberId());
-//
-//        //questionID가 맞는지 확인
-//        findVerifiedQuestion(question.getQuestionId());
-//
-//        //*테스트* 글작성한사람의 아이디와 question에 저장된 memberId가 같을 때 수정
-//        if(question.getMember().getMemberId() == 1L){
-//            question.setContent(question.getContent());
-//        }
-//
-//        return questionRepository.save(question);
-//    }
-
-    //내가 한 질문만 출력
     @Transactional
-    public Question findQuestion(long memberId,int page,int size){
-        //question중 해당하는 memberId만 전체 출력
+    public Question updateQuestion(Question question){
+        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
-        //questionRepository.fin
+        Optional.ofNullable(question.getTitle())
+                .ifPresent(findQuestion::setTitle);
 
-        return null;
+        Optional.ofNullable(question.getExpectationContent())
+                .ifPresent(findQuestion::setExpectationContent);
+
+        Optional.ofNullable(question.getProblemContent())
+                .ifPresent(findQuestion::setProblemContent);
+
+        Question updateQuestion = questionRepository.save(findQuestion);
+
+        return updateQuestion;
+    }
+
+    //질문 작성자만 질문을 수정, 삭제 할 수 있게
+    @Transactional
+    public Long findQuestionWriter(long questionId){
+        // 질문 작성자만 질문을 수정, 삭제할 수 있도록 질문의 작성자를 찾는 메서드
+        Question findQuestion = findVerifiedQuestion(questionId);
+
+        return findQuestion.getMember().getMemberId();
     }
 
 
