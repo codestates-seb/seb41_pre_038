@@ -8,7 +8,7 @@ import Signup from './Pages/Signup';
 import ForgotPassword from './Pages/ForgotPassword';
 import Question from './Pages/Question';
 import AskQuestion from './Pages/AskQuestion';
-import MyPage from './Pages/MyPage';
+import Mypage from './Pages/Mypage';
 import Setting from './Pages/Setting';
 import EditAnswer from './Pages/EditAnswer';
 import EditQuestion from './Pages/EditQuestion';
@@ -29,7 +29,7 @@ function App() {
 					<Route path='/members/help/password' element={<ForgotPassword />}></Route>
 					<Route path='/questions/1' element={<Question />}></Route>
 					<Route path='/questions/ask' element={<AskQuestion />}></Route>
-					<Route path='/members/1/profiles' element={<MyPage />}></Route>
+					<Route path='/members/1/profiles' element={<Mypage />}></Route>
 					<Route path='/members/1' element={<Setting />}></Route>
 					<Route path='/members/delete/completed' element={<DeleteCompleted />}></Route>
 					<Route path='/edit-answer' element={<EditAnswer />}></Route>
