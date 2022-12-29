@@ -10,6 +10,7 @@ import Footer from '../Components/Footer';
 import axios from 'axios';
 import { addQuestions, editQuestions, deleteQuestions } from '../store/store';
 import { useSelector, useDispatch } from 'react-redux';
+import DiscardQuestion from '../Components/DiscardQuestion';
 const backgroundImg = 'https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368';
 
 const Container = styled.div`
@@ -257,6 +258,7 @@ const AskQuestion = () => {
   const scrollRefContent = useRef();
   const scrollRefExpecting = useRef();
   let dispatch = useDispatch();
+  let [discardModal, setDiscardModal] = useState(false);
 
   useEffect(() => {
     new StacksEditor(answerRef1.current, '', {});
@@ -376,11 +378,17 @@ const AskQuestion = () => {
           )}
 
           {content !== '' ? <BlueButton onClick={onSubmit}>Review your question</BlueButton> : null}
-          <Link to='/'>
-            <DiscardButton>Discard draft</DiscardButton>
-          </Link>
+          <DiscardButton
+            onClick={() => {
+              setDiscardModal(true);
+            }}
+          >
+            Discard draft
+          </DiscardButton>
         </Box>
       </Container>
+      {discardModal === true ? <DiscardQuestion setDiscardModal={setDiscardModal}></DiscardQuestion> : null}
+
       <Footer></Footer>
     </>
   );
