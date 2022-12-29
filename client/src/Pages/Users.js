@@ -26,7 +26,7 @@ const Container = styled.main`
 const Main = styled.div`
   width: 1100px;
   padding: 24px;
-  height: 1400px;
+  height: 1300px;
 `;
 
 const SearchBar = styled.div`
