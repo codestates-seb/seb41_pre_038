@@ -240,9 +240,9 @@ const Option = styled(Subscript)`
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('abc123@abc.com');
-  const [id, setId] = useState('abc123');
-  const [password, setPassword] = useState('abc12345');
+  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
 
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidId, setIsValidId] = useState(true);
@@ -265,15 +265,24 @@ const Signup = () => {
   };
 
   const requestSignUp = async (userData) => {
-    const response = await fetch('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/sign-up', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-    console.log(response);
-    return response.json();
+    try {
+      const response = await fetch(
+        'https://cors-anywhere.herokuapp.com/http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/sign-up',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        }
+      );
+      if (response.ok) {
+        setEmail('');
+        setId('');
+        setPassword('');
+        navigate('/members/login');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -297,8 +306,6 @@ const Signup = () => {
     }
     setIsValidPassword(true);
 
-    console.log(email, id, password);
-
     const userData = {
       loginId: id,
       password: password,
@@ -306,14 +313,7 @@ const Signup = () => {
       nickname: id,
       country: 'Korea',
     };
-
-    const response = requestSignUp(userData);
-    // if (response) {
-    //   setEmail('');
-    //   setId('');
-    //   setPassword('');
-    //   navigate('/members/login');
-    // }
+    requestSignUp(userData);
   };
 
   return (
