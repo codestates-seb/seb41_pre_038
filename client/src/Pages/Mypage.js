@@ -42,7 +42,7 @@ const SectionContainer = styled.div`
 	justify-content: space-between;
 `;
 
-const MyPage = () => {
+const Mypage = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -71,4 +71,4 @@ const MyPage = () => {
 	);
 };
 
-export default MyPage;
+export default Mypage;
