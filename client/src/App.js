@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Questions from './Pages/Questions';
 import Login from './Pages/Login';
-import Logout from './Pages/Logout';
+// import Logout from './Components/Logout';
 import Signup from './Pages/Signup';
 import ForgotPassword from './Pages/ForgotPassword';
 import Question from './Pages/Question';
@@ -14,6 +14,7 @@ import EditAnswer from './Pages/EditAnswer';
 import EditQuestion from './Pages/EditQuestion';
 import Users from './Pages/Users';
 import DeleteCompleted from './Pages/DeleteCompleted';
+import Logout from './Pages/Logout';
 import './App.css';
 
 function App() {

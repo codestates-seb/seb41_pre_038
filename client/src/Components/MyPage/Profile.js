@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { updateSettingNav } from '../../store/store';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
 	width: 100%;
@@ -96,6 +98,12 @@ const PencilIcon = (
 
 const Profile = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const editProfile = () => {
+		dispatch(updateSettingNav('Edit'));
+		navigate('/members/1');
+	};
 
 	return (
 		<Container>
@@ -122,7 +130,7 @@ const Profile = () => {
 			<Edit>
 				<a>
 					<span className='icon'>{PencilIcon}</span>
-					<span onClick={() => navigate('/members/1')}>Edit Profile</span>
+					<span onClick={editProfile}>Edit Profile</span>
 				</a>
 			</Edit>
 		</Container>

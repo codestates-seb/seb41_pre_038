@@ -7,9 +7,9 @@ import Navbar from '../Components/MyPage/Navbar';
 import Sidebar from '../Components/MyPage/EditProfile/Sidebar';
 import EditPage from '../Components/MyPage/EditProfile/EditPage';
 import DeletePage from '../Components/MyPage/EditProfile/DeletePage';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { editNickname, editCountry, editUserImage } from '../store/store';
+import { updateSettingNav } from '../store/store';
 
 const Container = styled.div`
 	width: 100vw;
@@ -37,12 +37,13 @@ const Main = styled.div`
 `;
 
 const Setting = () => {
-	const [selected, setSelected] = useState('Edit');
+	const dispatch = useDispatch();
 
-	let store = useSelector((state) => {
-		return state;
-	});
-	let dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(updateSettingNav('Edit'));
+	}, []);
+
+	let selectedTab = useSelector((state) => state.tab.settingNav);
 
 	return (
 		<Container>
@@ -53,8 +54,8 @@ const Setting = () => {
 					<Profile />
 					<Navbar />
 					<Main>
-						<Sidebar selected={selected} setSelected={setSelected} />
-						{selected === 'Edit' ? <EditPage /> : <DeletePage />}
+						<Sidebar />
+						{selectedTab === 'Edit' ? <EditPage /> : <DeletePage />}
 					</Main>
 				</ProfileContainer>
 			</Body>

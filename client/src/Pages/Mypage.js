@@ -44,7 +44,10 @@ const SectionContainer = styled.div`
 
 const MyPage = () => {
 	const dispatch = useDispatch();
-	dispatch(updateSideNavTab('Users'));
+
+	useEffect(() => {
+		dispatch(updateSideNavTab('Users'));
+	}, []);
 
 	return (
 		<Container>

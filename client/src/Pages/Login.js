@@ -195,7 +195,7 @@ const SignUpMessage = styled.div`
 	}
 `;
 
-const StackOverFlowLogo = (
+export const StackOverFlowLogo = (
 	<svg aria-hidden='true' className='native svg-icon iconLogoGlyphMd' width='32' height='37' viewBox='0 0 32 37'>
 		<path d='M26 33v-9h4v13H0V24h4v9h22Z' fill='#BCBBBB'></path>
 		<path
@@ -257,7 +257,7 @@ const Login = () => {
 		setClickedLoginBtn(true);
 
 		// return axios
-		// 	.post('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/login', { loginInfo })
+		// 	.post(`${process.env.REACT_APP_API_URL}/members/login`, { loginInfo })
 		// 	.then((res) => {
 		// 		setIsLogin(true);
 		//		setUserInfo(res.data);
