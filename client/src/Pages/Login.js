@@ -256,13 +256,15 @@ const Login = () => {
 		printErrorMessage();
 		setClickedLoginBtn(true);
 
-		// return axios
-		// 	.post(`${process.env.REACT_APP_API_URL}/members/login`, { loginInfo })
-		// 	.then((res) => {
-		// 		setIsLogin(true);
-		//		setUserInfo(res.data);
-		// })
-		// 	.catch((err) => setIdErrorMessage('The email or password is incorrect.'));
+		return axios
+			.post(`http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/login`, { loginInfo })
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+				setIdErrorMessage('The email or password is incorrect.');
+			});
 	};
 
 	// ID, Password 인풋이 비어있으면 에러 메세지를 띄우는 함수

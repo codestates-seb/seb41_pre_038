@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Header from '../Components/Header';
 import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSideNavTab } from '../store/store';
 
@@ -38,7 +39,10 @@ const Main = styled.div`
 
 const DeleteCompleted = () => {
 	const dispatch = useDispatch();
-	dispatch(updateSideNavTab('Home'));
+
+	useEffect(() => {
+		dispatch(updateSideNavTab('Home'));
+	}, []);
 
 	return (
 		<Container>

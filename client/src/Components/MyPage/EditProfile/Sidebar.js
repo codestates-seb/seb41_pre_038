@@ -42,7 +42,7 @@ const SideMenu = styled.div`
 `;
 
 const Sidebar = () => {
-	const selectedTab = useSelector((state) => state.tab);
+	const selectedTab = useSelector((state) => state.tab.settingNav);
 	const dispatch = useDispatch();
 
 	return (

@@ -63,7 +63,7 @@ const Buttons = styled.div`
 			background-color: hsl(210, 8%, 97.5%);
 		}
 
-		&.clicked {
+		&.selected {
 			color: #3b4045;
 			border-color: rgb(120, 129, 138);
 			background-color: hsl(210, 8%, 90%);
@@ -120,19 +120,19 @@ const TopQuestions = () => {
 				</Link>
 			</Header>
 			<Buttons>
-				<button onClick={selectSorting} className={selected === 'Interesting' ? 'clicked' : ''}>
+				<button onClick={selectSorting} className={selected === 'Interesting' ? 'selected' : ''}>
 					Interesting
 				</button>
-				<button onClick={selectSorting} className={selected === 'Bountied' ? 'clicked' : ''}>
+				<button onClick={selectSorting} className={selected === 'Bountied' ? 'selected' : ''}>
 					Bountied
 				</button>
-				<button onClick={selectSorting} className={selected === 'Hot' ? 'clicked' : ''}>
+				<button onClick={selectSorting} className={selected === 'Hot' ? 'selected' : ''}>
 					Hot
 				</button>
-				<button onClick={selectSorting} className={selected === 'Week' ? 'clicked' : ''}>
+				<button onClick={selectSorting} className={selected === 'Week' ? 'selected' : ''}>
 					Week
 				</button>
-				<button onClick={selectSorting} className={selected === 'Month' ? 'clicked' : ''}>
+				<button onClick={selectSorting} className={selected === 'Month' ? 'selected' : ''}>
 					Month
 				</button>
 			</Buttons>

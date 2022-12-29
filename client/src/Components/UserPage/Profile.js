@@ -108,7 +108,7 @@ const Profile = () => {
 	return (
 		<Container>
 			<Image onClick={() => navigate('/members/1/profiles')}>
-				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
+				<img src='https://www.gravatar.com/avatar/73992b63bc8580d4877875468ab2a86f?s=256&d=identicon&r=PG&f=1' />
 			</Image>
 			<Info>
 				<NickName>Nickname</NickName>
@@ -127,12 +127,6 @@ const Profile = () => {
 					</div>
 				</Detail>
 			</Info>
-			<Edit>
-				<a>
-					<span className='icon'>{PencilIcon}</span>
-					<span onClick={editProfile}>Edit Profile</span>
-				</a>
-			</Edit>
 		</Container>
 	);
 };

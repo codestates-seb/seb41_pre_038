@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -58,12 +59,13 @@ const RightSide = styled.div`
 	}
 `;
 
-const Title = styled.a`
+const Title = styled.div`
 	margin: -1px 0px 7.5px 0px;
 	padding-right: 25px;
 	text-decoration: none;
 	color: #0074cc;
 	font-size: 17px;
+	cursor: pointer;
 	&:hover {
 		color: rgb(14, 138, 255);
 	}
@@ -107,10 +109,12 @@ const Time = styled.div`
 	span {
 		color: #0074cc;
 		margin-right: 4px;
+		cursor: pointer;
 	}
 `;
 
 const Question = ({ id, userId, title, body, tab }) => {
+	const navigate = useNavigate();
 	const tagArr = body.split(' ').slice(0, 3);
 
 	return (
@@ -125,7 +129,7 @@ const Question = ({ id, userId, title, body, tab }) => {
 			</LeftSide>
 
 			<RightSide>
-				<Title href='/questions/1'>{title}</Title>
+				<Title onClick={() => navigate(`/questions/${id}`)}>{title}</Title>
 				{tab === 'all-questions' && <Body>{body}</Body>}
 				<TagsAndTime>
 					<div className='tags'>
@@ -134,7 +138,7 @@ const Question = ({ id, userId, title, body, tab }) => {
 						))}
 					</div>
 					<Time>
-						<span>Username{userId}</span>0 mins ago
+						<span onClick={() => navigate(`/members/1`)}>Username{userId}</span>0 mins ago
 					</Time>
 				</TagsAndTime>
 			</RightSide>
