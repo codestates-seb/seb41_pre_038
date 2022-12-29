@@ -7,6 +7,7 @@ import SideBar from '../Components/SideBar';
 import TopQuestions from '../Components/TopQuestions';
 import { useDispatch } from 'react-redux';
 import { updateSideNavTab } from '../store/store';
+import { useEffect } from 'react';
 
 const Body = styled.div`
 	display: flex;
@@ -26,7 +27,10 @@ const Container = styled.main`
 
 const Home = () => {
 	const dispatch = useDispatch();
-	dispatch(updateSideNavTab('Home'));
+
+	useEffect(() => {
+		dispatch(updateSideNavTab('Home'));
+	}, []);
 
 	return (
 		<div>

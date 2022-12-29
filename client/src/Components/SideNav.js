@@ -73,7 +73,6 @@ const SideNav = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const selectedTab = useSelector((state) => state.tab.sideNav);
-	console.log('selectedTab in SideNav :', selectedTab);
 
 	const selectMenu = (e) => {
 		const text = e.target.textContent;

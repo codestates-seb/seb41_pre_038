@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import Logout from '../Pages/Logout';
+import Logout from './Logout';
 
 const iconImg = 'https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27';
 

@@ -61,6 +61,7 @@ const tab = createSlice({
 	initialState: {
 		sideNav: 'Home',
 		myPageNav: 'Activity',
+		settingNav: 'Edit',
 	},
 	reducers: {
 		updateSideNavTab(state, action) {
@@ -71,13 +72,17 @@ const tab = createSlice({
 			state.myPageNav = action.payload;
 			return state;
 		},
+		updateSettingNav(state, action) {
+			state.settingNav = action.payload;
+			return state;
+		},
 	},
 });
 
 export const { editNickname, editCountry } = user.actions;
 export const { addQuestions, editQuestions, deconsteQuestions } = questions.actions;
 export const { addMember, deleteMember } = members.actions;
-export const { updateSideNavTab, updateMyPageNav } = tab.actions;
+export const { updateSideNavTab, updateMyPageNav, updateSettingNav } = tab.actions;
 
 // export default configureStore({
 // 	reducer: {

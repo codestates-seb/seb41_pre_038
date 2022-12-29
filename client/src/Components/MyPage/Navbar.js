@@ -41,7 +41,6 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const selectedTab = useSelector((state) => state.tab.myPageNav);
-	console.log('selectedTab in MyPage : ', selectedTab);
 	const selectMenu = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Profile') {
