@@ -48,13 +48,7 @@ const Navbar = () => {
 			// navigate();
 		} else if (text === 'Activity') {
 			dispatch(updateMyPageNav('Activity'));
-			navigate('/members/1/profiles');
-		} else if (text === 'Saves') {
-			dispatch(updateMyPageNav('Saves'));
-			// navigate();
-		} else if (text === 'Settings') {
-			dispatch(updateMyPageNav('Settings'));
-			navigate('/members/1/settings');
+			navigate('/members/1/');
 		}
 	};
 
@@ -66,13 +60,8 @@ const Navbar = () => {
 			<NavMenu onClick={selectMenu} className={selectedTab === 'Activity' ? 'selected' : ''}>
 				Activity
 			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selectedTab === 'Saves' ? 'selected' : ''}>
-				Saves
-			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selectedTab === 'Settings' ? 'selected' : ''}>
-				Settings
-			</NavMenu>
 		</Container>
 	);
 };
+
 export default Navbar;
