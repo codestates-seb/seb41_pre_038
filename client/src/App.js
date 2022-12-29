@@ -29,15 +29,15 @@ function App() {
 					<Route path='/members/logout' element={<Logout />}></Route>
 					<Route path='/members/sign-up' element={<Signup />}></Route>
 					<Route path='/members/help/password' element={<ForgotPassword />}></Route>
-					<Route path='/questions/1' element={<Question />}></Route>
+					<Route path='/questions/:questionId' element={<Question />}></Route>
 					<Route path='/questions/ask' element={<AskQuestion />}></Route>
-					<Route path='/members/1/profiles' element={<Mypage />}></Route>
-					<Route path='/members/1/settings' element={<Setting />}></Route>
+					<Route path='/members/:memberId/profiles' element={<Mypage />}></Route>
+					<Route path='/members/:memberId/settings' element={<Setting />}></Route>
 					<Route path='/members/delete/completed' element={<DeleteCompleted />}></Route>
-					<Route path='/edit-answer' element={<EditAnswer />}></Route>
-					<Route path='/edit-question' element={<EditQuestion />}></Route>
+					<Route path='/questions/:questionId/edit-question' element={<EditQuestion />}></Route>
+					<Route path='/questions/:questionId/edit-answer' element={<EditAnswer />}></Route>
 					<Route path='/members' element={<Users />}></Route>
-					<Route path='/members/1' element={<UserPage />}></Route>
+					<Route path='/members/:memberId' element={<UserPage />}></Route>
 					<Route path='/tags' element={<Tags />}></Route>
 				</Routes>
 			</BrowserRouter>
