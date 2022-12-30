@@ -272,16 +272,21 @@ const Login = () => {
 			.then((res) => {
 				console.log('logged in!', res.data);
 
+				// 임시로 유저 1 데이터 가져오기
+				// .get(`${process.env.REACT_APP_API_URL}/members/19`)
+				// .then((res) => {
+				const { data } = res.data;
+
 				dispatch(setIsLogin(true));
 
 				dispatch(
 					setUserInfo({
-						memberId: res.data.memberId,
-						loginId: res.data.loginId,
-						password: res.data.password,
-						email: res.data.email,
-						nickname: res.data.nickname,
-						country: res.data.country,
+						memberId: data.memberId,
+						loginId: data.loginId,
+						password: data.password,
+						email: data.email,
+						nickname: data.nickname,
+						country: data.country,
 					})
 				);
 

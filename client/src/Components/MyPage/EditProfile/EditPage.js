@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateMyPageNav } from '../../../store/store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editNickname, editCountry } from '../../../store/store';
 import axios from 'axios';
 
@@ -131,8 +131,11 @@ const Buttons = styled.div`
 	}
 `;
 
-const EditPage = ({ user }) => {
+const EditPage = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const user = useSelector((state) => state.user);
+
 	useEffect(() => {
 		dispatch(updateMyPageNav('Settings'));
 	}, []);
@@ -144,7 +147,6 @@ const EditPage = ({ user }) => {
 		nickname: user.nickname,
 		country: user.country,
 	});
-	const navigate = useNavigate();
 
 	// 인풋에 입력한 값을 profileInfo 상태에 업데이트하는 함수
 	const handleInputValue = (key) => (e) => {
@@ -154,19 +156,23 @@ const EditPage = ({ user }) => {
 	// 변경된 profileInfo를 서버로 전송하고, 받은 응답을 store에 업데이트하는 함수
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(profileInfo);
-		// return axios
-		// 	.post(`${process.env.REACT_APP_API_URL}/members/1`, JSON.stringify(profileInfo))
-		// 	.then((res) => {
-		// 		const { data } = res;
-		// 		dispatch(editNickname(data.nickname));
-		// 		dispatch(editCountry(data.country));
-		// 	})
-		// 	.catch((err) => console.log(err));
+		console.log('send', JSON.stringify(profileInfo));
+		console.log('uri', `${process.env.REACT_APP_API_URL}/members/${user.memberId}`);
+		return axios
+			.patch(`${process.env.REACT_APP_API_URL}/members/${user.memberId}`, JSON.stringify(profileInfo), {
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8',
+				},
+			})
+			.then((res) => {
+				console.log('received', res);
+				const { data } = res.data;
 
-		dispatch(editNickname(profileInfo.nickname));
-		dispatch(editCountry(profileInfo.country));
-		navigate('/members/1/profiles');
+				dispatch(editNickname(data.nickname));
+				dispatch(editCountry(data.country));
+				navigate(`/members/${user.memberId}/profiles`);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (

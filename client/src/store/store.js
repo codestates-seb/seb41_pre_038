@@ -59,20 +59,6 @@ const questions = createSlice({
 	},
 });
 
-// 회원가입, 회원 탈퇴
-const members = createSlice({
-	name: 'members',
-	initialState: [],
-	reducers: {
-		addMember(state, action) {
-			state.push(action.payload);
-		},
-		deleteMember(state, action) {
-			return state.filter((member) => member.memberId !== action.payload);
-		},
-	},
-});
-
 // SideNav, MyPage에서 선택한 탭 업데이트
 const tab = createSlice({
 	name: 'tab',
@@ -100,7 +86,6 @@ const tab = createSlice({
 export const { setUserInfo, editNickname, editCountry } = user.actions;
 export const { setIsLogin } = isLogin.actions;
 export const { addQuestions, editQuestions, deconsteQuestions } = questions.actions;
-export const { addMember, deleteMember } = members.actions;
 export const { updateSideNavTab, updateMyPageNav, updateSettingNav } = tab.actions;
 
 // export default configureStore({
@@ -116,7 +101,6 @@ export const { updateSideNavTab, updateMyPageNav, updateSettingNav } = tab.actio
 const reducers = combineReducers({
 	user: user.reducer,
 	questions: questions.reducer,
-	members: members.reducer,
 	tab: tab.reducer,
 	isLogin: isLogin.reducer,
 });
