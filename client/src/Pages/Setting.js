@@ -56,7 +56,7 @@ const Setting = () => {
 					<Navbar />
 					<Main>
 						<Sidebar />
-						{selectedTab === 'Edit' ? <EditPage user={user} /> : <DeletePage />}
+						{selectedTab === 'Edit' ? <EditPage /> : <DeletePage />}
 					</Main>
 				</ProfileContainer>
 			</Body>

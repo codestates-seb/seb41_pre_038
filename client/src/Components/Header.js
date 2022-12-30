@@ -103,6 +103,10 @@ const Container = styled.header`
 			position: absolute;
 			top: 7px;
 		}
+
+		&.smaller {
+			width: 609px;
+		}
 	}
 	.searchInput:hover {
 		outline-color: hsl(206deg 90% 70%);
@@ -186,6 +190,23 @@ const Container = styled.header`
 			background-color: hsl(206, 100%, 40%);
 		}
 	}
+
+	.log-in {
+		padding: 8px 10.4px;
+		border: 1px solid hsl(205, 41%, 63%);
+		border-radius: 3px;
+		height: 15px;
+		color: #39739d;
+		background-color: hsl(205, 46%, 92%);
+		font-size: 13px;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		box-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px 0px inset;
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgb(170, 205, 230);
+		}
+	}
 `;
 
 const Header = () => {
@@ -218,7 +239,12 @@ const Header = () => {
 							<path d='M0 0h24v24H0z' fill='none' />
 							<path d='m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z' />
 						</svg>
-						<input className='searchInput' onClick={() => setOpenModal(!openModal)} placeholder='Search...'></input>
+						<input
+							className={isLogin ? 'searchInput' : 'searchInput smaller'}
+							onClick={() => setOpenModal(!openModal)}
+							onBlur={() => setOpenModal(false)}
+							placeholder='Search...'
+						></input>
 						{openModal ? <SearchModal></SearchModal> : null}
 					</div>
 					{isLogin ? (
@@ -268,6 +294,9 @@ const Header = () => {
 						</div>
 					) : (
 						<div className='buttons'>
+							<Link to='/members/login'>
+								<button className='log-in'>Log in</button>
+							</Link>
 							<Link to='/members/sign-up'>
 								<button className='sign-up'>Sign up</button>
 							</Link>

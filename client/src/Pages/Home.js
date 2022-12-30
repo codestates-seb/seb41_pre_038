@@ -29,6 +29,10 @@ const Home = () => {
 	const isLogin = useSelector((state) => state.isLogin);
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		dispatch(updateSideNavTab('Home'));
+	}, []);
+
 	return (
 		<div>
 			<Header />

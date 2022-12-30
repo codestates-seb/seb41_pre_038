@@ -242,7 +242,7 @@ const Login = () => {
 	const isLogin = useSelector((state) => state.isLogin);
 	const dispatch = useDispatch();
 	const [loginInfo, setLoginInfo] = useState({
-		id: '',
+		loginId: '',
 		password: '',
 	});
 	const [idErrorMessage, setIdErrorMessage] = useState('');
@@ -267,46 +267,41 @@ const Login = () => {
 		printErrorMessage();
 		setClickedLoginBtn(true);
 
-		// return axios
-		// 	.post(`https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_API_URL}/members/login`, { loginInfo })
-		// 	.then((res) => {
-		// 		console.log(res.data);
-		// 		dispatch(setIsLogin(true));
+		return axios
+			.post(`${process.env.REACT_APP_API_URL}/members/login`, JSON.stringify(loginInfo))
+			.then((res) => {
+				console.log('logged in!', res.data);
 
-		// 		dispatch(
-		// 			setUserInfo({
-		// 				memberId: null,
-		// 				loginId: loginInfo.id,
-		// 				password: loginInfo.password,
-		// 				email: 'temp@gmail.com',
-		// 				nickname: 'tempNickname',
-		// 				country: 'tempCountry',
-		// 			})
-		// 		);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 		setIdErrorMessage('The email or password is incorrect.');
-		// 	});
+				// 임시로 유저 1 데이터 가져오기
+				// .get(`${process.env.REACT_APP_API_URL}/members/19`)
+				// .then((res) => {
+				const { data } = res.data;
 
-		dispatch(setIsLogin(true));
+				dispatch(setIsLogin(true));
 
-		dispatch(
-			setUserInfo({
-				memberId: null,
-				loginId: loginInfo.id,
-				password: loginInfo.password,
-				email: 'temp@gmail.com',
-				nickname: 'tempNickname',
-				country: 'tempCountry',
+				dispatch(
+					setUserInfo({
+						memberId: data.memberId,
+						loginId: data.loginId,
+						password: data.password,
+						email: data.email,
+						nickname: data.nickname,
+						country: data.country,
+					})
+				);
+
+				navigate('/');
 			})
-		);
+			.catch((err) => {
+				console.log(err);
+				setIdErrorMessage('The email or password is incorrect.');
+			});
 	};
 
 	// ID, Password 인풋이 비어있으면 에러 메세지를 띄우는 함수
 	const printErrorMessage = () => {
 		if (clickedLoginBtn) {
-			if (!loginInfo.id) {
+			if (!loginInfo.loginId) {
 				setIdErrorMessage('ID cannot be empty.');
 			} else {
 				setIdErrorMessage('');
@@ -345,7 +340,7 @@ const Login = () => {
 					<Form onSubmit={handleSubmit}>
 						<InputContainer>
 							<Label>ID</Label>
-							<Input onChange={handleInputValue('id')} onBlur={printErrorMessage} type='text' className={idErrorMessage && 'error'} />
+							<Input onChange={handleInputValue('loginId')} onBlur={printErrorMessage} type='text' className={idErrorMessage && 'error'} />
 							{idErrorMessage && ErrorIcon}
 							<ErrorMessage>{idErrorMessage}</ErrorMessage>
 						</InputContainer>
