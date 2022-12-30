@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -47,12 +48,15 @@ public class SecurityConfig
                 .httpBasic().disable()
                 .apply(new CustomFilterConfigure())
                 .and()
-                .authorizeHttpRequests(authorize -> authorize
-                    .antMatchers(HttpMethod.POST, "*/member/refresh").permitAll()
-                    .antMatchers(HttpMethod.GET, "/*/members/").hasAnyRole("USER", "ADMIN")
-                    .antMatchers(HttpMethod.GET, "/*members/").hasRole("ADMIN")
+                .authorizeHttpRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                    .antMatchers(HttpMethod.POST,"/*/members/login").permitAll()
+                    .antMatchers(HttpMethod.POST, "/*/members/refresh").permitAll()
+                    .antMatchers(HttpMethod.GET, "/*/members").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/members/**").hasRole("ADMIN")
                     .anyRequest().permitAll()
-                );
+                .and()
+                .cors().and();
 
         return http.build();
     }
@@ -64,6 +68,7 @@ public class SecurityConfig
         config.setAllowCredentials(true); //내서버가 응답을 할 때 json 을 자바스크립트에서 처리할 수 있게 할지를 설정하는것
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+
         source.registerCorsConfiguration("*", config);
         return new CorsFilter(source);
     }
@@ -82,6 +87,7 @@ public class SecurityConfig
         public void configure(HttpSecurity builder) throws Exception
         {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtRepository);
             jwtAuthenticationFilter.setFilterProcessesUrl("/members/login");

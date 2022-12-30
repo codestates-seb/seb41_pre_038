@@ -25,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
+@CrossOrigin
 public class QuestionsController{
 
     private final QuestionsService questionsService;
