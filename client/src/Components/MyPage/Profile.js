@@ -96,7 +96,7 @@ const PencilIcon = (
 	</svg>
 );
 
-const Profile = () => {
+const Profile = ({ user }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -111,19 +111,19 @@ const Profile = () => {
 				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
 			</Image>
 			<Info>
-				<NickName>Nickname</NickName>
+				<NickName>{user.nickname}</NickName>
 				<Detail>
 					<div className='signin-date'>
 						<span className='icon'>{CakeIcon}</span>
-						<span className='text'>Member for 3 months</span>
+						<span className='text'>Member for 1 day</span>
 					</div>
 					<div className='email'>
 						<span className='icon'>{LinkIcon}</span>
-						<span className='text'>abc123@google.com</span>
+						<span className='text'>{user.email}</span>
 					</div>
 					<div className='nationality'>
 						<span className='icon'>{MapIcon}</span>
-						<span className='text'>South Korea</span>
+						<span className='text'>{user.country}</span>
 					</div>
 				</Detail>
 			</Info>

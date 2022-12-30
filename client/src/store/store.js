@@ -19,11 +19,29 @@ const user = createSlice({
 		country: null,
 	},
 	reducers: {
+		setUserInfo(state, action) {
+			state = action.payload;
+			return state;
+		},
 		editNickname(state, action) {
 			state.nickname = action.payload;
+			return state;
 		},
 		editCountry(state, action) {
 			state.country = action.payload;
+			return state;
+		},
+	},
+});
+
+// 로그인 상태
+const isLogin = createSlice({
+	name: 'isLogin',
+	initialState: false,
+	reducers: {
+		setIsLogin(state, action) {
+			state = action.payload;
+			return state;
 		},
 	},
 });
@@ -79,7 +97,8 @@ const tab = createSlice({
 	},
 });
 
-export const { editNickname, editCountry } = user.actions;
+export const { setUserInfo, editNickname, editCountry } = user.actions;
+export const { setIsLogin } = isLogin.actions;
 export const { addQuestions, editQuestions, deconsteQuestions } = questions.actions;
 export const { addMember, deleteMember } = members.actions;
 export const { updateSideNavTab, updateMyPageNav, updateSettingNav } = tab.actions;
@@ -99,6 +118,7 @@ const reducers = combineReducers({
 	questions: questions.reducer,
 	members: members.reducer,
 	tab: tab.reducer,
+	isLogin: isLogin.reducer,
 });
 
 // config 객체

@@ -38,6 +38,7 @@ const Main = styled.div`
 
 const Setting = () => {
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
 
 	useEffect(() => {
 		dispatch(updateSettingNav('Edit'));
@@ -51,11 +52,11 @@ const Setting = () => {
 			<Body>
 				<SideNav />
 				<ProfileContainer>
-					<Profile />
+					<Profile user={user} />
 					<Navbar />
 					<Main>
 						<Sidebar />
-						{selectedTab === 'Edit' ? <EditPage /> : <DeletePage />}
+						{selectedTab === 'Edit' ? <EditPage user={user} /> : <DeletePage />}
 					</Main>
 				</ProfileContainer>
 			</Body>
