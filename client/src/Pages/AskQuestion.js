@@ -15,7 +15,7 @@ const backgroundImg = 'https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205
 
 const Container = styled.div`
   width: 100%;
-  height: 1700px;
+  height: 1900px;
   background-color: #f8faf9;
   display: flex;
   flex-direction: column;
@@ -212,6 +212,99 @@ const Editor = styled.div`
   padding: 6px 2px;
   margin-bottom: 10px;
 `;
+
+const Tags = styled.div`
+  width: 801px;
+  height: 100px;
+  box-sizing: content-box;
+  padding: 24px;
+  border: 1px solid rgb(227, 230, 230);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 20px; */
+  background-color: white;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 8px 0 0 0;
+
+    > .tag {
+      width: auto;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      padding: 0 8px;
+      font-size: 14px;
+      list-style: none;
+      border-radius: 6px;
+      margin: 0 8px 8px 0;
+      background: var(--coz-purple-600);
+      > .tag-close-icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+        font-size: 14px;
+        margin-left: 8px;
+        color: var(--coz-purple-600);
+        border-radius: 50%;
+        background: #fff;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+    }
+  }
+  > input {
+    flex: 1;
+    width: 780px;
+    height: 18px;
+    padding: 7px 9px;
+    border: 1px solid rgb(189, 190, 193);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    margin-left: 5px;
+    input:focus {
+      outline-color: hsl(206deg 90% 70%);
+      box-shadow: 0px 0px 6px skyblue;
+      border-radius: 5px;
+    }
+  }
+  > button {
+    width: 30px;
+    height: 14px;
+    box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    background-color: #0a95ff;
+    border-radius: 3px;
+    border: 1px solid rgb(34, 147, 237);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 10.4px;
+    text-decoration: none;
+    /* margin-top: 10px; */
+    :hover {
+      background-color: hsl(209deg 94% 33% / 89%);
+      border: 1px solid hsl(209deg 94% 33% / 89%);
+    }
+  }
+`;
+
 const BlueButton = styled.button`
   width: 149px;
   height: 36px;
@@ -248,6 +341,69 @@ const DiscardButton = styled.button`
   border: none;
 `;
 
+export const TagsInput = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-height: 40px;
+  padding: 0 3px;
+  height: 38px;
+
+  border: 1px solid rgb(214, 216, 218);
+  border-radius: 6px;
+  margin-bottom: 10px;
+
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 8px 0 0 0;
+
+    > .tag {
+      font-size: 12px;
+      //실질적인 태그
+      width: auto;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(82, 116, 141);
+      padding: 0 8px;
+      font-size: 14px;
+      list-style: none;
+      border-radius: 3px;
+      margin: 0 3px 0 0;
+      /* background: var(--coz-purple-600); */
+      background-color: rgb(226, 236, 245);
+      > .tag-close-icon {
+        display: block;
+
+        font-weight: 600;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+        font-size: 14px;
+        margin-left: 4px;
+        color: rgb(82, 116, 141);
+        cursor: pointer;
+      }
+    }
+  }
+
+  > input {
+    flex: 1;
+    border: none;
+    height: 31px;
+    font-size: 14px;
+    padding: 4px 0 0 0;
+    margin-left: 5px;
+    :focus {
+      outline: transparent;
+    }
+  }
+`;
+
 const AskQuestion = () => {
   const answerRef1 = useRef();
   const answerRef2 = useRef();
@@ -255,6 +411,9 @@ const AskQuestion = () => {
   const [content, setContent] = useState('');
   const [expecting, setExpecting] = useState('');
   const [isClicked, setIsClicked] = useState([false, false]); // redux 상태관리 필요 x
+  //태그
+  const [tags, setTags] = useState(['React', 'JavaScript']);
+  const tagRef = useRef(null);
   const scrollRefContent = useRef();
   const scrollRefExpecting = useRef();
   let dispatch = useDispatch();
@@ -289,16 +448,37 @@ const AskQuestion = () => {
   const onSubmit = (event) => {
     setExpecting(event.target.closest('div').querySelector(`[role='textbox']`).innerHTML);
     const write = JSON.stringify({ title, content, expecting });
+    console.log(write);
 
-    alert('글쓰기 완료');
+    // alert('글쓰기 완료');
 
     return axios
-      .post('https://jsonplaceholder.typicode.com/posts', { write })
+      .post('https://cors-anywhere.herokuapp.com/http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/questions', { write })
       .then((res) => {
         console.log(res.data);
-        //dispatch(addQuestions(res.data));
+        dispatch(addQuestions(res.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('에러', write));
+  };
+
+  //복사용
+  const initialTags = ['CodeStates', 'kimcoding'];
+  const inputTag = useRef(null);
+
+  //const [tags, setTags] = useState(initialTags);
+  const removeTags = (indexToRemove) => {
+    let copy = [...tags];
+    copy.splice(indexToRemove, 1);
+    setTags(copy);
+  };
+
+  const addTags = (event) => {
+    if (event.target.value !== '' && !tags.includes(event.target.value) && tags.length < 7) {
+      let copy = [...tags];
+      copy.push(event.target.value);
+      setTags(copy);
+      event.target.value = '';
+    }
   };
 
   return (
@@ -376,6 +556,38 @@ const AskQuestion = () => {
               <Editor ref={answerRef2}></Editor>
             </QuestionBox>
           )}
+
+          <Tags>
+            <h3>Tags</h3>
+            <p>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</p>
+            <TagsInput>
+              <ul id='tags'>
+                {tags.map((tag, index) => (
+                  <li key={index} className='tag'>
+                    <span className='tag-title'>{tag}</span>
+                    <span
+                      className='tag-close-icon'
+                      onClick={(el, index) => {
+                        removeTags(index);
+                      }}
+                    >
+                      x
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <input
+                ref={inputTag}
+                className='tag-input'
+                type='text'
+                onKeyUp={(e) => {
+                  return e.key === 'Enter' ? addTags(e) : null;
+                }}
+                placeholder='e.g. (spring typescript ruby-on-rails)'
+              />
+            </TagsInput>
+            {/* <button>Next</button> */}
+          </Tags>
 
           {content !== '' ? <BlueButton onClick={onSubmit}>Review your question</BlueButton> : null}
           <DiscardButton
