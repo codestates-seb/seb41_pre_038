@@ -66,13 +66,16 @@ const CancelButton = styled(PostButton)`
   }
 `;
 
-const Editor = ({ edit, answer, answers, setAnswers }) => {
+const Editor = ({ edit, editQuestion, answer, answers, setAnswers, placeholder }) => {
   const navigate = useNavigate();
   const editorRef = useRef();
 
   useEffect(() => {
-    new StacksEditor(editorRef.current, answer || '', {});
-  }, []);
+    new StacksEditor(editorRef.current, answer || placeholder || '', {});
+    return () => {
+      editorRef.current?.querySelector('div').remove();
+    };
+  }, [placeholder]);
 
   const handleClick = (event) => {
     if (answer) {
