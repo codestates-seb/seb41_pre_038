@@ -133,8 +133,8 @@ const Question = ({ tab, questionId, title, problemContent, expectationContent, 
 				{tab === 'all-questions' && <Body>{problemContent}</Body>}
 				<TagsAndTime>
 					<div className='tags'>
-						{tagArr.map((tag) => (
-							<Tag>{tag}</Tag>
+						{tagArr.map((tag, index) => (
+							<Tag key={index}>{tag}</Tag>
 						))}
 					</div>
 					<Time>

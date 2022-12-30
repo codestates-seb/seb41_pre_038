@@ -131,7 +131,7 @@ const Buttons = styled.div`
 	}
 `;
 
-const EditPage = () => {
+const EditPage = ({ user }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(updateMyPageNav('Settings'));
@@ -139,10 +139,10 @@ const EditPage = () => {
 
 	// 이미지 제외
 	const [profileInfo, setProfileInfo] = useState({
-		memberId: 1,
-		password: 'password123',
-		nickname: 'Nickname',
-		country: 'Korea',
+		memberId: user.memberId,
+		password: user.password,
+		nickname: user.nickname,
+		country: user.country,
 	});
 	const navigate = useNavigate();
 
@@ -163,7 +163,10 @@ const EditPage = () => {
 		// 		dispatch(editCountry(data.country));
 		// 	})
 		// 	.catch((err) => console.log(err));
-		// navigate('/members/1/profiles');
+
+		dispatch(editNickname(profileInfo.nickname));
+		dispatch(editCountry(profileInfo.country));
+		navigate('/members/1/profiles');
 	};
 
 	return (

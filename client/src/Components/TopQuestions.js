@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
-import { dummyQuestions } from '../dummyQuestions';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -89,19 +88,14 @@ const TopQuestions = () => {
 	const [selected, setSelected] = useState('Interesting');
 	const [data, setData] = useState([]);
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${process.env.REACT_APP_API_URL}/api/questions?page=1&size=10`)
-	// 		.then((res) => {
-	// 			console.log(res.data);
-	// 			setData(res.data);
-	// 		})
-	// 		.catch((err) => console.log(err));
-	// }, []);
-
-	// 임시 데이터
 	useEffect(() => {
-		setData(dummyQuestions);
+		axios
+			.get(`https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_API_URL}/questions?page=1&size=10`)
+			.then((res) => {
+				console.log(res.data);
+				setData(res.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
 
 	const selectSorting = (e) => {

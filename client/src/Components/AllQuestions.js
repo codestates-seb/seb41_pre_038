@@ -4,7 +4,6 @@ import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
 // import Pagenation from './Pagenation';
-import { dummyQuestions } from '../dummyQuestions';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -215,23 +214,19 @@ const AllQuestions = () => {
 	const [page, setPage] = useState(1); // 선택한 페이지
 	const [pageCount, setPageCount] = useState(15); // 한 페이지 당 질문 개수
 	const [totalPage, setTotalPage] = useState(null); // 전체 페이지 수
+	const [totalElements, setTotalElements] = useState(null); // 전체 질문 수
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${process.env.REACT_APP_API_URL}/questions?page=${page}&size=${pageCount}`)
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 			setData(res.data);
-	// 			setTotalPage(res.pageInfo.totalPages);
-	// 		})
-	// 		.catch((err) => console.log(err));
-	// }, [data, page, pageCount]);
-
-	// 임시 데이터
 	useEffect(() => {
-		setData(dummyQuestions);
-		setTotalPage(5);
-	}, []);
+		axios
+			.get(`https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_API_URL}/questions?page=${page}&size=${pageCount}`)
+			.then((res) => {
+				console.log(res);
+				setData(res.data);
+				setTotalPage(res.pageInfo.totalPages);
+				setTotalElements(res.pageInfo.totalElements);
+			})
+			.catch((err) => console.log(err));
+	}, [data, page, pageCount]);
 
 	const selectSorting = (e) => {
 		const text = e.target.textContent;
@@ -272,7 +267,7 @@ const AllQuestions = () => {
 				</Link>
 			</Header>
 			<FlexBox>
-				<Counter>0 questions</Counter>
+				<Counter>{totalElements} questions</Counter>
 				<FlexBox className='PerPage'>
 					<SortPerPage>
 						<button onClick={selectSorting} className={selected === 'Newest' ? 'selected' : ''}>

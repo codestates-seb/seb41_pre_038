@@ -5,7 +5,7 @@ import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
 import SideBar from '../Components/SideBar';
 import TopQuestions from '../Components/TopQuestions';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateSideNavTab } from '../store/store';
 import { useEffect } from 'react';
 
@@ -26,11 +26,8 @@ const Container = styled.main`
 `;
 
 const Home = () => {
+	const isLogin = useSelector((state) => state.isLogin);
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(updateSideNavTab('Home'));
-	}, []);
 
 	return (
 		<div>
