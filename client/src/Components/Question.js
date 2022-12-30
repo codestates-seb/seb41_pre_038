@@ -113,24 +113,24 @@ const Time = styled.div`
 	}
 `;
 
-const Question = ({ id, userId, title, body, tab }) => {
+const Question = ({ tab, questionId, title, problemContent, expectationContent, vote }) => {
 	const navigate = useNavigate();
-	const tagArr = body.split(' ').slice(0, 3);
+	const tagArr = expectationContent.split(' ').slice(0, 3);
 
 	return (
 		<Container>
 			<LeftSide>
 				<div className='buttons'>
-					{/* <NotAnswered>0 answer</NotAnswered> */}
-					<Vote>0 votes</Vote>
-					<Answered>1 answer</Answered>
+					<Vote>{vote} votes</Vote>
+					<NotAnswered>0 answer</NotAnswered>
+					{/* <Answered>1 answer</Answered> */}
 					<View>0 views</View>
 				</div>
 			</LeftSide>
 
 			<RightSide>
-				<Title onClick={() => navigate(`/questions/${id}`)}>{title}</Title>
-				{tab === 'all-questions' && <Body>{body}</Body>}
+				<Title onClick={() => navigate(`/questions/${questionId}`)}>{title}</Title>
+				{tab === 'all-questions' && <Body>{problemContent}</Body>}
 				<TagsAndTime>
 					<div className='tags'>
 						{tagArr.map((tag) => (
@@ -138,7 +138,7 @@ const Question = ({ id, userId, title, body, tab }) => {
 						))}
 					</div>
 					<Time>
-						<span onClick={() => navigate(`/members/1`)}>Username{userId}</span>0 mins ago
+						<span onClick={() => navigate(`/members/1`)}>Username</span>0 mins ago
 					</Time>
 				</TagsAndTime>
 			</RightSide>

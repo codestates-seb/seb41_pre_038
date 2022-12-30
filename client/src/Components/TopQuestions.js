@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
+import { dummyQuestions } from '../dummyQuestions';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -88,9 +89,21 @@ const TopQuestions = () => {
 	const [selected, setSelected] = useState('Interesting');
 	const [data, setData] = useState([]);
 
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${process.env.REACT_APP_API_URL}/api/questions?page=1&size=10`)
+	// 		.then((res) => {
+	// 			console.log(res.data);
+	// 			setData(res.data);
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// }, []);
+
+	// 임시 데이터
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => setData(res.data.slice(0, 10)));
+		setData(dummyQuestions);
 	}, []);
+
 	const selectSorting = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Interesting') {
@@ -137,8 +150,15 @@ const TopQuestions = () => {
 				</button>
 			</Buttons>
 			<Questions>
-				{data.map((question) => (
-					<Question key={question.id} id={question.id} userId={question.userId} title={question.title} body={question.body} />
+				{data.map((d) => (
+					<Question
+						key={d.questionId}
+						questionId={d.questionId}
+						title={d.title}
+						problemContent={d.problemContent}
+						expectationContent={d.expectationContent}
+						vote={d.vote}
+					/>
 				))}
 			</Questions>
 		</Container>

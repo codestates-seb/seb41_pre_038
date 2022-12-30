@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from './Question';
 import { Link } from 'react-router-dom';
-import Pagenation from './Pagenation';
+// import Pagenation from './Pagenation';
+import { dummyQuestions } from '../dummyQuestions';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -148,13 +149,88 @@ const FilterIcon = (
 
 const Questions = styled.div``;
 
+const PagenationContainer = styled.div`
+	padding: 80px 0px;
+	border-top: 1px solid rgb(208, 212, 215);
+	width: 751px;
+	left: -24px;
+
+	display: flex;
+	justify-content: space-between;
+
+	.pagenation {
+		display: flex;
+		list-style: none;
+
+		.page-num {
+			margin: 0px 3px;
+			padding: 5px 8px;
+			border: 1px solid rgb(208, 212, 215);
+			border-radius: 4px;
+			height: 27px;
+			color: #3b4045;
+
+			display: flex;
+			align-items: center;
+		}
+
+		.invisible {
+			display: none;
+		}
+
+		.active {
+			color: white;
+			border-color: #f48225;
+			background-color: #f48225;
+		}
+	}
+`;
+
+const PerPage = styled.div`
+	button {
+		margin: 0px 3px;
+		padding: 5px 8px;
+		border: 1px solid rgb(208, 212, 215);
+		border-radius: 4px;
+		color: #3b4045;
+		background: none;
+		cursor: pointer;
+
+		&.active {
+			color: white;
+			border-color: #f48225;
+			background-color: #f48225;
+		}
+	}
+
+	span {
+		padding: 0px 8px;
+	}
+`;
+
 const AllQuestions = () => {
 	const [data, setData] = useState([]); // 전체 데이터
-	const [currentData, setCurrentData] = useState(data.slice(0, 15)); // 현재 보여주는 데이터
+	// const [currentData, setCurrentData] = useState(data.slice(0, 15)); // 현재 보여주는 데이터
 	const [selected, setSelected] = useState('Newest');
+	const [page, setPage] = useState(1); // 선택한 페이지
+	const [pageCount, setPageCount] = useState(15); // 한 페이지 당 질문 개수
+	const [totalPage, setTotalPage] = useState(null); // 전체 페이지 수
 
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${process.env.REACT_APP_API_URL}/questions?page=${page}&size=${pageCount}`)
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 			setData(res.data);
+	// 			setTotalPage(res.pageInfo.totalPages);
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// }, [data, page, pageCount]);
+
+	// 임시 데이터
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => setData(res.data));
+		setData(dummyQuestions);
+		setTotalPage(5);
 	}, []);
 
 	const selectSorting = (e) => {
@@ -175,6 +251,15 @@ const AllQuestions = () => {
 			setSelected('More');
 			// sorting logic..
 		}
+	};
+
+	// totalPage가 5라면, [1, 2, 3, 4, 5] 배열을 리턴하는 함수
+	const PageNums = (e) => {
+		const pageNums = [];
+		for (let i = 1; i <= totalPage; i++) {
+			pageNums.push(i);
+		}
+		return pageNums;
 	};
 
 	return (
@@ -214,12 +299,42 @@ const AllQuestions = () => {
 			</FlexBox>
 
 			<Questions>
-				{currentData.map((question) => (
-					<Question key={question.id} id={question.id} userId={question.userId} title={question.title} body={question.body} tab='all-questions' />
+				{data.map((d) => (
+					<Question
+						key={d.questionId}
+						questionId={d.questionId}
+						title={d.title}
+						problemContent={d.problemContent}
+						expectationContent={d.expectationContent}
+						vote={d.vote}
+						tab='all-questions'
+					/>
 				))}
 			</Questions>
-
-			<Pagenation data={data} setCurrentData={setCurrentData} />
+			{/* <Pagenation data={data} setCurrentData={setCurrentData} /> */}
+			<PagenationContainer>
+				<div className='pagenation'>
+					{/* <a className='page-num'>Prev</a> */}
+					{PageNums().map((num) => (
+						<a className={page === num ? 'page-num active' : 'page-num'} onClick={() => setPage(num)}>
+							{num}
+						</a>
+					))}
+					{/* <a className='page-num'>Next</a> */}
+				</div>
+				<PerPage>
+					<button onClick={() => setPageCount(15)} className={pageCount === 15 ? 'active' : ''}>
+						15
+					</button>
+					<button onClick={() => setPageCount(30)} className={pageCount === 30 ? 'active' : ''}>
+						30
+					</button>
+					<button onClick={() => setPageCount(50)} className={pageCount === 50 ? 'active' : ''}>
+						50
+					</button>
+					<span>per page</span>
+				</PerPage>
+			</PagenationContainer>
 		</Container>
 	);
 };
