@@ -90,9 +90,9 @@ const TopQuestions = () => {
 
 	useEffect(() => {
 		axios
-			.get(`https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_API_URL}/questions?page=1&size=10`)
+			.get(`${process.env.REACT_APP_API_URL}/questions?page=1&size=10`)
 			.then((res) => {
-				console.log(res.data);
+				console.log('Top Questions', res.data);
 				setData(res.data);
 			})
 			.catch((err) => console.log(err));
