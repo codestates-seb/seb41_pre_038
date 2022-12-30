@@ -9,6 +9,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
+                .allowedMethods("GET","POST","PATCH","DELETE")
                 .allowedOrigins("http://stackoverflow-deploy.s3-website.ap-northeast-2.amazonaws.com",
                         "http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080",
                         "localhost:3000");
