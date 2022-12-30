@@ -26,7 +26,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
-public class QuestionsController extends CorsConfig {
+@CrossOrigin("*")
+public class QuestionsController{
 
     private final QuestionsService questionsService;
 

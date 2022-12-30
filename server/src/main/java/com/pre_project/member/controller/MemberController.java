@@ -27,7 +27,8 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/members")
-public class MemberController extends CorsConfig
+@CrossOrigin("*")
+public class MemberController
 {
     private final MemberService memberService;
 
