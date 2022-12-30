@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Main from './Pages/Main';
 import Home from './Pages/Home';
 import Questions from './Pages/Questions';
 import Login from './Pages/Login';
@@ -23,7 +24,7 @@ function App() {
 		<div className='App'>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<Home />}></Route>
+					<Route path='/' element={<Main />}></Route>
 					<Route path='/questions' element={<Questions />}></Route>
 					<Route path='/members/login' element={<Login />}></Route>
 					<Route path='/members/logout' element={<Logout />}></Route>

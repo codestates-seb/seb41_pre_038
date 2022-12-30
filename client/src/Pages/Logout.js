@@ -3,6 +3,8 @@ import Header from '../Components/Header';
 import { StackOverFlowLogo } from './Login';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLogin, setUserInfo } from '../store/store';
 
 const Container = styled.div`
 	width: 100%;
@@ -131,6 +133,7 @@ const Info = styled.div`
 
 const Logout = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const logout = () => {
 		console.log('logged out!');
@@ -138,6 +141,20 @@ const Logout = () => {
 		// 	.patch(`${process.env.REACT_APP_API_URL}/members/logout`)
 		// 	.then((res) => console.log(res.data))
 		// 	.catch((err) => console.log(err));
+
+		dispatch(setIsLogin(false));
+
+		dispatch(
+			setUserInfo({
+				memberId: null,
+				loginId: null,
+				password: null,
+				email: null,
+				nickname: null,
+				country: null,
+			})
+		);
+
 		navigate('/');
 	};
 
@@ -189,7 +206,9 @@ const Logout = () => {
 						<button onClick={logout} className='log-out'>
 							Log out
 						</button>
-						<button className='cancel'>Cancel</button>
+						<button onClick={() => navigate('/')} className='cancel'>
+							Cancel
+						</button>
 					</Buttons>
 					<Info>If you’re on a shared computer, remember to log out of your Open ID provider (Facebook, Google, Stack Exchange, etc.) as well.</Info>
 				</LogoutContainer>

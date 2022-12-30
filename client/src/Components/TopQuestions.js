@@ -89,8 +89,15 @@ const TopQuestions = () => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => setData(res.data.slice(0, 10)));
+		axios
+			.get(`https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_API_URL}/questions?page=1&size=10`)
+			.then((res) => {
+				console.log(res.data);
+				setData(res.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
+
 	const selectSorting = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Interesting') {
@@ -137,8 +144,15 @@ const TopQuestions = () => {
 				</button>
 			</Buttons>
 			<Questions>
-				{data.map((question) => (
-					<Question key={question.id} id={question.id} userId={question.userId} title={question.title} body={question.body} />
+				{data.map((d) => (
+					<Question
+						key={d.questionId}
+						questionId={d.questionId}
+						title={d.title}
+						problemContent={d.problemContent}
+						expectationContent={d.expectationContent}
+						vote={d.vote}
+					/>
 				))}
 			</Questions>
 		</Container>
