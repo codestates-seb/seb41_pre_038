@@ -3,10 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../Components/Header';
 
+const Global = styled.div`
+  background-color: #f1f2f3;
+  height: 100vh;
+`;
+
 const Container = styled.main`
   background-color: #f1f2f3;
   width: 100vw;
-  height: 100vh;
   padding: 24px;
   display: flex;
   justify-content: center;
@@ -238,8 +242,6 @@ const Option = styled(Subscript)`
 `;
 
 const Signup = () => {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -247,6 +249,8 @@ const Signup = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidId, setIsValidId] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
+
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return /^[A-Za-z0-9.\-_]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,6}$/.test(email);
@@ -262,27 +266,6 @@ const Signup = () => {
 
   const handleOAuthButtonClick = (event) => {
     console.log(event.target.textContent);
-  };
-
-  const requestSignUp = async (userData) => {
-    try {
-      const response = await fetch(
-        'https://cors-anywhere.herokuapp.com/http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/sign-up',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(userData),
-        }
-      );
-      if (response.ok) {
-        setEmail('');
-        setId('');
-        setPassword('');
-        navigate('/members/login');
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const handleSubmit = (event) => {
@@ -307,17 +290,39 @@ const Signup = () => {
     setIsValidPassword(true);
 
     const userData = {
+      email,
+      password,
       loginId: id,
-      password: password,
-      email: email,
       nickname: id,
       country: 'Korea',
     };
     requestSignUp(userData);
   };
 
+  const requestSignUp = async (userData) => {
+    const url = `${process.env.REACT_APP_API_URL}/members/sign-up`;
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        alert('회원가입 실패');
+        return;
+      }
+      setEmail('');
+      setId('');
+      setPassword('');
+      navigate('/members/login');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div>
+    <Global>
       <Header />
       <Container>
         <Contents>
@@ -457,7 +462,7 @@ const Signup = () => {
           </Sign>
         </Contents>
       </Container>
-    </div>
+    </Global>
   );
 };
 
