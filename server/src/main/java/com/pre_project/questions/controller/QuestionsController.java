@@ -1,6 +1,7 @@
 package com.pre_project.questions.controller;
 
 
+import com.pre_project.config.CorsConfig;
 import com.pre_project.dto.SingleResponseDto;
 import com.pre_project.member.mapper.MemberMapper;
 import com.pre_project.member.service.MemberService;
@@ -25,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
-public class QuestionsController {
+public class QuestionsController extends CorsConfig {
 
     private final QuestionsService questionsService;
 
