@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Components/Header';
@@ -6,6 +6,7 @@ import SideNav from '../Components/SideNav';
 import SideBar from '../Components/SideBar';
 import Footer from '../Components/Footer';
 import Editor from '../Components/Question/Editor';
+import { useParams } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -59,8 +60,31 @@ const Input = styled.input`
 `;
 
 const EditQuestion = () => {
-  const answer = 'dummy answer';
   const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const { questionId } = useParams();
+
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
+  const fetchQuestion = async () => {
+    const url = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        alert('질문 가져오기 실패');
+        return;
+      }
+      const question = await response.json();
+      setTitle(question.title);
+      const content = question.problemContent + '\n\n' + question.expectationContent;
+      setContent(content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -75,8 +99,8 @@ const EditQuestion = () => {
           <Contents>
             <Question>
               <Title htmlFor='title'>Title</Title>
-              <Input type='text' id='title' value={title} onChange={handleTitleChange} />
-              <Editor edit={true} />
+              <Input type='text' id='title' value={title} onChange={handleTitleChange} placeholder={title} />
+              <Editor edit={true} editQuestion={true} placeholder={content || ''} />
             </Question>
             <SideBar />
           </Contents>

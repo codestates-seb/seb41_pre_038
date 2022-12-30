@@ -22,7 +22,7 @@ const Icon = styled.div`
   cursor: pointer;
 `;
 
-const VoteCount = styled.div`
+const Vote = styled.div`
   width: 36px;
   height: 27.45px;
   margin: 2px;
@@ -41,7 +41,7 @@ const Icons = (props) => {
           <path d='M2 25h32L18 9 2 25Z'></path>
         </svg>
       </Icon>
-      <VoteCount>{props.voteCount}</VoteCount>
+      <Vote>{props.vote}</Vote>
       <Icon onClick={() => console.log('down')}>
         <svg aria-hidden='true' width='36' height='36' viewBox='0 0 36 36'>
           <path d='M2 11h32L18 27 2 11Z'></path>
