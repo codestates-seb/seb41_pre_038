@@ -1,6 +1,6 @@
 package com.pre_project.member.controller;
 
-import com.pre_project.config.CorsConfig;
+
 import com.pre_project.dto.MultiResponseDto;
 import com.pre_project.dto.SingleResponseDto;
 import com.pre_project.member.dto.MemberPatchDto;
@@ -27,7 +27,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/members")
-@CrossOrigin("*")
 public class MemberController
 {
     private final MemberService memberService;

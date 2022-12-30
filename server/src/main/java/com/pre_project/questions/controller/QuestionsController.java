@@ -1,8 +1,7 @@
 package com.pre_project.questions.controller;
 
 
-import com.pre_project.config.CorsConfig;
-import com.pre_project.dto.SingleResponseDto;
+
 import com.pre_project.member.mapper.MemberMapper;
 import com.pre_project.member.service.MemberService;
 import com.pre_project.questions.dto.QuestionPatchDto;
@@ -26,7 +25,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
-@CrossOrigin("*")
 public class QuestionsController{
 
     private final QuestionsService questionsService;
