@@ -8,7 +8,9 @@ import Sidebar from '../Components/MyPage/Sidebar';
 import Section from '../Components/MyPage/Section';
 import { useDispatch } from 'react-redux';
 import { updateUserNav, updateSideNavTab } from '../store/store';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Container = styled.div`
 	width: 100vw;
@@ -43,10 +45,19 @@ const SectionContainer = styled.div`
 `;
 
 const UserPage = () => {
+	const [data, setData] = useState(null);
 	const dispatch = useDispatch();
+	const params = useParams();
 
 	useEffect(() => {
 		dispatch(updateSideNavTab('Users'));
+
+		axios
+			.get(`${process.env.REACT_APP_API_URL}/members/${params.memberId}`)
+			.then((res) => {
+				setData(res.data.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
 
 	return (
@@ -54,17 +65,19 @@ const UserPage = () => {
 			<Header />
 			<Body>
 				<SideNav />
-				<ProfileContainer>
-					<Profile />
-					<Navbar />
-					<Main>
-						<Sidebar />
-						<SectionContainer>
-							<Section text='Questions' emptyMsg='asked' data={null}></Section>
-							<Section text='Answers' emptyMsg='answered' data={null}></Section>
-						</SectionContainer>
-					</Main>
-				</ProfileContainer>
+				{data && (
+					<ProfileContainer>
+						<Profile data={data} />
+						<Navbar />
+						<Main>
+							<Sidebar />
+							<SectionContainer>
+								<Section text='Questions' emptyMsg='asked' data={null}></Section>
+								<Section text='Answers' emptyMsg='answered' data={null}></Section>
+							</SectionContainer>
+						</Main>
+					</ProfileContainer>
+				)}
 			</Body>
 			<Footer />
 		</Container>

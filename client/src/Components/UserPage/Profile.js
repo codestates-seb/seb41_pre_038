@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateSettingNav } from '../../store/store';
 import { useDispatch } from 'react-redux';
+import { srcs } from '../../Pages/Users';
 
 const Container = styled.div`
 	width: 100%;
@@ -96,34 +97,30 @@ const PencilIcon = (
 	</svg>
 );
 
-const Profile = () => {
+const Profile = ({ data }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	const editProfile = () => {
-		dispatch(updateSettingNav('Edit'));
-		navigate('/members/1/settings');
-	};
+	const params = useParams();
 
 	return (
 		<Container>
-			<Image onClick={() => navigate('/members/1/profiles')}>
-				<img src='https://www.gravatar.com/avatar/73992b63bc8580d4877875468ab2a86f?s=256&d=identicon&r=PG&f=1' />
+			<Image onClick={() => navigate(`/members/${params.memberId}/profiles`)}>
+				<img src={srcs[params.memberId % 22]} alt='프로필 이미지' />
 			</Image>
 			<Info>
-				<NickName>Nickname</NickName>
+				<NickName>{data.nickname}</NickName>
 				<Detail>
 					<div className='signin-date'>
 						<span className='icon'>{CakeIcon}</span>
-						<span className='text'>Member for 3 months</span>
+						<span className='text'>Member for 1 day</span>
 					</div>
 					<div className='email'>
 						<span className='icon'>{LinkIcon}</span>
-						<span className='text'>abc123@google.com</span>
+						<span className='text'>{data.email}</span>
 					</div>
 					<div className='nationality'>
 						<span className='icon'>{MapIcon}</span>
-						<span className='text'>South Korea</span>
+						<span className='text'>{data.country}</span>
 					</div>
 				</Detail>
 			</Info>

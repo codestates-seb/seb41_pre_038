@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { updateSettingNav } from '../../store/store';
 import { useDispatch } from 'react-redux';
+import { srcs } from '../../Pages/Users';
 
 const Container = styled.div`
 	width: 100%;
@@ -109,7 +110,7 @@ const Profile = ({ user }) => {
 	return (
 		<Container>
 			<Image onClick={() => navigate(`/members/${user.memberId}/profiles`)}>
-				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
+				<img src={srcs[user.memberId % 22]} alt='프로필 이미지' />
 			</Image>
 			<Info>
 				<NickName>{user.nickname}</NickName>

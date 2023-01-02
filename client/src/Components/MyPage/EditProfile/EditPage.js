@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateMyPageNav } from '../../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { editNickname, editCountry } from '../../../store/store';
@@ -135,6 +135,7 @@ const EditPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const user = useSelector((state) => state.user);
+	const params = useParams();
 
 	useEffect(() => {
 		dispatch(updateMyPageNav('Settings'));
@@ -217,7 +218,7 @@ const EditPage = () => {
 				</SectionContainer>
 				<Buttons>
 					<button className='save-profile'>Save Profile</button>
-					<button onClick={() => navigate('/members/1/profiles')} className='cancel'>
+					<button onClick={() => navigate(`/members/${useParams}/profiles`)} className='cancel'>
 						Cancel
 					</button>
 				</Buttons>
