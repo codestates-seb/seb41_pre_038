@@ -221,12 +221,14 @@ const AllQuestions = () => {
 			.get(`${process.env.REACT_APP_API_URL}/questions?page=${page}&size=${pageCount}`)
 			.then((res) => {
 				console.log('All Questions', res);
-				setData(res.data);
-				setTotalPage(res.pageInfo.totalPages);
-				setTotalElements(res.pageInfo.totalElements);
+				const { data, pageInfo } = res.data;
+				setData(data);
+				setTotalPage(pageInfo.totalPages);
+				setTotalElements(pageInfo.totalElements);
+				window.scroll(0, 0);
 			})
 			.catch((err) => console.log(err));
-	}, []);
+	}, [page, pageCount]);
 
 	const selectSorting = (e) => {
 		const text = e.target.textContent;
