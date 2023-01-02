@@ -17,7 +17,8 @@ StackOverFlow 클론코딩입니다.
 - BE: 김도형, 양건모, 박정한울
 
 ## Project Wiki
-![image](https://user-images.githubusercontent.com/80298907/210202819-048869d7-6d7d-4906-829e-2ce7bcd7698b.png)
-![image](https://user-images.githubusercontent.com/80298907/210202837-b421e4a8-771d-4482-8a6d-978a9f7ad28f.png)
-![image](https://user-images.githubusercontent.com/80298907/210202844-2b9bb0ed-1241-4133-9a15-4d2046be7d7f.png)
-![image](https://user-images.githubusercontent.com/80298907/210202864-3d370d9a-4a8a-4531-82cc-cd9195987e18.png)
+Front-end
+    
+
+Back-end
+     
