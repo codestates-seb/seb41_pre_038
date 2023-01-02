@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -30,6 +31,7 @@ public class SecurityConfig
 
     private final JwtRepository jwtRepository;
     private final MemberRepository memberRepository;
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
@@ -47,10 +49,14 @@ public class SecurityConfig
                 .apply(new CustomFilterConfigure())
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "*/member/refresh").permitAll()
-                .antMatchers(HttpMethod.GET, "/*/members/").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/*members/").hasRole("ADMIN")
-                .anyRequest().permitAll();
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                    .antMatchers(HttpMethod.POST,"/*/members/login").permitAll()
+                    .antMatchers(HttpMethod.POST, "/*/members/refresh").permitAll()
+                    .antMatchers(HttpMethod.GET, "/*/members").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/members/**").hasRole("ADMIN")
+                    .anyRequest().permitAll()
+                .and()
+                .cors().and();
 
         return http.build();
     }
@@ -59,10 +65,14 @@ public class SecurityConfig
     {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); //내서버가 응답을 할 때 json 을 자바스크립트에서 처리할 수 있게 할지를 설정하는것
-        config.addAllowedHeader("*");
+        config.addAllowedOriginPattern("*");
         config.addAllowedMethod("*");
-        source.registerCorsConfiguration("*", config);
+        config.addAllowedHeader("*");
+        config.addExposedHeader("authorization");
+        config.setAllowCredentials(true); //내서버가 응답을 할 때 json 을 자바스크립트에서 처리할 수 있게 할지를 설정하는것
+        config.setMaxAge(3600L);
+
+        source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 
@@ -81,6 +91,7 @@ public class SecurityConfig
         {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
+
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtRepository);
             jwtAuthenticationFilter.setFilterProcessesUrl("/members/login");
 
@@ -91,4 +102,5 @@ public class SecurityConfig
                     .addFilterAfter(jwtAuthorizationFilter, JwtAuthenticationFilter.class);
         }
     }
+
 }

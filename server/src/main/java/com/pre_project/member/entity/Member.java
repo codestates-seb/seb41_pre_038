@@ -34,6 +34,7 @@ public class Member extends Auditable //엔티티 클래스
 
     private String country;
 
+    @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 

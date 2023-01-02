@@ -23,11 +23,7 @@ ext {
 }
 
 
-
-
 dependencies {
-
-
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'	//API문서화 추가
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'	//API문서화 추가
 	implementation 'org.springframework.boot:spring-boot-starter-web',		//jwt 추가
@@ -48,18 +44,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'  //Security 추가
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final' // mapper 추가
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final' //mapper 추가
-
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' //oauth2 추가
 	implementation group: 'com.auth0', name: 'java-jwt', version: '4.0.0'
 
 	implementation 'com.google.code.gson:gson'
 }
 
-/*dependencyManagement { // AWS 블록 추가
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"
-	}
-}*/
+//dependencyManagement { // AWS 블록 추가
+//	imports {
+//		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"
+//	}
+//}
 
 tasks.named('test') {
 	outputs.dir snippetsDir	//API문서화 추가

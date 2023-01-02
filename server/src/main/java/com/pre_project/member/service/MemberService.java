@@ -2,6 +2,7 @@ package com.pre_project.member.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.pre_project.Security.member.MemberDetails;
 import com.pre_project.Security.utils.CustomAuthorityUtils;
 import com.pre_project.Security.jwt.Jwt;
 import com.pre_project.Security.jwt.JwtRepository;
@@ -10,9 +11,11 @@ import com.pre_project.exception.ExceptionCode;
 import com.pre_project.member.entity.Member;
 import com.pre_project.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class MemberService
 {
     private final MemberRepository memberRepository;
@@ -84,6 +88,31 @@ public class MemberService
         memberRepository.delete(member);
     }
 
+//    public Member getMemberFromToken(String token)
+//    {
+//        String pureToken = token.replace("Bearer ", "");
+//
+//        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
+//        Member findMember = findMemberById(jwt.getMember().getMemberId());
+//
+//        return findMember;
+//    }
+
+    //로그인한 회원정보 반환
+//    public Member getLoginMember(){
+//        //회원 가입 -> 로그인 -> memberId를 가지는 token생성 -> token클래스에 member정보도 같이 저장
+//
+//        //Object principal = Jwt
+//        MemberDetails userDetails = (MemberDetails)principal;
+//        Long userId = userDetails.getMember().getMemberId();
+//        String username = userDetails.getUsername();
+//        log.info("로그인한 아이디"+userId);
+//        log.info("로그인한 아이디"+username);
+//
+//        return userDetails.getMember();
+//    }
+
+    //사용자 토큰 가져오는 메서드
     @Transactional
     public String getAccessToken(String refreshToken)
     {
