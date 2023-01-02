@@ -330,6 +330,7 @@ const DiscardButton = styled.button`
   width: 100px;
   height: 36px;
   margin-left: 10px;
+  margin-top: 10px;
   background-color: rgb(248, 250, 249);
   display: inline-block;
   cursor: pointer;
@@ -373,7 +374,6 @@ export const TagsInput = styled.div`
       list-style: none;
       border-radius: 3px;
       margin: 0 3px 0 0;
-      /* background: var(--coz-purple-600); */
       background-color: rgb(226, 236, 245);
       > .tag-close-icon {
         display: block;
@@ -413,7 +413,6 @@ const AskQuestion = () => {
   const [isClicked, setIsClicked] = useState([false, false]); // redux 상태관리 필요 x
   //태그
   const [tags, setTags] = useState(['React', 'JavaScript']);
-  const tagRef = useRef(null);
   const scrollRefContent = useRef();
   const scrollRefExpecting = useRef();
   let dispatch = useDispatch();
@@ -450,22 +449,22 @@ const AskQuestion = () => {
     const write = JSON.stringify({ title, content, expecting });
     console.log(write);
 
-    // alert('글쓰기 완료');
+    alert('글이 정상적으로 작성되었습니다.');
 
     return axios
-      .post('https://cors-anywhere.herokuapp.com/http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/questions', { write })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(addQuestions(res.data));
+      .post('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/questions', {
+        title: title,
+        problemContent: content,
+        expectationContent: expecting,
       })
-      .catch((err) => console.log('에러', write));
+      .then((res) => {
+        dispatch(addQuestions(res.data));
+        window.location.replace('/');
+      })
+      .catch((err) => console.log(err));
   };
 
-  //복사용
-  const initialTags = ['CodeStates', 'kimcoding'];
   const inputTag = useRef(null);
-
-  //const [tags, setTags] = useState(initialTags);
   const removeTags = (indexToRemove) => {
     let copy = [...tags];
     copy.splice(indexToRemove, 1);
