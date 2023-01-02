@@ -14,6 +14,8 @@ import javax.persistence.Lob;
 @Getter
 @Setter
 public class QuestionResponseDto {
+    private Long questionId; // question Id
+
     private String title; // 질문 제목
 
 

@@ -2,6 +2,7 @@ package com.pre_project.questions.controller;
 
 
 
+import com.pre_project.dto.MultiResponseDto;
 import com.pre_project.member.mapper.MemberMapper;
 import com.pre_project.member.service.MemberService;
 import com.pre_project.questions.dto.QuestionPatchDto;
@@ -25,7 +26,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
-@CrossOrigin
 public class QuestionsController{
 
     private final QuestionsService questionsService;
@@ -101,11 +101,9 @@ public class QuestionsController{
             @Positive @RequestParam int size){
         Page<Question> pageQuestions = questionsService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();
+        MultiResponseDto response = new MultiResponseDto(questionsMapper.questionsToQuestionResponses(questions),pageQuestions);
 
-        return new ResponseEntity(
-                questionsMapper.
-                        questionsToQuestionResponses
-                                (questions),HttpStatus.OK);
+        return new ResponseEntity(response,HttpStatus.OK);
     }
     //질문 삭제
     @DeleteMapping("/{question-id}")

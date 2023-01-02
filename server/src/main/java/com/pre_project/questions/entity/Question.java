@@ -17,13 +17,15 @@ public class Question extends Auditable{//시간 추가
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId; // 질문 ID
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  // 지연 로딩
     @JoinColumn(name = "member_id")
     private Member member;
 
     public void addMember(Member member){
         this.member = member;
     }
+
+
 
     @Column(length = 50, nullable = false)
     private String title; // 질문 제목

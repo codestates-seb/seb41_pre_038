@@ -10,14 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableJpaAuditing
 @SpringBootApplication
 
-public class PreProjectApplication implements WebMvcConfigurer {
-	@Override
-	public void addCorsMappings(CorsRegistry registry){
-		registry.addMapping("/**")
-				.allowedOrigins("*")
-				.allowedMethods("GET","POST","PUT","DELETE","PATCH","OPTIONS")
-				.allowedHeaders("*");
-	}
+public class PreProjectApplication{
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(PreProjectApplication.class, args);

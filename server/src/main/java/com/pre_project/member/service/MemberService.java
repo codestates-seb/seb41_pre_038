@@ -76,7 +76,7 @@ public class MemberService
     public Page<Member> findMembers(int page, int size) //전체 회원 조회
     {
         return memberRepository.findAll
-                (PageRequest.of(page, size, Sort.by("member-id").descending()));
+                (PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
 
     @Transactional
@@ -86,18 +86,29 @@ public class MemberService
         memberRepository.delete(member);
     }
 
+//    public Member getMemberFromToken(String token)
+//    {
+//        String pureToken = token.replace("Bearer ", "");
+//
+//        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
+//        Member findMember = findMemberById(jwt.getMember().getMemberId());
+//
+//        return findMember;
+//    }
 
     //로그인한 회원정보 반환
-    public Member getLoginMember(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        MemberDetails userDetails = (MemberDetails)principal;
-        Long userId = userDetails.getMember().getMemberId();
-        String username = userDetails.getUsername();
-        log.info("로그인한 아이디"+userId);
-        log.info("로그인한 아이디"+username);
-
-        return userDetails.getMember();
-    }
+//    public Member getLoginMember(){
+//        //회원 가입 -> 로그인 -> memberId를 가지는 token생성 -> token클래스에 member정보도 같이 저장
+//
+//        //Object principal = Jwt
+//        MemberDetails userDetails = (MemberDetails)principal;
+//        Long userId = userDetails.getMember().getMemberId();
+//        String username = userDetails.getUsername();
+//        log.info("로그인한 아이디"+userId);
+//        log.info("로그인한 아이디"+username);
+//
+//        return userDetails.getMember();
+//    }
 
     //사용자 토큰 가져오는 메서드
     @Transactional

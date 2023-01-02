@@ -4,6 +4,7 @@ import com.pre_project.dto.SingleResponseDto;
 import com.pre_project.exception.BusinessLogicException;
 import com.pre_project.exception.ExceptionCode;
 import com.pre_project.member.entity.Member;
+import com.pre_project.member.mapper.MemberMapper;
 import com.pre_project.member.service.MemberService;
 import com.pre_project.questions.dto.QuestionPatchDto;
 import com.pre_project.questions.dto.QuestionPostDto;
@@ -21,8 +22,11 @@ import java.util.List;
 @Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionsMapper {
 
-    //질문등록 매퍼
     Question questionPostToQuestion(QuestionPostDto postDto);
+    //질문등록 매퍼
+//    default Question questionPostToQuestion(MemberService memberService,QuestionPostDto postDto){
+//        Member member = memberService
+//    }
 
     //질문수정 매퍼
     Question questionPatchToQuestion(QuestionPatchDto questionPatchDto);
@@ -37,14 +41,12 @@ public interface QuestionsMapper {
 //                questionsService.findQuestionWriter(questionPatchDto.getQuestionId())){ //현재
 //            throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_USER);
 //        }
-//
 //        Question question = new Question();
 //        question.setQuestionId(questionPatchDto.getQuestionId());
 //        question.setTitle(questionPatchDto.getTitle());
 //        question.setExpectationContent(questionPatchDto.getExpectationContent());
 //        question.setProblemContent(questionPatchDto.getProblemContent());
 //        question.addMember(member);
-//
 //
 //        return question;
 //    }
