@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Logout from './Logout';
 import SearchModal from './SearchModal';
 import { useSelector } from 'react-redux';
+import userEvent from '@testing-library/user-event';
 
 const iconImg = 'https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27';
 
@@ -213,6 +214,7 @@ const Header = () => {
 	const [isOpen, setOpen] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const isLogin = useSelector((state) => state.isLogin);
+	const user = useSelector((state) => state.user);
 
 	return (
 		<>
@@ -250,7 +252,7 @@ const Header = () => {
 					{isLogin ? (
 						<div style={{ display: 'flex' }}>
 							{/* 프로필 */}
-							<Link to='/members/1/profiles'>
+							<Link to={`/members/${user.memberId}/profiles`}>
 								<div className='profile' style={{ display: 'flex' }}>
 									<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1'></img>
 									<p>3</p>

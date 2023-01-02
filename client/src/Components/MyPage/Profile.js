@@ -101,13 +101,14 @@ const Profile = ({ user }) => {
 	const dispatch = useDispatch();
 
 	const editProfile = () => {
+		console.log(user);
 		dispatch(updateSettingNav('Edit'));
-		navigate('/members/1/settings');
+		navigate(`/members/${user.memberId}/settings`);
 	};
 
 	return (
 		<Container>
-			<Image onClick={() => navigate('/members/1/profiles')}>
+			<Image onClick={() => navigate(`/members/${user.memberId}/profiles`)}>
 				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
 			</Image>
 			<Info>
