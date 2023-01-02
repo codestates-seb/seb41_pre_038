@@ -5,6 +5,7 @@ import { updateMyPageNav } from '../../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { editNickname, editCountry } from '../../../store/store';
 import axios from 'axios';
+import { srcs } from '../../../Pages/Users';
 
 const GlobalStyle = createGlobalStyle`
   button,
@@ -203,7 +204,7 @@ const EditPage = () => {
 					<Section>
 						<Label>Profile image</Label>
 						<Wrapper>
-							<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
+							<img src={srcs[params.memberId % 22]} alt='프로필 이미지' />
 							<a>Change picture</a>
 						</Wrapper>
 					</Section>
