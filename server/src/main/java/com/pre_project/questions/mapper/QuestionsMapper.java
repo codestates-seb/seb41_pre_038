@@ -54,6 +54,7 @@ public interface QuestionsMapper {
     //질문응답 매퍼
     default QuestionResponseDto questionToQuestionResponse(Question question){
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        questionResponseDto.setQuestionId(question.getQuestionId());
         questionResponseDto.setTitle(question.getTitle());
         questionResponseDto.setExpectationContent(question.getExpectationContent());
         questionResponseDto.setProblemContent(question.getProblemContent());

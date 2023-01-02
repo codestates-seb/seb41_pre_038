@@ -30,7 +30,6 @@ public class QuestionsService {
         this.questionRepository = questionRepository;
         this.memberRepository = memberRepository;
     }
-    
 
     public Question createQuestion(Question question){
         // 회원인지 아닌지 체크
@@ -93,7 +92,6 @@ public class QuestionsService {
         Question findQuestion = findVerifiedQuestion(questionId);
         questionRepository.delete(findQuestion);
     }
-
 
 
    public Question findVerifiedQuestion(long memberId){

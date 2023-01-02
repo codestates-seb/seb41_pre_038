@@ -1,23 +1,18 @@
 package com.pre_project.questions.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
 
-
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class QuestionResponseDto {
     private Long questionId; // question Id
+    private Long memberId;  // member Id
 
     private String title; // 질문 제목
-
 
     private String problemContent;    //문제 내용
 
@@ -26,4 +21,12 @@ public class QuestionResponseDto {
 
     private int vote;    // 추천 수
 
+
+    public QuestionResponseDto(Long questionId, String title, String problemContent, String expectationContent, int vote) {
+        this.questionId = questionId;
+        this.title = title;
+        this.problemContent = problemContent;
+        this.expectationContent = expectationContent;
+        this.vote = vote;
+    }
 }
