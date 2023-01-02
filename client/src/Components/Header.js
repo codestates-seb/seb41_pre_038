@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Logout from './Logout';
 import SearchModal from './SearchModal';
 import { useSelector } from 'react-redux';
-import userEvent from '@testing-library/user-event';
+import { srcs } from '../Pages/Users';
 
 const iconImg = 'https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27';
 
@@ -254,7 +254,7 @@ const Header = () => {
 							{/* 프로필 */}
 							<Link to={`/members/${user.memberId}/profiles`}>
 								<div className='profile' style={{ display: 'flex' }}>
-									<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1'></img>
+									<img src={srcs[user.memberId % 22]} alt='프로필 이미지'></img>
 									<p>3</p>
 								</div>
 							</Link>

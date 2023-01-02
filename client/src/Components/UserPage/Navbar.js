@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateMyPageNav } from '../../store/store';
+import { useParams } from 'react-router-dom';
 
 const Container = styled.div`
 	margin: 4px 0px 20px 0px;
@@ -33,6 +34,7 @@ const NavMenu = styled.div`
 `;
 
 const Navbar = () => {
+	const params = useParams();
 	// 맨 처음 렌더링 때는 Activity 탭으로 설정
 	useEffect(() => {
 		dispatch(updateMyPageNav('Activity'));
@@ -48,7 +50,7 @@ const Navbar = () => {
 			// navigate();
 		} else if (text === 'Activity') {
 			dispatch(updateMyPageNav('Activity'));
-			navigate('/members/1/');
+			navigate(`/members/${params.memberId}`);
 		}
 	};
 
