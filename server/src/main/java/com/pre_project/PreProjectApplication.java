@@ -11,8 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 
 public class PreProjectApplication{
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(PreProjectApplication.class, args);
 	}

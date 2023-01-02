@@ -13,8 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.expression.ExpressionException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.Optional;
 
 @Transactional
@@ -45,7 +46,7 @@ public class QuestionsService {
         return savaQuestion;
     }
 
-    @Transactional
+
     public Question updateQuestion(Question question){
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
@@ -64,7 +65,6 @@ public class QuestionsService {
     }
 
     //질문 작성자만 질문을 수정, 삭제 할 수 있게
-    @Transactional
     public Long findQuestionWriter(long questionId){
         // 질문 작성자만 질문을 수정, 삭제할 수 있도록 질문의 작성자를 찾는 메서드
         Question findQuestion = findVerifiedQuestion(questionId);
@@ -74,6 +74,7 @@ public class QuestionsService {
 
 
     //질문 검색
+    @Transactional(readOnly = true)
     public Question findQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
         questionRepository.save(findQuestion);
@@ -82,6 +83,7 @@ public class QuestionsService {
 
 
     //전체 질문 출력
+    @Transactional(readOnly = true)
     public Page<Question> findQuestions(int page,int size){
         return questionRepository.findAll(PageRequest.of(page,size,
                 Sort.by("questionId").descending()));
@@ -94,21 +96,14 @@ public class QuestionsService {
     }
 
 
-   public Question findVerifiedQuestion(long memberId){
+   public Question findVerifiedQuestion(long questionId){
        Optional<Question> optionalQuestion =
-               questionRepository.findById(memberId);
+               questionRepository.findById(questionId);
 
        Question findQuestion =
                optionalQuestion.orElseThrow(() ->
-                       new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+                       new BusinessLogicException(ExceptionCode.NO_AUTH_TOKEN));
 
        return findQuestion;
    }
-
-
-
-    private void verifyExistsEmail(String email){
-
-    }
-
 }
