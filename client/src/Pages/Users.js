@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.main`
   display: flex;
@@ -26,7 +27,7 @@ const Container = styled.main`
 const Main = styled.div`
   width: 1100px;
   padding: 24px;
-  height: 1400px;
+  height: 1300px;
 `;
 
 const SearchBar = styled.div`
@@ -70,6 +71,7 @@ const SearchBar = styled.div`
   }
 
   & li {
+    cursor: pointer;
     text-align: center;
     width: 68px;
     height: 16px;
@@ -81,6 +83,8 @@ const SearchBar = styled.div`
     color: #6a737c;
     line-height: 16px;
     margin: 0 auto;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
   & li:hover {
     text-align: center;
@@ -97,8 +101,15 @@ const SearchBar = styled.div`
     background-color: rgb(248, 250, 249);
   }
 
+  &li:nth-child(1) {
+    /* border-bottom-left-radius: 5px !important;
+    border-top-left-radius: 5px !important; */
+  }
+
   & li:nth-child(5) {
     border-right: none;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
   }
 
   & li:nth-child(3),
@@ -272,6 +283,7 @@ const Pagination = ({ total, limit, page, setPage }) => {
 };
 
 const Users = () => {
+  const navigate = useNavigate();
   const [filterUser, setFilterUser] = useState('');
   const [filterDate, setFilterDate] = useState('');
   const agent = ['Reputation', 'New users', 'Voters', 'Editors', 'Moderators'];
@@ -306,14 +318,13 @@ const Users = () => {
     'https://www.gravatar.com/avatar/3106b8083eded6789b401d44475394a4?s=256&d=identicon&r=PG&f=1',
     'https://i1.sndcdn.com/avatars-000201592531-nzg96z-t500x500.jpg',
   ];
+  const stack = ['react', 'spring', 'Java', 'JavaScript', 'Nodejs', 'Python', 'C++', 'Ruby'];
 
-  // get 요청으로 데이터를 받아옵니다.
   useEffect(() => {
     axios
-      .get('https://jsonplaceholder.typicode.com/posts')
+      .get('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members?page=1&size=35')
       .then((res) => {
-        setPosts(res.data);
-        console.log(posts);
+        setPosts(res.data.data);
       })
       .catch((Error) => {
         console.log(Error);
@@ -369,15 +380,15 @@ const Users = () => {
             </ul>
           </DaySort>
           <ProfileBox>
-            {posts.slice(offset, offset + limit).map(({ id, title, body }) => {
+            {posts.map(({ nickname, country, memberId }) => {
               return (
-                <UserProfile key={id}>
-                  <img src={srcs[id % 22]} alt='프로필 이미지'></img>
+                <UserProfile key={memberId}>
+                  <img src={srcs[memberId % 22]} alt='프로필 이미지'></img>
                   <div>
-                    <a>{title.slice(0, 10)}</a>
-                    <p>Korea</p>
-                    <span>533</span>
-                    <div>{body.slice(0, 10)}</div>
+                    <a onClick={() => navigate(`/members/1`)}>{nickname}</a>
+                    <p>{country}</p>
+                    <span>{memberId}</span>
+                    <div>{stack[memberId % 8]}</div>
                   </div>
                 </UserProfile>
               );

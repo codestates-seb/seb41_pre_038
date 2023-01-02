@@ -2,8 +2,8 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { deleteMember } from '../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLogin, setUserInfo } from '../../../store/store';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -83,6 +83,7 @@ const DeleteBtn = styled.button`
 const DeletePage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
 	const [checked, setChecked] = useState(false);
 
 	// 체크박스의 체크여부에 따라 checked 상태를 업데이트해주는 함수
@@ -96,19 +97,27 @@ const DeletePage = () => {
 
 	// 탈퇴할 userId를 서버로 전송하고, store에서 해당 유저를 삭제하는 함수
 	const deleteUser = () => {
-		console.log('deleteUser');
-		// return axios
-		// 	.delete(`${process.env.REACT_APP_API_URL}/members/1`, {
-		// 		data: {
-		// 			memberId,
-		// 		},
-		// 	})
-		// 	.then((res) => {
-		// 		console.log(res.data) // 응답 : 204 No Content
-		// 		dispatch(deleteMember(memberId));
-		// 	})
-		// 	.catch((err) => console.log(err));
-		navigate('/members/delete/completed');
+		
+		return axios
+			.delete(`${process.env.REACT_APP_API_URL}/members/${user.memberId}`)
+			.then((res) => {
+				console.log(`deleted User ${user.nickname}`);
+
+				dispatch(setIsLogin(false));
+				dispatch(setUserInfo(
+					{
+						memberId: null,
+						loginId: null,
+						password: null,
+						email: null,
+						nickname: null,
+						country: null,
+					}
+				));
+				navigate('/members/delete/completed');
+			})
+			.catch((err) => console.log(err));
+		
 	};
 
 	return (

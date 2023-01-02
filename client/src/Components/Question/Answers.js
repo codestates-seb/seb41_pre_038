@@ -36,7 +36,14 @@ const Answers = ({ answers }) => {
         <>
           <h2>{answers.length} Answers</h2>
           {answers.map((answer) => (
-            <Answer key={answer.id} voteCount={'0'} answer={answer.body} userName={'username'} userId={answer.id} />
+            <Answer
+              key={answer.id}
+              answerId={answer?.answerId || 1}
+              vote={answer?.vote || '0'}
+              answer={answer?.body || ''}
+              userName={answer?.userName || 'username'}
+              userId={answer?.userId || 1}
+            />
           ))}
         </>
       )}

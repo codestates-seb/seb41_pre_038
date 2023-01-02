@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -58,12 +59,13 @@ const RightSide = styled.div`
 	}
 `;
 
-const Title = styled.a`
+const Title = styled.div`
 	margin: -1px 0px 7.5px 0px;
 	padding-right: 25px;
 	text-decoration: none;
 	color: #0074cc;
 	font-size: 17px;
+	cursor: pointer;
 	&:hover {
 		color: rgb(14, 138, 255);
 	}
@@ -107,34 +109,36 @@ const Time = styled.div`
 	span {
 		color: #0074cc;
 		margin-right: 4px;
+		cursor: pointer;
 	}
 `;
 
-const Question = ({ id, userId, title, body, tab }) => {
-	const tagArr = body.split(' ').slice(0, 3);
+const Question = ({ tab, questionId, title, problemContent, expectationContent, vote }) => {
+	const navigate = useNavigate();
+	const tagArr = expectationContent.split(' ').slice(0, 3);
 
 	return (
 		<Container>
 			<LeftSide>
 				<div className='buttons'>
-					{/* <NotAnswered>0 answer</NotAnswered> */}
-					<Vote>0 votes</Vote>
-					<Answered>1 answer</Answered>
+					<Vote>{vote} votes</Vote>
+					<NotAnswered>0 answer</NotAnswered>
+					{/* <Answered>1 answer</Answered> */}
 					<View>0 views</View>
 				</div>
 			</LeftSide>
 
 			<RightSide>
-				<Title href='/questions/1'>{title}</Title>
-				{tab === 'all-questions' && <Body>{body}</Body>}
+				<Title onClick={() => navigate(`/questions/${questionId}`)}>{title}</Title>
+				{tab === 'all-questions' && <Body>{problemContent}</Body>}
 				<TagsAndTime>
 					<div className='tags'>
-						{tagArr.map((tag) => (
-							<Tag>{tag}</Tag>
+						{tagArr.map((tag, index) => (
+							<Tag key={index}>{tag}</Tag>
 						))}
 					</div>
 					<Time>
-						<span>Username{userId}</span>0 mins ago
+						<span onClick={() => navigate(`/members/1`)}>Username</span>0 mins ago
 					</Time>
 				</TagsAndTime>
 			</RightSide>

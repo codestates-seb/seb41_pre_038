@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateSettingNav } from '../../../store/store';
 
 const Container = styled.div`
 	margin-right: 30px;
@@ -39,15 +41,18 @@ const SideMenu = styled.div`
 	}
 `;
 
-const Sidebar = ({ selected, setSelected }) => {
+const Sidebar = () => {
+	const selectedTab = useSelector((state) => state.tab.settingNav);
+	const dispatch = useDispatch();
+
 	return (
 		<Container>
 			<Ul>
 				<Li>PERSONAL INFORMATION</Li>
-				<SideMenu onClick={() => setSelected('Edit')} className={selected === 'Edit' ? 'selected' : ''}>
+				<SideMenu onClick={() => dispatch(updateSettingNav('Edit'))} className={selectedTab === 'Edit' ? 'selected' : ''}>
 					Edit Profile
 				</SideMenu>
-				<SideMenu onClick={() => setSelected('Delete')} className={selected === 'Delete' ? 'selected' : ''}>
+				<SideMenu onClick={() => dispatch(updateSettingNav('Delete'))} className={selectedTab === 'Delete' ? 'selected' : ''}>
 					Delete Profile
 				</SideMenu>
 			</Ul>

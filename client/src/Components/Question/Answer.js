@@ -72,16 +72,40 @@ const Comment = styled.p`
 const Answer = (props) => {
   const navigate = useNavigate();
 
+  const handleDeleteClick = () => {
+    const shouldDeleteQuestion = window.confirm('답변을 삭제하시겠습니까?');
+    if (shouldDeleteQuestion) {
+      // requestDeleteAnswer();
+    }
+  };
+
+  const requestDeleteAnswer = async () => {
+    // TODO: url, answerId 수정
+    const url = `${process.env.REACT_APP_API_URL}/answers/${props.answerId}`;
+    const options = { method: 'DELETE' };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        alert('답변 삭제 실패');
+        return;
+      }
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
-      <Icons voteCount={props.voteCount} />
+      <Icons vote={props.vote} />
       <AnswerContainer>
         <AnswerContent>{props.answer}</AnswerContent>
         <Social>
           <SocialButtons>
             <SocialButton onClick={() => console.log('share')}>Share</SocialButton>
-            <SocialButton onClick={() => console.log('edit')}>Edit</SocialButton>
             <SocialButton onClick={() => console.log('follow')}>Follow</SocialButton>
+            <SocialButton onClick={() => navigate(`/questions/${props.answerId}/edit-answer`)}>Edit</SocialButton>
+            <SocialButton onClick={handleDeleteClick}>Delete</SocialButton>
           </SocialButtons>
           <UserInfo onClick={() => navigate(`/members/${props.userId}`)}>
             <UserImage src='https://www.gravatar.com/avatar/a6f7ffb957d52ac7b1b21e24d6078329?s=64&d=identicon&r=PG&f=1' alt='user-profile' />

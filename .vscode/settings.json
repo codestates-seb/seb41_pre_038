@@ -11,5 +11,6 @@
   "prettier.printWidth": 150,
   "window.zoomLevel": 1,
   "editor.tabSize": 2,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "java.compile.nullAnalysis.mode": "disabled"
 }

@@ -1,10 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Header from '../Components/Header';
-import SideNav from '../Components/SideNav';
-import SideBar from '../Components/SideBar';
 import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 import Editor from '../Components/Question/Editor';
+import SideBar from '../Components/SideBar';
+import SideNav from '../Components/SideNav';
 
 const Container = styled.div`
   display: flex;
@@ -37,8 +38,41 @@ const Answer = styled.div`
   flex-grow: 1;
 `;
 
+const EditButton = styled.button`
+  width: 85.14px;
+  height: 37.79px;
+  margin: 20px 0;
+  color: #ffffff;
+  background-color: #0a95ff;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0073cc;
+  }
+`;
+
+const CancelButton = styled(EditButton)`
+  width: 64.4px;
+  margin: 0 0 0 8px;
+  color: #0074cc;
+  background-color: #ffffff;
+
+  &:hover {
+    background-color: #b2d3ea;
+  }
+`;
+
 const EditAnswer = () => {
   const answer = 'dummy answer';
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // TODO: 답변 수정 기능 추가
+  };
 
   return (
     <>
@@ -49,6 +83,8 @@ const EditAnswer = () => {
           <Contents>
             <Answer>
               <Editor answer={answer} />
+              <EditButton onClick={handleClick}>Save edit</EditButton>
+              <CancelButton onClick={() => navigate(-1)}>Cancel</CancelButton>
             </Answer>
             <SideBar />
           </Contents>

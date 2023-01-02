@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import Header from '../Components/Header';
 import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
-import Profile from '../Components/MyPage/Profile';
-import Navbar from '../Components/MyPage/Navbar';
-import Sidebar from '../Components/MyPage/EditProfile/Sidebar';
-import EditPage from '../Components/MyPage/EditProfile/EditPage';
-import DeletePage from '../Components/MyPage/EditProfile/DeletePage';
+import Profile from '../Components/UserPage/Profile';
+import Navbar from '../Components/UserPage/Navbar';
+import Sidebar from '../Components/MyPage/Sidebar';
+import Section from '../Components/MyPage/Section';
+import { useDispatch } from 'react-redux';
+import { updateUserNav, updateSideNavTab } from '../store/store';
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateSettingNav } from '../store/store';
 
 const Container = styled.div`
 	width: 100vw;
@@ -19,7 +18,7 @@ const Container = styled.div`
 const Body = styled.div`
 	display: flex;
 	justify-content: center;
-	width: 1264px;
+	width: 100%;
 	margin: 0 auto;
 `;
 
@@ -36,15 +35,19 @@ const Main = styled.div`
 	display: flex;
 `;
 
-const Setting = () => {
+const SectionContainer = styled.div`
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+`;
+
+const UserPage = () => {
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.user);
 
 	useEffect(() => {
-		dispatch(updateSettingNav('Edit'));
+		dispatch(updateSideNavTab('Users'));
 	}, []);
-
-	let selectedTab = useSelector((state) => state.tab.settingNav);
 
 	return (
 		<Container>
@@ -52,11 +55,14 @@ const Setting = () => {
 			<Body>
 				<SideNav />
 				<ProfileContainer>
-					<Profile user={user} />
-					<Navbar user={user} />
+					<Profile />
+					<Navbar />
 					<Main>
 						<Sidebar />
-						{selectedTab === 'Edit' ? <EditPage /> : <DeletePage />}
+						<SectionContainer>
+							<Section text='Questions' emptyMsg='asked' data={null}></Section>
+							<Section text='Answers' emptyMsg='answered' data={null}></Section>
+						</SectionContainer>
 					</Main>
 				</ProfileContainer>
 			</Body>
@@ -65,4 +71,4 @@ const Setting = () => {
 	);
 };
 
-export default Setting;
+export default UserPage;

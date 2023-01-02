@@ -32,7 +32,7 @@ const NavMenu = styled.div`
 	}
 `;
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
 	// 맨 처음 렌더링 때는 Activity 탭으로 설정
 	useEffect(() => {
 		dispatch(updateMyPageNav('Activity'));
@@ -41,7 +41,6 @@ const Navbar = ({ user }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const selectedTab = useSelector((state) => state.tab.myPageNav);
-
 	const selectMenu = (e) => {
 		const text = e.target.textContent;
 		if (text === 'Profile') {
@@ -49,13 +48,7 @@ const Navbar = ({ user }) => {
 			// navigate();
 		} else if (text === 'Activity') {
 			dispatch(updateMyPageNav('Activity'));
-			navigate(`/members/${user.memberId}/profiles`);
-		} else if (text === 'Saves') {
-			dispatch(updateMyPageNav('Saves'));
-			// navigate();
-		} else if (text === 'Settings') {
-			dispatch(updateMyPageNav('Settings'));
-			navigate(`/members/${user.memberId}/settings`);
+			navigate('/members/1/');
 		}
 	};
 
@@ -67,13 +60,8 @@ const Navbar = ({ user }) => {
 			<NavMenu onClick={selectMenu} className={selectedTab === 'Activity' ? 'selected' : ''}>
 				Activity
 			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selectedTab === 'Saves' ? 'selected' : ''}>
-				Saves
-			</NavMenu>
-			<NavMenu onClick={selectMenu} className={selectedTab === 'Settings' ? 'selected' : ''}>
-				Settings
-			</NavMenu>
 		</Container>
 	);
 };
+
 export default Navbar;

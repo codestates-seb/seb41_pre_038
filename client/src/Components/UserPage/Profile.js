@@ -96,44 +96,37 @@ const PencilIcon = (
 	</svg>
 );
 
-const Profile = ({ user }) => {
+const Profile = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const editProfile = () => {
-		console.log(user);
 		dispatch(updateSettingNav('Edit'));
-		navigate(`/members/${user.memberId}/settings`);
+		navigate('/members/1/settings');
 	};
 
 	return (
 		<Container>
-			<Image onClick={() => navigate(`/members/${user.memberId}/profiles`)}>
-				<img src='https://www.gravatar.com/avatar/fae9320960fea04d9995ccce46a0844c?s=256&d=identicon&r=PG&f=1' />
+			<Image onClick={() => navigate('/members/1/profiles')}>
+				<img src='https://www.gravatar.com/avatar/73992b63bc8580d4877875468ab2a86f?s=256&d=identicon&r=PG&f=1' />
 			</Image>
 			<Info>
-				<NickName>{user.nickname}</NickName>
+				<NickName>Nickname</NickName>
 				<Detail>
 					<div className='signin-date'>
 						<span className='icon'>{CakeIcon}</span>
-						<span className='text'>Member for 1 day</span>
+						<span className='text'>Member for 3 months</span>
 					</div>
 					<div className='email'>
 						<span className='icon'>{LinkIcon}</span>
-						<span className='text'>{user.email}</span>
+						<span className='text'>abc123@google.com</span>
 					</div>
 					<div className='nationality'>
 						<span className='icon'>{MapIcon}</span>
-						<span className='text'>{user.country}</span>
+						<span className='text'>South Korea</span>
 					</div>
 				</Detail>
 			</Info>
-			<Edit>
-				<a>
-					<span className='icon'>{PencilIcon}</span>
-					<span onClick={editProfile}>Edit Profile</span>
-				</a>
-			</Edit>
 		</Container>
 	);
 };

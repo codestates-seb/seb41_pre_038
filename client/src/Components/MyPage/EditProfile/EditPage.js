@@ -1,8 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateMyPageNav } from '../../../store/store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editNickname, editCountry } from '../../../store/store';
 import axios from 'axios';
 
@@ -133,35 +133,63 @@ const Buttons = styled.div`
 
 const EditPage = () => {
 	const dispatch = useDispatch();
-	dispatch(updateMyPageNav('Settings'));
-
-	// 이미지 제외
-	const [profileInfo, setProfileInfo] = useState({
-		memberId: 1,
-		password: 'password123',
-		nickname: 'Nickname',
-		country: 'Korea',
-	});
 	const navigate = useNavigate();
+	const user = useSelector((state) => state.user);
 
-	// 인풋에 입력한 값을 profileInfo 상태에 업데이트하는 함수
-	const handleInputValue = (key) => (e) => {
-		setProfileInfo({ ...profileInfo, [key]: e.target.value });
+	useEffect(() => {
+		dispatch(updateMyPageNav('Settings'));
+	}, []);
+
+	const [nickname, setNickname] = useState(user.nickname);
+	const [country, setCountry] = useState(user.country);
+
+	// 인풋에 입력한 값을 nickname 상태에 업데이트하는 함수
+	const handleNickname = (e) => {
+		setNickname(e.target.value);
 	};
 
-	// 변경된 profileInfo를 서버로 전송하고, 받은 응답을 store에 업데이트하는 함수
+	// 인풋에 입력한 값을 country 상태에 업데이트하는 함수
+	const handleCountry = (e) => {
+		setCountry(e.target.value);
+	};
+
+	// 변경된 정보를 서버로 전송하고, 받은 응답을 store에 업데이트하는 함수
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(profileInfo);
-		// return axios
-		// 	.post(`${process.env.REACT_APP_API_URL}/members/1`, JSON.stringify(profileInfo))
-		// 	.then((res) => {
-		// 		const { data } = res;
-		// 		dispatch(editNickname(data.nickname));
-		// 		dispatch(editCountry(data.country));
-		// 	})
-		// 	.catch((err) => console.log(err));
-		// navigate('/members/1/profiles');
+
+		if (user.nickname !== nickname) {
+			return axios
+				.patch(`${process.env.REACT_APP_API_URL}/members/${user.memberId}`, JSON.stringify({ nickname: nickname }), {
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+					},
+				})
+				.then((res) => {
+					console.log('received', res);
+					const { data } = res.data;
+
+					dispatch(editNickname(data.nickname));
+					navigate(`/members/${user.memberId}/profiles`);
+				})
+				.catch((err) => console.log(err));
+		}
+
+		if (user.country !== country) {
+			return axios
+				.patch(`${process.env.REACT_APP_API_URL}/members/${user.memberId}`, JSON.stringify({ country }), {
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+					},
+				})
+				.then((res) => {
+					console.log('received', res);
+					const { data } = res.data;
+
+					dispatch(editCountry(data.country));
+					navigate(`/members/${user.memberId}/profiles`);
+				})
+				.catch((err) => console.log(err));
+		}
 	};
 
 	return (
@@ -180,11 +208,11 @@ const EditPage = () => {
 					</Section>
 					<Section>
 						<Label>Display Name</Label>
-						<Input onChange={handleInputValue('nickname')} type='text' value={profileInfo.nickname} />
+						<Input onChange={handleNickname} type='text' value={nickname} />
 					</Section>
 					<Section>
 						<Label>Location</Label>
-						<Input onChange={handleInputValue('country')} type='text' value={profileInfo.country} />
+						<Input onChange={handleCountry} type='text' value={country} />
 					</Section>
 				</SectionContainer>
 				<Buttons>

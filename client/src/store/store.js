@@ -19,11 +19,29 @@ const user = createSlice({
 		country: null,
 	},
 	reducers: {
+		setUserInfo(state, action) {
+			state = action.payload;
+			return state;
+		},
 		editNickname(state, action) {
 			state.nickname = action.payload;
+			return state;
 		},
 		editCountry(state, action) {
 			state.country = action.payload;
+			return state;
+		},
+	},
+});
+
+// 로그인 상태
+const isLogin = createSlice({
+	name: 'isLogin',
+	initialState: false,
+	reducers: {
+		setIsLogin(state, action) {
+			state = action.payload;
+			return state;
 		},
 	},
 });
@@ -41,26 +59,13 @@ const questions = createSlice({
 	},
 });
 
-// 회원가입, 회원 탈퇴
-const members = createSlice({
-	name: 'members',
-	initialState: [],
-	reducers: {
-		addMember(state, action) {
-			state.push(action.payload);
-		},
-		deleteMember(state, action) {
-			return state.filter((member) => member.memberId !== action.payload);
-		},
-	},
-});
-
 // SideNav, MyPage에서 선택한 탭 업데이트
 const tab = createSlice({
 	name: 'tab',
 	initialState: {
 		sideNav: 'Home',
 		myPageNav: 'Activity',
+		settingNav: 'Edit',
 	},
 	reducers: {
 		updateSideNavTab(state, action) {
@@ -71,13 +76,17 @@ const tab = createSlice({
 			state.myPageNav = action.payload;
 			return state;
 		},
+		updateSettingNav(state, action) {
+			state.settingNav = action.payload;
+			return state;
+		},
 	},
 });
 
-export const { editNickname, editCountry } = user.actions;
+export const { setUserInfo, editNickname, editCountry } = user.actions;
+export const { setIsLogin } = isLogin.actions;
 export const { addQuestions, editQuestions, deconsteQuestions } = questions.actions;
-export const { addMember, deleteMember } = members.actions;
-export const { updateSideNavTab, updateMyPageNav } = tab.actions;
+export const { updateSideNavTab, updateMyPageNav, updateSettingNav } = tab.actions;
 
 // export default configureStore({
 // 	reducer: {
@@ -92,8 +101,8 @@ export const { updateSideNavTab, updateMyPageNav } = tab.actions;
 const reducers = combineReducers({
 	user: user.reducer,
 	questions: questions.reducer,
-	members: members.reducer,
 	tab: tab.reducer,
+	isLogin: isLogin.reducer,
 });
 
 // config 객체

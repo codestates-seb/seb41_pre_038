@@ -1,8 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from '../Components/Header';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { setUserInfo, setIsLogin } from '../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const GlobalStyle = createGlobalStyle`
   button {
@@ -97,7 +99,7 @@ const Form = styled.form`
 		width: 100%;
 		margin: 10px 0px 2px 0px;
 		padding: 10.4px;
-		border: none;
+		border: 1px solid #0a95ff;
 		border-radius: 3px;
 		color: white;
 		background-color: #0a95ff;
@@ -195,7 +197,7 @@ const SignUpMessage = styled.div`
 	}
 `;
 
-const StackOverFlowLogo = (
+export const StackOverFlowLogo = (
 	<svg aria-hidden='true' className='native svg-icon iconLogoGlyphMd' width='32' height='37' viewBox='0 0 32 37'>
 		<path d='M26 33v-9h4v13H0V24h4v9h22Z' fill='#BCBBBB'></path>
 		<path
@@ -237,13 +239,22 @@ const ErrorIcon = (
 
 const Login = () => {
 	const navigate = useNavigate();
+	const isLogin = useSelector((state) => state.isLogin);
+	const dispatch = useDispatch();
 	const [loginInfo, setLoginInfo] = useState({
-		id: '',
+		loginId: '',
 		password: '',
 	});
 	const [idErrorMessage, setIdErrorMessage] = useState('');
 	const [pwErrorMessage, setPwErrorMessage] = useState('');
 	const [clickedLoginBtn, setClickedLoginBtn] = useState(false);
+
+	// 로그인 상태인데 로그인 페이지로 들어오면 홈으로 보낸다.
+	useEffect(() => {
+		if (isLogin) {
+			navigate('/');
+		}
+	}, []);
 
 	// ID, Password 인풋에 입력된 값을 loginInfo로 업데이트하는 함수
 	const handleInputValue = (key) => (e) => {
@@ -256,19 +267,43 @@ const Login = () => {
 		printErrorMessage();
 		setClickedLoginBtn(true);
 
-		// return axios
-		// 	.post('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members/login', { loginInfo })
-		// 	.then((res) => {
-		// 		setIsLogin(true);
-		//		setUserInfo(res.data);
-		// })
-		// 	.catch((err) => setIdErrorMessage('The email or password is incorrect.'));
+		return (
+			axios
+				// .post(`${process.env.REACT_APP_API_URL}/members/login`, JSON.stringify(loginInfo))
+				// .then((res) => {
+				// 	console.log('logged in!', res.data);
+
+				// 임시로 유저 35 데이터 가져오기
+				.get(`${process.env.REACT_APP_API_URL}/members/35`)
+				.then((res) => {
+					const { data } = res.data;
+
+					dispatch(setIsLogin(true));
+
+					dispatch(
+						setUserInfo({
+							memberId: data.memberId,
+							loginId: data.loginId,
+							password: data.password,
+							email: data.email,
+							nickname: data.nickname,
+							country: data.country,
+						})
+					);
+
+					navigate('/');
+				})
+				.catch((err) => {
+					console.log(err);
+					setIdErrorMessage('The email or password is incorrect.');
+				})
+		);
 	};
 
 	// ID, Password 인풋이 비어있으면 에러 메세지를 띄우는 함수
 	const printErrorMessage = () => {
 		if (clickedLoginBtn) {
-			if (!loginInfo.id) {
+			if (!loginInfo.loginId) {
 				setIdErrorMessage('ID cannot be empty.');
 			} else {
 				setIdErrorMessage('');
@@ -307,7 +342,7 @@ const Login = () => {
 					<Form onSubmit={handleSubmit}>
 						<InputContainer>
 							<Label>ID</Label>
-							<Input onChange={handleInputValue('id')} onBlur={printErrorMessage} type='text' className={idErrorMessage && 'error'} />
+							<Input onChange={handleInputValue('loginId')} onBlur={printErrorMessage} type='text' className={idErrorMessage && 'error'} />
 							{idErrorMessage && ErrorIcon}
 							<ErrorMessage>{idErrorMessage}</ErrorMessage>
 						</InputContainer>

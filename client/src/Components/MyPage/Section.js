@@ -79,14 +79,36 @@ const EmptyMessage = styled.span`
 
 const Section = ({ text, emptyMsg, data }) => {
 	const [empty, setEmpty] = useState(false);
+	const [selected, setSelected] = useState('Score');
+
+	const selectSorting = (e) => {
+		const text = e.target.textContent;
+		if (text === 'Score') {
+			setSelected('Score');
+			// sorting logic..
+		} else if (text === 'Activity') {
+			setSelected('Activity');
+			// sorting logic..
+		} else if (text === 'Newest') {
+			setSelected('Newest');
+			// sorting logic..
+		}
+	};
+
 	return (
 		<Container>
 			<Title>
 				<h3>{text}</h3>
 				<SortPerPage>
-					<button className='selected'>Score</button>
-					<button>Activity</button>
-					<button>Newest</button>
+					<button onClick={selectSorting} className={selected === 'Score' ? 'selected' : ''}>
+						Score
+					</button>
+					<button onClick={selectSorting} className={selected === 'Activity' ? 'selected' : ''}>
+						Activity
+					</button>
+					<button onClick={selectSorting} className={selected === 'Newest' ? 'selected' : ''}>
+						Newest
+					</button>
 				</SortPerPage>
 			</Title>
 			<Content className={empty ? 'empty' : 'not-empty'}>

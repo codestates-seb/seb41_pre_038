@@ -6,7 +6,7 @@ import Profile from '../Components/MyPage/Profile';
 import Navbar from '../Components/MyPage/Navbar';
 import Sidebar from '../Components/MyPage/Sidebar';
 import Section from '../Components/MyPage/Section';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateMyPageNav, updateSideNavTab } from '../store/store';
 import { useEffect } from 'react';
 
@@ -43,8 +43,12 @@ const SectionContainer = styled.div`
 `;
 
 const Mypage = () => {
+	const user = useSelector((state) => state.user);
 	const dispatch = useDispatch();
-	dispatch(updateSideNavTab('Users'));
+
+	useEffect(() => {
+		dispatch(updateSideNavTab('Users'));
+	}, []);
 
 	return (
 		<Container>
@@ -52,8 +56,8 @@ const Mypage = () => {
 			<Body>
 				<SideNav />
 				<ProfileContainer>
-					<Profile />
-					<Navbar />
+					<Profile user={user} />
+					<Navbar user={user} />
 					<Main>
 						<Sidebar />
 						<SectionContainer>
