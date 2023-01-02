@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Icons from './Icons';
@@ -106,7 +106,6 @@ const Answer = (props) => {
             <SocialButton onClick={() => console.log('follow')}>Follow</SocialButton>
             <SocialButton onClick={() => navigate(`/questions/${props.answerId}/edit-answer`)}>Edit</SocialButton>
             <SocialButton onClick={handleDeleteClick}>Delete</SocialButton>
-            {/* // TODO: delete 버튼 만들기 */}
           </SocialButtons>
           <UserInfo onClick={() => navigate(`/members/${props.userId}`)}>
             <UserImage src='https://www.gravatar.com/avatar/a6f7ffb957d52ac7b1b21e24d6078329?s=64&d=identicon&r=PG&f=1' alt='user-profile' />

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -17,11 +18,11 @@ const QuestionContainer = styled.div`
   justify-content: space-between;
 `;
 
-const QuestionContent = styled.p`
+const QuestionContent = styled.div`
   font-size: 15px;
 `;
 
-const QuestionExpectation = styled.p`
+const QuestionExpectation = styled.div`
   font-size: 15px;
   margin: 0 0 24px 0;
 `;
@@ -77,7 +78,15 @@ const Question = (props) => {
   const navigate = useNavigate();
   const { questionId } = useParams();
 
+  const questionContentRef = useRef();
+  const questionExpectationRef = useRef();
+
   // TODO: Edit, Delete 버튼 글 작성자에게만 보이게 수정하기
+
+  useEffect(() => {
+    questionContentRef.current.innerHTML = props.question;
+    questionExpectationRef.current.innerHTML = props.expectation;
+  }, [props.question, props.expectation]);
 
   const handleDeleteClick = () => {
     const shouldDeleteQuestion = window.confirm('질문을 삭제하시겠습니까?');
@@ -105,8 +114,8 @@ const Question = (props) => {
     <Container>
       <Icons vote={props.vote} />
       <QuestionContainer>
-        <QuestionContent>{props.question}</QuestionContent>
-        <QuestionExpectation>{props.expectation}</QuestionExpectation>
+        <QuestionContent ref={questionContentRef}></QuestionContent>
+        <QuestionExpectation ref={questionExpectationRef}></QuestionExpectation>
         <Social>
           <SocialButtons>
             <SocialButton onClick={() => console.log('share')}>Share</SocialButton>

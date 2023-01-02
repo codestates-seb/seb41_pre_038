@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Header from '../Components/Header';
-import SideNav from '../Components/SideNav';
 import Footer from '../Components/Footer';
-import QuestionHeader from '../Components/Question/QuestionHeader';
-import Question from '../Components/Question/Question';
+import Header from '../Components/Header';
 import Answers from '../Components/Question/Answers';
-import Editor from '../Components/Question/Editor';
-import SideBar from '../Components/SideBar';
 import BottomNotice from '../Components/Question/BottomNotice';
+import Editor from '../Components/Question/Editor';
+import Question from '../Components/Question/Question';
+import QuestionHeader from '../Components/Question/QuestionHeader';
+import SideBar from '../Components/SideBar';
+import SideNav from '../Components/SideNav';
 
 const Container = styled.div`
   width: 100vw;
@@ -42,6 +42,22 @@ const Contents = styled.div`
 const QnA = styled.div`
   max-width: 727px;
   flex-grow: 1;
+`;
+
+const PostButton = styled.button`
+  width: 128.91px;
+  height: 37.79px;
+  margin: 20px 0;
+  color: #ffffff;
+  background-color: #0a95ff;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0073cc;
+  }
 `;
 
 const QuestionAnswer = () => {
@@ -89,13 +105,21 @@ const QuestionAnswer = () => {
     }
   };
 
+  const handleClick = (event) => {
+    const answerField = event.target.previousElementSibling.querySelector("[role='textbox']");
+    const myAnswer = answerField.innerHTML;
+    console.log(myAnswer);
+    // TODO: 서버에 답변 전송
+    answerField.innerHTML = '';
+  };
+
   return (
     <>
       <Header />
       <Container>
         <SideNav />
         <Main>
-          {/* // TODO: asked, modified, viewed 수정 */}
+          {/* // TODO: ]]asked, modified, viewed 수정 */}
           <QuestionHeader title={question?.title || ''} asked={'today'} modified={'today'} viewed={'1'} />
           <Contents>
             <QnA>
@@ -107,7 +131,8 @@ const QuestionAnswer = () => {
                 userId={'1'} // TODO: 수정
               />
               <Answers answers={answers || []} />
-              <Editor answers={answers} setAnswers={setAnswers} />
+              <Editor />
+              <PostButton onClick={handleClick}>Post Your Answer</PostButton>
               <BottomNotice />
             </QnA>
             <SideBar />

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Header from '../Components/Header';
-import SideNav from '../Components/SideNav';
-import SideBar from '../Components/SideBar';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 import Editor from '../Components/Question/Editor';
-import { useParams } from 'react-router-dom';
+import SideBar from '../Components/SideBar';
+import SideNav from '../Components/SideNav';
 
 const Container = styled.div`
   display: flex;
@@ -59,11 +59,39 @@ const Input = styled.input`
   }
 `;
 
+const EditButton = styled.button`
+  width: 85.14px;
+  height: 37.79px;
+  margin: 20px 0;
+  color: #ffffff;
+  background-color: #0a95ff;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0073cc;
+  }
+`;
+
+const CancelButton = styled(EditButton)`
+  width: 64.4px;
+  margin: 0 0 0 8px;
+  color: #0074cc;
+  background-color: #ffffff;
+
+  &:hover {
+    background-color: #b2d3ea;
+  }
+`;
+
 const EditQuestion = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const { questionId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchQuestion();
@@ -86,8 +114,38 @@ const EditQuestion = () => {
     }
   };
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+  const handleClick = (event) => {
+    console.log(title);
+    const bodyField = event.target.previousElementSibling.querySelector("[role='textbox']");
+    const body = bodyField.innerHTML;
+    console.log(body);
+    // TODO: 서버에 수정된 질문 전송
+    const modifiedQuestion = {
+      questionId,
+      title,
+      problemContent: body,
+      expectationContent: '',
+    };
+    requestToModify(modifiedQuestion);
+  };
+
+  const requestToModify = async (modifiedQuestion) => {
+    const url = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
+    const options = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(modifiedQuestion),
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        alert('질문 수정 실패');
+        return;
+      }
+      navigate(`/questions/${questionId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -99,8 +157,10 @@ const EditQuestion = () => {
           <Contents>
             <Question>
               <Title htmlFor='title'>Title</Title>
-              <Input type='text' id='title' value={title} onChange={handleTitleChange} placeholder={title} />
-              <Editor edit={true} editQuestion={true} placeholder={content || ''} />
+              <Input type='text' id='title' value={title} onChange={(event) => setTitle(event.target.value)} placeholder={title} />
+              <Editor edit={true} placeholder={content || ''} />
+              <EditButton onClick={handleClick}>Save edit</EditButton>
+              <CancelButton onClick={() => navigate(`/questions/${questionId}`)}>Cancel</CancelButton>
             </Question>
             <SideBar />
           </Contents>
