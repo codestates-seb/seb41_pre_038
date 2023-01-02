@@ -71,6 +71,7 @@ const SearchBar = styled.div`
   }
 
   & li {
+    cursor: pointer;
     text-align: center;
     width: 68px;
     height: 16px;
@@ -82,6 +83,8 @@ const SearchBar = styled.div`
     color: #6a737c;
     line-height: 16px;
     margin: 0 auto;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
   & li:hover {
     text-align: center;
@@ -98,8 +101,15 @@ const SearchBar = styled.div`
     background-color: rgb(248, 250, 249);
   }
 
+  &li:nth-child(1) {
+    /* border-bottom-left-radius: 5px !important;
+    border-top-left-radius: 5px !important; */
+  }
+
   & li:nth-child(5) {
     border-right: none;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
   }
 
   & li:nth-child(3),
@@ -315,7 +325,6 @@ const Users = () => {
       .get('http://ec2-54-180-116-18.ap-northeast-2.compute.amazonaws.com:8080/members?page=1&size=35')
       .then((res) => {
         setPosts(res.data.data);
-        console.log(res.data.data);
       })
       .catch((Error) => {
         console.log(Error);

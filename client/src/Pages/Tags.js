@@ -68,7 +68,7 @@ const SearchBar = styled.div`
     text-align: center;
     width: 37px;
     height: 16px;
-
+    cursor: pointer;
     list-style: none;
     padding: 10.4px;
     box-sizing: content-box;
@@ -120,6 +120,7 @@ const TagBox = styled.div`
   display: flex;
   margin-top: 15px;
   flex-wrap: wrap;
+  cursor: pointer;
 `;
 
 const Tag = styled.div`
@@ -228,10 +229,18 @@ const Tags = () => {
               </div>
             </Tag>
             <Tag>
-              <div>javascript</div>
+              <div>python</div>
+              <div>Python is a multi-paradigm, dynamically typed, multi-purpose programming language. It is designed to be quick to learn,</div>
               <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
+                <div>2084961 questions</div>
+                <div>495 asked today, 4454 this week</div>
+              </div>
+            </Tag>
+            <Tag>
+              <div>java</div>
+              <div>
+                Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the
+                language itself.
               </div>
               <div>
                 <div>2461879 questions</div>
@@ -239,10 +248,20 @@ const Tags = () => {
               </div>
             </Tag>
             <Tag>
-              <div>javascript</div>
+              <div>c#</div>
               <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
+                C# (pronounced "see sharp") is a high-level, statically typed, multi-paradigm programming language developed by Microsoft. C# code
+              </div>
+              <div>
+                <div>2461879 questions</div>
+                <div>108 asked today, 1146 this week</div>
+              </div>
+            </Tag>
+            <Tag>
+              <div>php</div>
+              <div>
+                PHP is a widely used, open source, general-purpose, multi-paradigm, dynamically typed and interpreted scripting language designed
+                initially
               </div>
               <div>
                 <div>2461879 questions</div>
@@ -250,10 +269,9 @@ const Tags = () => {
               </div>
             </Tag>
             <Tag>
-              <div>javascript</div>
+              <div>android</div>
               <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
+                Android is Google's mobile operating system, used for programming or developing digital devices (Smartphones, Tablets, Automobiles,
               </div>
               <div>
                 <div>2461879 questions</div>
@@ -261,10 +279,9 @@ const Tags = () => {
               </div>
             </Tag>
             <Tag>
-              <div>javascript</div>
+              <div>html</div>
               <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
+                HTML (HyperText Markup Language) is the markup language for creating web pages and other information to be displayed in a web browser.
               </div>
               <div>
                 <div>2461879 questions</div>
@@ -272,32 +289,9 @@ const Tags = () => {
               </div>
             </Tag>
             <Tag>
-              <div>javascript</div>
+              <div>jquery</div>
               <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
-              </div>
-              <div>
-                <div>2461879 questions</div>
-                <div>540 asked today, 3129 this week</div>
-              </div>
-            </Tag>
-            <Tag>
-              <div>javascript</div>
-              <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
-              </div>
-              <div>
-                <div>2461879 questions</div>
-                <div>540 asked today, 3129 this week</div>
-              </div>
-            </Tag>
-            <Tag>
-              <div>javascript</div>
-              <div>
-                For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations (except for ActionScript).
-                Keep in ...
+                jQuery is a JavaScript library. Consider also adding the JavaScript tag. jQuery is a popular cross-browser JavaScript library that
               </div>
               <div>
                 <div>2461879 questions</div>
