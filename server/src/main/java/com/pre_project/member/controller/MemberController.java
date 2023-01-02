@@ -1,5 +1,6 @@
 package com.pre_project.member.controller;
 
+import com.pre_project.Security.dto.LoginDto;
 import com.pre_project.dto.MultiResponseDto;
 import com.pre_project.dto.SingleResponseDto;
 import com.pre_project.member.dto.MemberPatchDto;
@@ -84,16 +85,17 @@ public class MemberController
     {
         Member member = memberService.findMemberById(memberId);
 
-        memberService.deleteMember(member.getMemberId());
+        memberService.deleteMember(memberId);
 
         log.info("delete member = {}", memberId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+
     @PostMapping("/refresh")
-    public ResponseEntity refreshToken(@RequestHeader String Refresh)
+    public ResponseEntity refreshToken(@RequestHeader String refresh)
     {
-        String accessToken = memberService.getAccessToken(Refresh);
+        String accessToken = memberService.getAccessToken(refresh);
 
         response.addHeader("Authorization", accessToken);
 
@@ -101,9 +103,9 @@ public class MemberController
     }
 
     @DeleteMapping("/logout")
-    public ResponseEntity logout(@RequestHeader String Refresh)
+    public ResponseEntity logout(@RequestHeader String refresh)
     {
-        memberService.deleteToken(Refresh);
+        memberService.deleteToken(refresh);
 
         log.info("log out");
         return new ResponseEntity(HttpStatus.NO_CONTENT);

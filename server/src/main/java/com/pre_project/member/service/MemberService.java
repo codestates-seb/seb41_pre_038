@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.pre_project.Security.utils.CustomAuthorityUtils;
 import com.pre_project.Security.jwt.Jwt;
 import com.pre_project.Security.jwt.JwtRepository;
+import com.pre_project.exception.BusinessLogicException;
+import com.pre_project.exception.ExceptionCode;
 import com.pre_project.member.entity.Member;
 import com.pre_project.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -63,16 +65,16 @@ public class MemberService
         return findMember;
     }
 
-    public Member findMemberById(long id) //회원 한명 조회
+    public Member findMemberById(Long id) //회원 한명 조회
     {
         return memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("This user doesn't exist"));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
     }
 
     public Page<Member> findMembers(int page, int size) //전체 회원 조회
     {
         return memberRepository.findAll
-                (PageRequest.of(page, size, Sort.by("member-id").descending()));
+                (PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
 
     @Transactional
@@ -86,10 +88,10 @@ public class MemberService
     public String getAccessToken(String refreshToken)
     {
         Jwt token = jwtRepository.findRefreshToken(refreshToken)
-                .orElseThrow(() -> new IllegalArgumentException("Refresh Token Not Found"));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.REFRESH_TOKEN_NOT_FOUND));
 
         String accessToken = JWT.create()
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (60000)))
                 .withClaim("id", token.getMember().getMemberId())
                 .withClaim("username", token.getMember().getLoginId())
                 .sign(Algorithm.HMAC256("zion"));
@@ -104,23 +106,13 @@ public class MemberService
         jwtRepository.deleteJwtToken(refreshToken);
     }
 
-    public Member getMemberFromToken(String token)
-    {
-        String pureToken = token.replace("Bearer ", "");
-
-        Jwt jwt = jwtRepository.findAccessToken(pureToken).orElseThrow(() -> new IllegalArgumentException("Mismatch"));
-        Member findMember = findMemberById(jwt.getMember().getMemberId());
-
-        return findMember;
-    }
-
     private void verifyMemberByEmail(String email) //이메일로 회원 조회
     {
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if(member.isPresent())
         {
-            throw new IllegalArgumentException("This email is already in use");
+            throw new BusinessLogicException(ExceptionCode.EMAIL_EXIST);
         }
     }
 
@@ -130,7 +122,7 @@ public class MemberService
 
         if(member.isPresent())
         {
-            throw new IllegalArgumentException("This nickname is already in use");
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_EXIST);
         }
     }
 
@@ -139,6 +131,18 @@ public class MemberService
         Optional<Member> member = memberRepository.findByLoginId(loginId);
 
         if(member.isPresent())
-            throw new IllegalStateException("This ID is already in use");
+            throw new BusinessLogicException(ExceptionCode.ID_EXIST);
+    }
+
+    public Member getMemberFromToken(String token)
+    {
+        String pureToken = token.replace("Bearer ", "");
+
+        Jwt jwt = jwtRepository.findAccessToken(pureToken)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN));
+
+        Member findMember = findMemberById(jwt.getMember().getMemberId());
+
+        return findMember;
     }
 }
