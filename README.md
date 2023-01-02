@@ -1,11 +1,12 @@
-# seb41_pre_038
+# 38조 이게왜안되조 stackoverflow pre-project
 
 # StackOverFlow App
 
-Todo 관리를 위한 웹 애플리케이션입니다.
+pre-project
+StackOverFlow 클론코딩
 
 ## Features
-
+@maam6073
 - 
 
 ## Contributors
