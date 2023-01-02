@@ -5,28 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/dto/LoginDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/jwt/Jwt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/jwt/JwtAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/jwt/JwtRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/member/MemberDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/member/MemberDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/utils/CustomAuthorityUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/Security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/answer/entity/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/answer/entity/Answer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/dto/MultiResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/dto/MultiResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/exception/ExceptionCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/exception/ExceptionCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/mapper/MemberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/mapper/MemberMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/service/LoginService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/member/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/validator/NotSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/validator/NotSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/controller/QuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/controller/QuestionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/dto/QuestionPatchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/dto/QuestionPatchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/mapper/QuestionsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/mapper/QuestionsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/service/QuestionsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/pre_project/questions/service/QuestionsService.java" afterDir="false" />
     </list>
-    <list default="true" id="49026338-9149-48e5-b10f-4c36caa9cc49" name="Changes" comment="push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,13 +53,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:\DH\project\seb41_pre_038\server"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:\DH\project\seb41_pre_038\server&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\DH\project\pre-project\seb41_pre_038" />

@@ -88,7 +88,7 @@ public class MemberController
         memberService.deleteMember(memberId);
 
         log.info("delete member = {}", memberId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
