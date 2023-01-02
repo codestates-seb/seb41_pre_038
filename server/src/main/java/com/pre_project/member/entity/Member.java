@@ -1,6 +1,8 @@
 package com.pre_project.member.entity;
 
+import com.pre_project.answer.entity.Answer;
 import com.pre_project.audit.Auditable;
+import com.pre_project.questions.entity.Question;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -35,15 +37,11 @@ public class Member extends Auditable //엔티티 클래스
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    public Member(String email)
-    {
-        this.memberId = memberId;
-        this.loginId = loginId;
-        this.password = password;
-        this.email = email;
-        this.nickname = nickname;
-        this.country = country;
-    }
+    @OneToMany(mappedBy = "member")
+    private List<Question> questions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Answer> answers = new ArrayList<>();
 
     //비밀번호 변경
     public void updatePassword(String password)

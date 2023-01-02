@@ -1,13 +1,14 @@
 package com.pre_project.member.dto;
 
 import com.pre_project.validator.NotSpace;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 
-@Getter
+@Getter @AllArgsConstructor
 @NoArgsConstructor
 public class MemberPatchDto
 {
