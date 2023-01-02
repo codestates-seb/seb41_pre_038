@@ -92,8 +92,9 @@ const TopQuestions = () => {
 		axios
 			.get(`${process.env.REACT_APP_API_URL}/questions?page=1&size=10`)
 			.then((res) => {
-				console.log('Top Questions', res.data);
-				setData(res.data);
+				console.log('Top Questions', res);
+				const { data } = res.data;
+				setData(data);
 			})
 			.catch((err) => console.log(err));
 	}, []);

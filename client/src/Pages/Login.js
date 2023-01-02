@@ -267,35 +267,37 @@ const Login = () => {
 		printErrorMessage();
 		setClickedLoginBtn(true);
 
-		return axios
-			.post(`${process.env.REACT_APP_API_URL}/members/login`, JSON.stringify(loginInfo))
-			.then((res) => {
-				console.log('logged in!', res.data);
-
-				// 임시로 유저 1 데이터 가져오기
-				// .get(`${process.env.REACT_APP_API_URL}/members/19`)
+		return (
+			axios
+				// .post(`${process.env.REACT_APP_API_URL}/members/login`, JSON.stringify(loginInfo))
 				// .then((res) => {
-				const { data } = res.data;
+				// 	console.log('logged in!', res.data);
 
-				dispatch(setIsLogin(true));
+				// 임시로 유저 35 데이터 가져오기
+				.get(`${process.env.REACT_APP_API_URL}/members/35`)
+				.then((res) => {
+					const { data } = res.data;
 
-				dispatch(
-					setUserInfo({
-						memberId: data.memberId,
-						loginId: data.loginId,
-						password: data.password,
-						email: data.email,
-						nickname: data.nickname,
-						country: data.country,
-					})
-				);
+					dispatch(setIsLogin(true));
 
-				navigate('/');
-			})
-			.catch((err) => {
-				console.log(err);
-				setIdErrorMessage('The email or password is incorrect.');
-			});
+					dispatch(
+						setUserInfo({
+							memberId: data.memberId,
+							loginId: data.loginId,
+							password: data.password,
+							email: data.email,
+							nickname: data.nickname,
+							country: data.country,
+						})
+					);
+
+					navigate('/');
+				})
+				.catch((err) => {
+					console.log(err);
+					setIdErrorMessage('The email or password is incorrect.');
+				})
+		);
 	};
 
 	// ID, Password 인풋이 비어있으면 에러 메세지를 띄우는 함수
