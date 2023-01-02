@@ -1,11 +1,11 @@
-# 38조 이게왜안되조 stackoverflow pre-project
-
-# StackOverFlow App
+# 38조 이게왜안되조
+# StackOverFlow Web
 
 pre-project
 StackOverFlow 클론코딩입니다.
 
 ## Features
+
 - 회원가입
 - 로그인
 - 질문 등록/수정/삭제/조회
@@ -18,7 +18,11 @@ StackOverFlow 클론코딩입니다.
 
 ## Project Wiki
 Front-end
-    
+![image](https://user-images.githubusercontent.com/80298907/210203068-811cd8e4-5793-48fd-9c89-8e3bbb766cd9.png)
+
 
 Back-end
-     
+ ![image](https://user-images.githubusercontent.com/80298907/210203101-b6997dbe-0f7f-4c8e-ba2f-12b9ad88f38b.png)
+ ![image](https://user-images.githubusercontent.com/80298907/210203386-0431b3e6-b108-4ab9-9fa6-ffa500b46ee5.png)
+
+    
