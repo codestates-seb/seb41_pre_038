@@ -19,7 +19,7 @@ StackOverFlow 클론코딩입니다.
 ## Project Wiki
 Front-end
 
-![image](https://user-images.githubusercontent.com/80298907/210203068-811cd8e4-5793-48fd-9c89-8e3bbb766cd9.png)
+![image](https://user-images.githubusercontent.com/108467211/210307215-7b4808dd-a2d3-4b11-9690-d4061ec64a61.png)
 
 
 Back-end
